@@ -8,6 +8,10 @@ const Color themeApp = Color.fromARGB(255, 222, 95, 236);
 const Color buttonTheme = Color.fromARGB(255, 170, 186, 162);
 const double appPadding = 30.0;
 Color buttonColor = Color(0xFF659B5E);
+Color buttonColorOpa = Color(0xFF96B990);
+Color textColor = Color(0xFF556F44);
+Color fieldColor = Color(0xFFE8E8E8);
+
 const Color firstBackColor = Color.fromARGB(255, 78, 21, 111);
 const Color secondBackColor = Color.fromARGB(255, 222, 95, 236);
 const Color thirdBackColor = Color.fromARGB(255, 186, 162, 168);

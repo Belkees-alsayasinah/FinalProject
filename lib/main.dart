@@ -1,4 +1,7 @@
+import 'package:bloom_project/FirstPage/first_page.dart';
+import 'package:bloom_project/LoginPage/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'OnBoarding/on_boarding.dart';
 //gg
@@ -24,20 +27,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-
-      theme: ThemeData(
-      //    // Color color = Color(0xFF659B5E);
-      //   colorScheme: ColorScheme.fromSwatch(
-      //     primarySwatch: customSwatch,
-      //   ).copyWith(
-      //     primary: Colors.white,
-      //   ),
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF509945)),
-        useMaterial3: true,
-      ),
+    return GetMaterialApp(
+      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: OnBoardingScreen(),
+      home: FirstPage(),
     );
   }
 }

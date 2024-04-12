@@ -121,9 +121,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
                 Spacer(),
                 Container(
+                  
                   width: 118,
                   height: 52,
                   child: FloatingActionButton(
+                    backgroundColor: buttonColor,
                     onPressed: () {
                       if (isLast) {
                         submit();
