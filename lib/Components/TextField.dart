@@ -16,6 +16,8 @@ class MyTextField extends StatelessWidget {
   final int max;
   final double blurRadius;
   final double offset;
+final double width;
+final int hieght;
 
   const MyTextField({
     Key? key,
@@ -32,6 +34,8 @@ class MyTextField extends StatelessWidget {
     this.obscureText = false,
     required this.blurRadius,
     required this.offset,
+    required this.width,
+    required this.hieght,
     this.max = 1,
   }) : super(key: key);
 
@@ -53,8 +57,8 @@ class MyTextField extends StatelessWidget {
       ),
       child:ConstrainedBox(
         constraints: BoxConstraints(
-          maxWidth: 348 - 16, // Adjust for padding
-          maxHeight: 62 - 16, // Adjust for padding
+          maxWidth: width - 16, // Adjust for padding
+          maxHeight: hieght - 16, // Adjust for padding
         ),
         child: TextField(
         controller: control,

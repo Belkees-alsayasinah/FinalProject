@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
 const Color white = Colors.white;
 const Color black = Colors.black;
 const Color red = Colors.red;
+const Color grey = Colors.grey;
+
 const double appPadding = 30.0;
 Color buttonColor = Color(0xFF659B5E);
 Color buttonColorOpa = Color(0xFF96B990);

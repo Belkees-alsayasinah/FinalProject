@@ -35,7 +35,7 @@ class LoginPage extends StatelessWidget {
                 fontFamily: 'font1',
 
               ),),
-              MyTextField(label: '', hint: "", textInputAction: TextInputAction.next, onsave: (value){}, keyboardType: TextInputType.emailAddress, blurRadius: 8, offset: 10),
+              MyTextField(label: '', hint: "", textInputAction: TextInputAction.next, onsave: (value){}, keyboardType: TextInputType.emailAddress, blurRadius: 8, offset: 10,width: 348,hieght: 62,),
                             SizedBox(height: 25,),
                 Text(':كلمة المرور',style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -43,7 +43,7 @@ class LoginPage extends StatelessWidget {
                   fontFamily: 'font1',
 
                 ),),
-                MyTextField(label: '', hint: "", textInputAction: TextInputAction.next, onsave: (value){}, keyboardType: TextInputType.emailAddress, blurRadius: 8, offset: 10),
+                MyTextField(label: '', hint: "", textInputAction: TextInputAction.next, onsave: (value){}, keyboardType: TextInputType.emailAddress, blurRadius: 8, offset: 10,width: 348,hieght: 62,),
                 SizedBox(height: 50,),
                 MyButton(
                   onsave: () {},
