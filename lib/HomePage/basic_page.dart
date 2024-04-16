@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-class HomePage extends StatefulWidget {
+class BasicPage extends StatefulWidget {
 
 
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<BasicPage> createState() => _BasicPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _BasicPageState extends State<BasicPage> {
   HomeController controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,6 @@
 import 'package:bloom_project/Components/TextField.dart';
+import 'package:bloom_project/LoginPage/login_page.dart';
+import 'package:bloom_project/RegisterPage/confirm_account.dart';
 import 'package:bloom_project/RegisterPage/register_controller.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/material.dart';
@@ -270,7 +272,10 @@ class RegisterPage extends StatelessWidget {
                   height: 50,
                 ),
                 MyButton(
-                  onsave: () {},
+                  fontSize: 34,
+                  onsave: () {
+                    Get.to(ConfirmAccountView());
+                  },
                   width: 348,
                   height: 62,
                   text: 'إنشاء الحساب',
@@ -295,7 +300,9 @@ class RegisterPage extends StatelessWidget {
                       ),
                     ),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(LoginPage());
+                        },
                         child: Text(
                           'تسجيل الدخول',
                           style: TextStyle(

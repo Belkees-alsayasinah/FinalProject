@@ -61,6 +61,8 @@ final int hieght;
           maxHeight: hieght - 16, // Adjust for padding
         ),
         child: TextField(
+          textDirection: TextDirection.rtl,
+
         controller: control,
         onChanged: onsave,
         obscureText: obscureText,
@@ -73,7 +75,7 @@ final int hieght;
           hintStyle: TextStyle(
             color: Colors.grey[400],
           ),
-          icon: icon != null ? Icon(icon) : null,
+          suffix: icon != null ? Icon(icon) : null,
           suffixIcon: suffixPressed != null ? IconButton(onPressed: suffixPressed!, icon: Icon(Icons.clear)) : null,
         ),
       ),

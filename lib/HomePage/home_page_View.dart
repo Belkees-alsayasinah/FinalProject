@@ -1,6 +1,8 @@
+import 'package:bloom_project/SearchPage/search_page_view.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomePageView extends StatelessWidget {
   const HomePageView({Key? key}) : super(key: key);
@@ -9,6 +11,7 @@ class HomePageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Text(''),
         centerTitle: true,
         actions: [
           Builder(
@@ -26,7 +29,9 @@ class HomePageView extends StatelessWidget {
             },
           ),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(SearchPageView());
+              },
               icon: Icon(
                 Icons.search,
                 color: textColor,
@@ -50,21 +55,64 @@ class HomePageView extends StatelessWidget {
             children: [
               DrawerHeader(
                 decoration: BoxDecoration(),
-                child: Text(
-                  'عنوان القائمة الجانبية',
-                  style: TextStyle(
-                    fontSize: 24,
+                child: Center(
+                  child: Text(
+                    'الإعدادات',
+                    style: TextStyle(
+                      fontSize: 35,
+                      color: textColor,
+                      fontFamily: 'font1'
+                    ),
                   ),
                 ),
               ),
               ListTile(
-                title: Text('عنصر القائمة 1'),
+                title: Row(
+                  textDirection: TextDirection.rtl,
+                  children: [
+                    Icon(Icons.brightness_4_outlined,color: black,),
+                    SizedBox(width: 10,),
+                    Text('الوضع الليلي',style: TextStyle(
+                      color: black,
+                      fontSize: 27,
+                      fontFamily: 'font1'
+                    ),),
+                  ],
+                ),
                 onTap: () {
                   // اتخذ إجراء عند النقر على عنصر القائمة 1
                 },
               ),
               ListTile(
-                title: Text('عنصر القائمة 2'),
+                title: Row(
+                  textDirection: TextDirection.rtl,
+                  children: [
+                    Icon(Icons.language,color: black,),
+                    SizedBox(width: 10,),
+                    Text('تغيير اللغة',style: TextStyle(
+                        color: black,
+                        fontSize: 27,
+                        fontFamily: 'font1'
+                    ),),
+                  ],
+                ),
+                onTap: () {
+                  // اتخذ إجراء عند النقر على عنصر القائمة 2
+                },
+              ),
+              ListTile(
+                title: Row(
+                  textDirection: TextDirection.rtl,
+                  children: [
+                    Icon(Icons.logout,color: black,),
+                    SizedBox(width: 10,),
+                    Text('تسجيل الخروج',style: TextStyle(
+                        color: black,
+                        fontSize: 27,
+                        fontFamily: 'font1'
+                    ),),
+                  ],
+                ),
                 onTap: () {
                   // اتخذ إجراء عند النقر على عنصر القائمة 2
                 },

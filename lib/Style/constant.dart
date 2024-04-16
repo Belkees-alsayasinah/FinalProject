@@ -6,7 +6,10 @@ const Color grey = Colors.grey;
 
 const double appPadding = 30.0;
 Color buttonColor = Color(0xFF659B5E);
-Color buttonColorOpa = Color(0xFF96B990);
+//Color buttonColorOpa0 = Color(0xFF96B990);
+Color buttonColorOpa = Color(0xFF92A78E);
+
+//Color buttonColorOpa = Color(0xC196B990);
 Color textColor = Color(0xFF556F44);
 Color fieldColor = Color(0xFFE8E8E8);
 

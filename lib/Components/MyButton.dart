@@ -9,6 +9,7 @@ class MyButton extends StatelessWidget {
   final String text;
   final Color color;
   final Color textColor;
+  final double fontSize;
 
   const MyButton({
     Key? key,
@@ -19,6 +20,7 @@ class MyButton extends StatelessWidget {
     required this.color,
     required this.textColor,
     required this.radius,
+    required this.fontSize,
   }) : super(key: key);
 
   @override
@@ -29,12 +31,14 @@ class MyButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onsave,
         child: Text(
+
           text,
           style: TextStyle(
             color: textColor,
             fontFamily: 'font1',
-            fontSize: 20,
+            fontSize: fontSize,
           ),
+          textDirection: TextDirection.rtl,
         ),
         style: ElevatedButton.styleFrom(
           primary: color,

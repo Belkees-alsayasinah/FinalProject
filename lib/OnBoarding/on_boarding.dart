@@ -1,8 +1,11 @@
+import 'package:bloom_project/FirstPage/first_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../Style/constant.dart';
+import '../service/store.dart';
 
 class BoardingModel {
   final String image;
@@ -48,7 +51,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   var isLast = false;
 
-  void submit() {
+  void submit() async{
+    StoreInfo info = StoreInfo();
+    await info.save("onBoarding", "true").then((value) => Get.to(FirstPage()));
     // CacheHelper.saveData(key: 'onBoarding', value: true).then(
     //   (value) {
     //     if (value) {

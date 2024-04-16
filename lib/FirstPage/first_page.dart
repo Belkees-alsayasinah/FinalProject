@@ -1,5 +1,6 @@
 import 'package:bloom_project/Components/MyButton.dart';
 import 'package:bloom_project/LoginPage/login_page.dart';
+import 'package:bloom_project/RegisterPage/register_page.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,7 @@ class FirstPage extends StatelessWidget {
               height: 30,
             ),
             MyButton(
+              fontSize: 34,
               onsave: () {
                 Get.to(() => LoginPage());
               },
@@ -60,7 +62,10 @@ class FirstPage extends StatelessWidget {
               height: 15,
             ),
             MyButton(
-              onsave: () {},
+              onsave: () {
+                Get.to(RegisterPage());
+              },
+              fontSize: 34,
               width: 348,
               height: 66,
               text: 'إنشاء حساب',
