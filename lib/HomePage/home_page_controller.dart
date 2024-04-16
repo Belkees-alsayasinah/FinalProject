@@ -1,21 +1,34 @@
 
+import 'package:bloom_project/HomePage/basic_page.dart';
+import 'package:bloom_project/HomePage/home_page_View.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class HomeController extends GetxController {
-  final List<Widget> pages = const [
-    Icon(Icons.home),
+
+  int currentIndex = 2;
+
+  List<Widget> screens = [
     Icon(Icons.person),
+    Icon(Icons.insert_chart),
+    HomePageView(),
     Icon(Icons.notifications),
     Icon(Icons.article),
-    Icon(Icons.insert_chart),
   ];
 
-  final currentIndex = ValueNotifier<int>(0); // استخدام ValueNotifier لتحديث BottomNavigationBar
+  List<BottomNavigationBarItem> bottomItem = [
+    BottomNavigationBarItem(label: "Profile",icon: Icon(Icons.person)),
+    BottomNavigationBarItem(label: "Chart",icon: Icon(Icons.insert_chart)),
+    BottomNavigationBarItem(label: "Home",icon: Icon(Icons.home)),
+    BottomNavigationBarItem(label: "Notification",icon: Icon(Icons.notifications)),
+    BottomNavigationBarItem(label: "Article",icon: Icon(Icons.article)),
+  ];
 
-  void changePage(int index) {
-    currentIndex.value = index;
+  void changeBottomNavBar(int index) {
+    currentIndex = index;
+    update();
+    // emit(ShopChangeBottomNavState());
   }
 }

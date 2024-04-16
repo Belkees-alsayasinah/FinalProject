@@ -1,5 +1,5 @@
 import 'package:bloom_project/FirstPage/first_page.dart';
-import 'package:bloom_project/HomePage/home_page.dart';
+import 'package:bloom_project/HomePage/basic_page.dart';
 import 'package:bloom_project/LoginPage/login_page.dart';
 import 'package:bloom_project/RegisterPage/register_page.dart';
 import 'package:flutter/material.dart';
