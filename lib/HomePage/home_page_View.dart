@@ -157,7 +157,7 @@ class HomePageView extends StatelessWidget {
                       borderRadius: BorderRadius.all(
                         Radius.circular(15),
                       ),
-                      boxShadow: [
+                        boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.5),
                           spreadRadius: 0, // انتشار الظل
