@@ -41,17 +41,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         image: 'assets/images/onboarding2.jpg',
         image0: 'assets/images/2.png',
         title: 'هل تريد استثمار مالك في مشاريع فعالة؟',
-        body: 'يمكنك من خلال التطبيق أن تستعرض المشاريع التي تحتاج للتمويل والحصول على كافة المعلومات اللازمة تلبيةً لرغباتك، وتتبّع المشاريع بفعالية وانتظام!'),
+        body:
+            'يمكنك من خلال التطبيق أن تستعرض المشاريع التي تحتاج للتمويل والحصول على كافة المعلومات اللازمة تلبيةً لرغباتك، وتتبّع المشاريع بفعالية وانتظام!'),
     BoardingModel(
         image: 'assets/images/onboarding3.jpg',
         image0: 'assets/images/3.png',
         title: 'احصل على عقد موثوق لتحقيق أهدافك',
-        body: 'فلو وجدت فرصتك داخل التطبيق سنوفر لك جميع ما تحتاج من العقود القانونية والتتبع اللازم والموثوق للمشاريع خاصتك!'),
+        body:
+            'فلو وجدت فرصتك داخل التطبيق سنوفر لك جميع ما تحتاج من العقود القانونية والتتبع اللازم والموثوق للمشاريع خاصتك!'),
   ];
 
   var isLast = false;
 
-  void submit() async{
+  void submit() async {
     StoreInfo info = StoreInfo();
     await info.save("onBoarding", "true").then((value) => Get.to(FirstPage()));
     // CacheHelper.saveData(key: 'onBoarding', value: true).then(
@@ -108,7 +110,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             height: 40.0,
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(15.0),
             child: Row(
               children: [
                 SmoothPageIndicator(
@@ -124,27 +126,30 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   ),
                 ),
                 Spacer(),
-                Container(
-                  
-                  width: 118,
-                  height: 52,
-                  child: FloatingActionButton(
-                    backgroundColor: buttonColor,
-                    onPressed: () {
-                      if (isLast) {
-                        submit();
-                      } else {
-                        boardController.nextPage(
-                          duration: Duration(
-                            milliseconds: 750,
-                          ),
-                          curve: Curves.fastLinearToSlowEaseIn,
-                        );
-                      }
-                    },
-                    child: Icon(
-                      Icons.arrow_forward_ios,
-                    ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Container(
+                    width: 118,
+                    height: 52,
+                    child: FloatingActionButton(
+                        backgroundColor: buttonColor,
+                        onPressed: () {
+                          if (isLast) {
+                            submit();
+                          } else {
+                            boardController.nextPage(
+                              duration: Duration(
+                                milliseconds: 750,
+                              ),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                            );
+                          }
+                        },
+                        child: Text(
+                          'التالي',
+                          style: TextStyle(
+                              fontSize: 32, fontFamily: 'font1', color: white),
+                        )),
                   ),
                 ),
               ],

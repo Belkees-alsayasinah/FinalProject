@@ -1,10 +1,13 @@
+import 'package:bloom_project/DetailsPage/details_page_view.dart';
 import 'package:bloom_project/FirstPage/first_page.dart';
 import 'package:bloom_project/HomePage/basic_page.dart';
+import 'package:bloom_project/HomePage/home_page_View.dart';
 import 'package:bloom_project/Interests/interests_view.dart';
 import 'package:bloom_project/LoginPage/login_page.dart';
 import 'package:bloom_project/RegisterPage/confirm_account.dart';
 import 'package:bloom_project/RegisterPage/register_page.dart';
 import 'package:bloom_project/SearchPage/search_page_view.dart';
+import 'package:bloom_project/SectorPage/sector_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
@@ -28,7 +31,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: OnBoardingScreen(),
+      home: BasicPage(),
     );
   }
 }
