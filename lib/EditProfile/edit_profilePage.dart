@@ -1,5 +1,4 @@
 
-import 'package:bloom_project/EditProfile/edit_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +12,7 @@ class EditProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
-    EditProfileController controller = Get.put(EditProfileController());
+   // EditProfileController controller = Get.put(EditProfileController());
     return Scaffold(
       body: Padding(
         padding:

@@ -151,7 +151,6 @@ class HomePageView extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     width: 156,
-                    height:123,
                     decoration: BoxDecoration(
                       color: cardColor,
                       borderRadius: BorderRadius.all(
@@ -183,7 +182,7 @@ class HomePageView extends StatelessWidget {
                 separatorBuilder: (BuildContext context, int index) {
                   return SizedBox(width: 10);
                 },
-                itemCount: 20,
+                itemCount: 10,
               ),
             ),
             SizedBox(height: 20,),

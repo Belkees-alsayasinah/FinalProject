@@ -11,6 +11,7 @@ import 'package:bloom_project/SectorPage/sector_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
+import 'Articles/articles_page.dart';
 import 'OnBoarding/on_boarding.dart';
 //gg
 void main() {
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home:ArticlesView()// OnBoardingScreen(),
+      home:BasicPage()// OnBoardingScreen(),
     );
   }
 }
