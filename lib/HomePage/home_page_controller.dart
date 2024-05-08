@@ -1,21 +1,25 @@
 
+import 'package:bloom_project/Articles/articles_page.dart';
 import 'package:bloom_project/HomePage/basic_page.dart';
 import 'package:bloom_project/HomePage/home_page_View.dart';
+import 'package:bloom_project/ProfilePage/profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+
+import '../ChartPage/chart_page_view.dart';
 
 class HomeController extends GetxController {
 
   int currentIndex = 2;
 
   List<Widget> screens = [
-    Icon(Icons.person),
-    Icon(Icons.insert_chart),
+    ProfilePage(),
+    ChartPageView(),
     HomePageView(),
     Icon(Icons.notifications),
-    Icon(Icons.article),
+    ArticlesView(),
   ];
 
   List<BottomNavigationBarItem> bottomItem = [
