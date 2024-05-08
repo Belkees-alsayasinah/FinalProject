@@ -43,7 +43,7 @@ class Details extends StatelessWidget {
                     const SizedBox(height: 8.0), // Space between texts
                     // ... rest of your container content
                   ],
-                ),
+                ),//
               ),
               const SizedBox(height: 16.0), // Space after container
               ElevatedButton(
