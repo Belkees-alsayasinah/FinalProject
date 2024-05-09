@@ -1,38 +1,39 @@
-
-import 'package:bloom_project/Articles/articles_page.dart';
-import 'package:bloom_project/HomePage/basic_page.dart';
-import 'package:bloom_project/HomePage/home_page_View.dart';
-import 'package:bloom_project/ProfilePage/profile_page.dart';
+import 'package:bloom_project/HomePage/home_page_model.dart';
+import 'package:bloom_project/HomePage/home_page_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import '../Config/userinformation.dart';
+import '../service/info.dart';
 
-import '../ChartPage/chart_page_view.dart';
+class HomePageController extends GetxController {
+  late RxBool isLoad;
+  late HomePageService service;
+  late RxList<HomePageModel> models;
+  late String message;
+  var d;
+  late bool state;
+  late GlobalKey<FormState> formstate;
 
-class HomeController extends GetxController {
+  @override
+  void onInit() async {
+    formstate = GlobalKey<FormState>();
 
-  int currentIndex = 2;
+    isLoad = true.obs;
+    service = HomePageService();
+    models = <HomePageModel>[].obs;
+    message = '';
 
-  List<Widget> screens = [
-    ProfilePage(),
-    ChartPageView(),
-    HomePageView(),
-    Icon(Icons.notifications),
-    ArticlesView(),
-  ];
+    await getdata();
+  }
 
-  List<BottomNavigationBarItem> bottomItem = [
-    BottomNavigationBarItem(label: "Profile",icon: Icon(Icons.person)),
-    BottomNavigationBarItem(label: "Chart",icon: Icon(Icons.insert_chart)),
-    BottomNavigationBarItem(label: "Home",icon: Icon(Icons.home)),
-    BottomNavigationBarItem(label: "Notification",icon: Icon(Icons.notifications)),
-    BottomNavigationBarItem(label: "Article",icon: Icon(Icons.article)),
-  ];
-
-  void changeBottomNavBar(int index) {
-    currentIndex = index;
-    update();
-    // emit(ShopChangeBottomNavState());
+  getdata() async {
+    d = await service.getSectors(UserInformation.user_token);
+    models.value.assignAll(service.model);
+    models.refresh();
+    isLoad.value = false;
+    if (models.isEmpty) {
+    } else if (models[0].name == "null") {}
   }
 }

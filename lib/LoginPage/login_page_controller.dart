@@ -1,43 +1,33 @@
-import 'package:bloom_project/RegisterPage/confirm_account.dart';
-import 'package:bloom_project/RegisterPage/register_model.dart';
-import 'package:bloom_project/RegisterPage/register_service.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:bloom_project/HomePage/basic_page.dart';
+import 'package:bloom_project/HomePage/home_page_View.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../service/info.dart';
+import '../Style/constant.dart';
+import 'login_page_model.dart';
+import 'login_page_service.dart';
 
-import '../Config/userinformation.dart';
-import '../service/info.dart';
 
-class RegisterPageController extends GetxController {
-  late RxString accountType;
-  late GlobalKey<FormState> formstate;
+class LoginPageController extends GetxController {
   late String email;
   late String password;
-  late String firstName;
-  late String lastName;
-  late String location;
-  late String phone;
-  late RegisterService service;
+  late LoginPageService service;
   late String message;
   late bool loginState;
   late RxBool remember;
+  late GlobalKey<FormState> formstate;
   late RxBool isLoading;
 
   @override
   void onInit() {
-    formstate = GlobalKey<FormState>();
-    accountType = 'عامل'.obs;
     email = '';
     password = '';
-    firstName = '';
-    lastName = '';
-    location = '';
-    phone = '';
     message = '';
-    service = RegisterService();
+    service = LoginPageService();
     loginState = false;
     remember = true.obs;
     isLoading = false.obs;
+    formstate = GlobalKey<FormState>();
     super.onInit();
   }
 
@@ -46,7 +36,7 @@ class RegisterPageController extends GetxController {
     update();
   }
 
-  void onClickSignIn() async {
+  void onClicksignin() async {
     isLoading = true.obs;
     var formdata = formstate.currentState;
     if (formdata!.validate()) {
@@ -55,13 +45,18 @@ class RegisterPageController extends GetxController {
       print("password : $password");
       await loginclick();
       if (loginState) {
-
-        Get.to(ConfirmAccountView());
+        print(loginState);
+        Get.to(BasicPage());
+/////////////////////////////////////////////////////////////////////////////////
+        if(UserInformation.usertype=="user"||UserInformation.usertype=="User")
+        // Get.to(HomePageView());
+        if(UserInformation.usertype=="super_admin")
+         // Get.to(HomePageView());
         print(UserInformation.usertype);
         Get.snackbar('Done', 'You have been logged in successfully',
             borderRadius: 20,
             margin: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-            backgroundColor: Colors.blueGrey,
+            backgroundColor: buttonColorOpa,
             icon: Icon(
               Icons.emoji_emotions_outlined,
               size: 40,
@@ -88,12 +83,10 @@ class RegisterPageController extends GetxController {
   }
 
   Future<void> loginclick() async {
-    print("h1");
-    RegisterModel user = RegisterModel(email: email, password: password, firstName: firstName, lastName: lastName, location: location, phone: phone);
+    LoginPageModel user = LoginPageModel(email: email, password: password);
     loginState = await service.login(user);
     var mapmsg = service.message;
     if (mapmsg is Map) {
-      // message = '${mapmsg["email"][0]}\n${mapmsg["password"][0]}';
     } else if (mapmsg is String) {
       message = mapmsg;
     }

@@ -24,14 +24,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-          primarySwatch: Colors.green,
-          useMaterial3: true,
-        ),
-        debugShowCheckedModeBanner: false,
-        home:ArticlesView()// OnBoardingScreen(),
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+        primarySwatch: Colors.green,
+        useMaterial3: true,
+      ),
+      debugShowCheckedModeBanner: false,
+<<<<<<< HEAD
+      home:LoginPage()// OnBoardingScreen(),
+=======
+      home:ArticlesView()// OnBoardingScreen(),
+>>>>>>> 8ef17d5558a9ee01e8250bc6fd8d14870549cf22
     );
   }
 }
