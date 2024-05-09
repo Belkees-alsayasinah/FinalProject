@@ -39,7 +39,7 @@ class _ChartPageViewState extends State<ChartPageView> {
               height: 200,
               width: 200,
             ),
-            SizedBox(height: 40),
+            SizedBox(height: 100),
             SizedBox(
               height: 200,
               child: MyBarGraph(

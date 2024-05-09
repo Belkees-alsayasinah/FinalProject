@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class StoreInfo {
   Future<void> save(String key, String value) async {
+    print("value: "+value);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // print(value);
     // print("done save");

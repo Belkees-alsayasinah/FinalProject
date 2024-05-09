@@ -11,10 +11,12 @@ class ArticlesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    String D="يُعد الاستثمار أحد أهم مفاتيح تحقيق الاستقرار المالي والأمان في المستقبل. باختصار، هو عملية تخصيص الأموال في أصول أو مشاريع ذات عائد متوقع بهدف تحقيق الربح أو تنمية الثروة.";
+    String D =
+        "يُعد الاستثمار أحد أهم مفاتيح تحقيق الاستقرار المالي والأمان في المستقبل. باختصار، هو عملية تخصيص الأموال في أصول أو مشاريع ذات عائد متوقع بهدف تحقيق الربح أو تنمية الثروة.";
 
     return Scaffold(
       appBar: AppBar(
+        leading: Text(''),
         centerTitle: true,
         title: Text(
           'المقالات', // Articles
@@ -30,35 +32,46 @@ class ArticlesView extends StatelessWidget {
         child: Column(
           children: [
             // Banner image and text
-            Stack(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.25, // Adjust height as needed
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/articles.jpg'),
-                      // Replace with your asset
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+            Container(
+              height: MediaQuery.of(context).size.height *
+                  0.25, // Adjust height as needed
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                image: DecorationImage(
+                  image: AssetImage('assets/images/articles.jpg'),
+                  // Replace with your asset
+                  fit: BoxFit.contain,
                 ),
-                Positioned(
-                  // bottom: 10.0,
-                  right: 10.0,
-                  top: screenSize.height * 0.3,
-                  child: Text(
-                    'عزز معلوماتك عن الاستثمار',
-                    // Enhance your investment knowledge
-                    style: TextStyle(
+              ),
+            ),
+            Container(
+              height: screenSize.width * 0.2,
+              width: 221,
+              decoration: BoxDecoration(
+                color: white,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.5),
+                    spreadRadius: 0, // انتشار الظل
+                    offset: Offset(3, 3), // تحديد الزاوية والاتجاه
+                    blurRadius: 4, // وضوح الظل
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  'عزز معلوماتك عن الاستثمار',
+                  // Enhance your investment knowledge
+                  style: TextStyle(
                       color: Colors.black87,
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                      fontFamily: 'font1'),
                 ),
-              ],
+              ),
             ),
+
             SizedBox(height: 20),
 
             // List of articles (clickable)
@@ -69,12 +82,15 @@ class ArticlesView extends StatelessWidget {
                   onTap: () {
                     // Handle article click here (e.g., navigate to article details)
                     print("Article $index clicked!");
-                    Get.to(SingleArticleView(title:'الاستثمار: بوابة نحو مستقبل مالي مستقر' ,description: D));
-
+                    Get.to(SingleArticleView(
+                        title: 'الاستثمار: بوابة نحو مستقبل مالي مستقر',
+                        description: D));
                   },
                   child: articleListItem(context),
                 ),
-                separatorBuilder: (context, index) => Divider(thickness: 1),
+                separatorBuilder: (context, index) => SizedBox(
+                  height: 15,
+                ),
                 itemCount: 5, // Adjust number of articles
               ),
             ),
@@ -86,35 +102,56 @@ class ArticlesView extends StatelessWidget {
 
   Widget articleListItem(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.15, // Adjust height as needed
+      height:
+          MediaQuery.of(context).size.height * 0.15, // Adjust height as needed
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Colors.grey[200],
+        color: Colors.white70,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 0, // انتشار الظل
+            offset: Offset(3, 3), // تحديد الزاوية والاتجاه
+            blurRadius: 2, // وضوح الظل
+          ),
+        ],
       ),
       child: Row(
         children: [
           Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end, // Change to end
-              children: [
-                Text(
-                  'عنوان المقال', // Article Title
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end, // Change to end
+                children: [
+                  Text(
+                    'عنوان المقال', // Article Title
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'font1'),
+                    maxLines: 2, // Allow for two lines of text
+                    overflow: TextOverflow.ellipsis, // Truncate if text overflows
                   ),
-                  maxLines: 2, // Allow for two lines of text
-                  overflow: TextOverflow.ellipsis, // Truncate if text overflows
-                ),
-                Text(
-                  '2024-04-22', // Replace with article date
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
+                  Text(
+                    '2024-04-22',
+                    style: TextStyle(
+                        fontSize: 18, color: Colors.grey, fontFamily: 'font1'),
                   ),
-                ),
-              ],
+                  SizedBox(height: 3,),
+                  Text(
+                    'يعد الاستثمار عنصرا أساسيا في النمو الاقتصادي...',
+
+                    style: TextStyle(
+                        fontSize: 18, color: Colors.grey, fontFamily: 'font1'),
+                    textDirection: TextDirection.rtl,
+                    maxLines: 1, // Allow for two lines of text
+                    overflow: TextOverflow.ellipsis,
+
+                  ),
+                ],
+              ),
             ),
           ),
           SizedBox(width: 10),

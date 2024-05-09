@@ -21,6 +21,14 @@ class SingleArticleView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: Text(''),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(Icons.arrow_forward_ios, color: textColor, size: 30))
+        ],
         centerTitle: true,
         title: Text(
           'المقالات', // Articles

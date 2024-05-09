@@ -1,47 +1,36 @@
-import 'package:bloom_project/HomePage/home_page_controller.dart';
+import 'package:bloom_project/HomePage/BasicPageController.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class BasicPage extends StatefulWidget {
-
-
-
   @override
   State<BasicPage> createState() => _BasicPageState();
 }
 
 class _BasicPageState extends State<BasicPage> {
-  HomeController controller = Get.put(HomeController());
+   BasicPageController controller = Get.put(BasicPageController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: GetBuilder<HomeController>(
-          init: HomeController(), // Instantiate the controller
-          builder: (controller) {
-            return controller.screens[controller.currentIndex];
+        child: Obx(() {
+          return controller.screens[controller.currentIndex.value];
+        }),
+      ),
+      bottomNavigationBar: Obx(() {
+        return BottomNavigationBar(
+          currentIndex: controller.currentIndex.value,
+          onTap: (int nextIndex) {
+            controller.changeBottomNavBar(nextIndex);
           },
-        ),
-      ),
-      bottomNavigationBar: GetBuilder<HomeController>(
-        init: HomeController(),
-        builder: (controller){
-          return BottomNavigationBar(
-            currentIndex: controller.currentIndex,
-            onTap: (int nextIndex){
-              controller.changeBottomNavBar(nextIndex);
-
-            },
-            items: controller.bottomItem,
-            selectedItemColor: buttonColor,
-            unselectedItemColor: grey,
-          );
-        }
-      ),
-
+          items: controller.bottomItem,
+          selectedItemColor: buttonColor,
+          unselectedItemColor: grey,
+        );
+      }),
     );
   }
 }
