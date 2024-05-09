@@ -1,3 +1,4 @@
+import 'package:bloom_project/Articles/articles_page.dart';
 import 'package:bloom_project/FirstPage/first_page.dart';
 import 'package:bloom_project/HomePage/basic_page.dart';
 import 'package:bloom_project/HomePage/home_page_View.dart';
@@ -7,11 +8,9 @@ import 'package:bloom_project/ProfilePage/profile_page.dart';
 import 'package:bloom_project/RegisterPage/confirm_account.dart';
 import 'package:bloom_project/RegisterPage/register_page.dart';
 import 'package:bloom_project/SearchPage/search_page_view.dart';
-import 'package:bloom_project/SectorPage/sector_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-import 'Articles/articles_page.dart';
 import 'OnBoarding/on_boarding.dart';
 //gg
 void main() {
@@ -32,7 +31,11 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
+<<<<<<< HEAD
       home:LoginPage()// OnBoardingScreen(),
+=======
+      home:ArticlesView()// OnBoardingScreen(),
+>>>>>>> 8ef17d5558a9ee01e8250bc6fd8d14870549cf22
     );
   }
 }
