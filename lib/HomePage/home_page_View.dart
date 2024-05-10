@@ -31,6 +31,7 @@ class HomePageView extends StatelessWidget {
       fit: BoxFit.cover,
     );
   }
+
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
@@ -249,12 +250,13 @@ class HomePageView extends StatelessWidget {
                       : controller.models.length == 0
                           ? Center(
                               child: Text(
-                                'there are no files yet',
+                                'لا يوجد مشاريع بعد!',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'font1',
-                                    fontSize: screenSize.shortestSide * 0.06,
-                                    color: Colors.white),
+                                    fontSize: screenSize.shortestSide * 0.07,
+                                    color: textColor),
+                                textDirection: TextDirection.rtl,
                               ),
                             )
                           : ListView.separated(

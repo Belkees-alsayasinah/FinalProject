@@ -1,13 +1,22 @@
+import 'package:bloom_project/HomePage/home_page_View.dart';
 import 'package:bloom_project/HomePage/home_page_model.dart';
 import 'package:bloom_project/HomePage/home_page_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import '../Config/userinformation.dart';
 import '../service/info.dart';
 
 class HomePageController extends GetxController {
+  @override
+  Widget get widget => HomePageView();
+
+
+  @override
+  void onClose() {
+    super.onClose();
+    // Clean up page-specific data or services here
+  }
   late RxBool isLoad;
   late HomePageService service;
   late RxList<HomePageModel> models;

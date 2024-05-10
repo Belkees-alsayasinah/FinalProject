@@ -4,28 +4,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BasicPage extends StatefulWidget {
-  @override
-  State<BasicPage> createState() => _BasicPageState();
-}
+import '../Articles/articles_controller.dart';
 
-class _BasicPageState extends State<BasicPage> {
-   BasicPageController controller = Get.put(BasicPageController());
+class BasicPage extends StatelessWidget {
+  final BasicPageController controller = Get.put(BasicPageController());
+  final controller0 = Get.lazyPut(() => ArticlesController(), fenix: true);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Obx(() {
-          return controller.screens[controller.currentIndex.value];
-        }),
+      body: PageView(
+        controller: controller.pageController,
+        onPageChanged: (index) {
+          controller.currentIndex.value = index;
+        },
+        children: controller.screens,
       ),
       bottomNavigationBar: Obx(() {
         return BottomNavigationBar(
           currentIndex: controller.currentIndex.value,
-          onTap: (int nextIndex) {
-            controller.changeBottomNavBar(nextIndex);
-          },
+          onTap: controller.changeBottomNavBar,
           items: controller.bottomItem,
           selectedItemColor: buttonColor,
           unselectedItemColor: grey,
@@ -33,4 +31,5 @@ class _BasicPageState extends State<BasicPage> {
       }),
     );
   }
+
 }

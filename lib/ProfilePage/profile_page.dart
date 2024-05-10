@@ -2,6 +2,7 @@ import 'package:bloom_project/EditProfile/edit_profilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../Add_Project/add_project_ui.dart';
 import '../Style/constant.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -30,6 +31,7 @@ class ProfilePage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
+              Get.to(AddProject());
               // Handle add action functionality
             },
           ),

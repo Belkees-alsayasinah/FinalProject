@@ -46,7 +46,7 @@ class LoginPageController extends GetxController {
       await loginclick();
       if (loginState) {
         print(loginState);
-        Get.to(BasicPage());
+        Get.off(BasicPage());
 /////////////////////////////////////////////////////////////////////////////////
         if(UserInformation.usertype=="user"||UserInformation.usertype=="User")
         // Get.to(HomePageView());

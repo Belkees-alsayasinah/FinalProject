@@ -4,8 +4,6 @@ import 'package:bloom_project/RegisterPage/register_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../Config/userinformation.dart';
 import '../service/info.dart';
 
 class RegisterPageController extends GetxController {

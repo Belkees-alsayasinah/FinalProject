@@ -7,18 +7,18 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../ChartPage/chart_page_view.dart';
+import '../Notifications/notifications_page.dart';
 
 class BasicPageController extends GetxController {
-
   var currentIndex = 2.obs;
- // var currentIndex = 0.obs;
 
+  PageController pageController = PageController(initialPage: 2);
 
   List<Widget> screens = [
     ProfilePage(),
     ChartPageView(),
     HomePageView(),
-    Icon(Icons.notifications),
+    NotificationsPage(),
     ArticlesView(),
   ];
 
@@ -31,9 +31,12 @@ class BasicPageController extends GetxController {
     BottomNavigationBarItem(label: "Article", icon: Icon(Icons.article)),
   ];
 
-  void changeBottomNavBar(var index) {
+  void changeBottomNavBar(int index) {
     currentIndex.value = index;
-    update();
-    // emit(ShopChangeBottomNavState());
+    pageController.animateToPage(
+      index,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.ease,
+    );
   }
 }

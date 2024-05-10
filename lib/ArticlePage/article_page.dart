@@ -44,47 +44,32 @@ class SingleArticleView extends StatelessWidget {
         child: Column(
           children: [
             // Banner image and text
-            Stack(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.25, // Adjust height as needed
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/article1.jpg'),
-                      // Replace with your asset
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.25, // Adjust height as needed
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                image: DecorationImage(
+                  image: AssetImage('assets/images/article1.jpg'),
+                  // Replace with your asset
+                  fit: BoxFit.contain,
                 ),
-                Positioned(
-                  // bottom: 10.0,
-                  right: 10.0,
-                  top: screenSize.height * 0.3,
-                  child: Text(
-                    'عزز معلوماتك عن الاستثمار',
-                    // Enhance your investment knowledge
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
             SizedBox(height: 20),
 
             // List of articles (clickable)
             Expanded(
               child: Column( // Use Column for vertical layout
+                textDirection: TextDirection.rtl,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Text box for title
                   Text(
-                    'أهمية الاستثمار', // Article Title (replace with actual title)
+                    title, // Article Title (replace with actual title)
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'font1'
                     ),
                   ),
                   SizedBox(height: 10), // Add some spacing between title and description
@@ -95,11 +80,14 @@ class SingleArticleView extends StatelessWidget {
                       child: Container( // Container for article description
                         padding: EdgeInsets.all(10), // Add padding for readability
                         child: Text(
-                          'يُعد الاستثمار أحد أهم مفاتيح تحقيق الاستقرار المالي والأمان في المستقبل.', // Replace with actual description
+
+                          description, // Replace with actual description
                           style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey[600],
+                            fontSize: 18,
+                            color: black,
+                            fontFamily: 'font1'
                           ),
+                          textDirection: TextDirection.rtl,
                         ),
                       ),
                     ),
