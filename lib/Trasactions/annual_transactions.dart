@@ -1,3 +1,4 @@
+import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/material.dart';
 
 class AnnualTransactions extends StatelessWidget {
@@ -8,14 +9,14 @@ class AnnualTransactions extends StatelessWidget {
         title: Text(
           "المعاملات السنوية", // Transaction Details
           style: const TextStyle(
-            color: Colors.white,
+            color: textColor,
             fontFamily: 'font1', // Replace with your desired font
             fontSize: 34,
           ),
           textAlign: TextAlign.right, // Right-to-left text alignment
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFF659B5E), // Green color for app bar (optional)
+      //  backgroundColor: const Color(0xFF659B5E), // Green color for app bar (optional)
       ),
       body: Padding(
 

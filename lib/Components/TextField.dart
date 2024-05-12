@@ -78,6 +78,7 @@ final int hieght;
           suffix: icon != null ? Icon(icon) : null,
           suffixIcon: suffixPressed != null ? IconButton(onPressed: suffixPressed!, icon: Icon(Icons.clear)) : null,
         ),
+          textAlign: TextAlign.right,
       ),
     ),
     );
