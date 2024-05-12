@@ -15,6 +15,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'Add_Project/add_project_ui.dart';
 import 'Communication_Request/communication_request page.dart';
+import 'EditProfile/edit_profilePage.dart';
 import 'OnBoarding/on_boarding.dart';
 import 'Pay_for_a_transaction/pay_for_a_transaction_ui.dart';
 import 'Trasactions/annual_transactions.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home:LoginPage()// OnBoardingScreen(),
+      home:TransactionDetails()// OnBoardingScreen(),
     );
   }
 }

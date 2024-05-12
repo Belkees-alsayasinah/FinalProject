@@ -1,4 +1,7 @@
+import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/material.dart';
+
+import '../Components/MyButton.dart';
 
 class PayForTracking extends StatelessWidget {
   @override
@@ -8,14 +11,14 @@ class PayForTracking extends StatelessWidget {
         title: Text(
           'دفع لتتبع مشروع',
           style: const TextStyle(
-            color: Colors.white,
+            color: textColor,
             fontFamily: 'font1',
             fontSize: 34.0,
           ),
           textAlign: TextAlign.center,
         ),
         centerTitle: true,
-        backgroundColor: const Color(0xFF659B5E), // Green color for app bar
+      //  backgroundColor: Colors.white, // Green color for app bar
       ),
       body: Column(
         children: [
@@ -30,16 +33,18 @@ class PayForTracking extends StatelessWidget {
                     Text(
                       'من أجل الدفع لإجراء عملية تتبع المشروع يجب عليك أن تقوم بتحويل المبلغ المطلوب لحساب البنك الخاص بالمكتب وإرفاق إشعار الدفع في الأسفل',
                       style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16.0,
+                        color: textColor,
+                        fontFamily: 'font1',
+                        fontSize: 34.0,
                       ),
                       textAlign: TextAlign.right,
                     ),
                     const SizedBox(height: 5.0), // Small space between texts
                     Text('الحساب المطلوب التحويل عليه هو',
                       style: const TextStyle(
-                        color: Color(0xFF659B5E),
-                        fontSize: 16.0,
+                        color: textColor,
+                        fontFamily: 'font1',
+                        fontSize: 34.0,
                       ),
                       textAlign: TextAlign.right,
                     ),
@@ -47,8 +52,9 @@ class PayForTracking extends StatelessWidget {
 
                     Text('bshab2024',
                       style: const TextStyle(
-                        color: Color(0xFF659B5E),
-                        fontSize: 16.0,
+                        color: textColor,
+                        fontFamily: 'font1',
+                        fontSize: 34.0,
                       ),
                       textAlign: TextAlign.right,
                     ),
@@ -87,18 +93,16 @@ class PayForTracking extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center, // Align to right
                         children: [
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'تأكيد الطلب',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              primary: const Color(0xFF659B5E), // Green color for button
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
+                          MyButton(
+                            fontSize: 24,
+                            onsave: () {
+                            },
+                            width: 150,
+                            height: 62,
+                            text: 'تأكيد الطلب',
+                            color: buttonColor,
+                            radius: 15,
+                            textColor: Colors.white,
                           ),
                         ],
                       ),
