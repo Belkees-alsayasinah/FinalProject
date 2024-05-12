@@ -5,12 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../Style/constant.dart';
 
-
 class ArticlesView extends StatelessWidget {
   final controller0 = Get.lazyPut(() => ArticlesController(), fenix: true);
-
- ArticlesController controller = Get.find();
-
+  ArticlesController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +116,9 @@ class ArticlesView extends StatelessWidget {
                                           title: controller.models[index].name
                                               .toString(),
                                           description: controller
-                                              .models[index].description));
+                                              .models[index].description,
+                                      image: controller.models[index].image
+                                      ));
                                     },
                                     child: articleListItem(context, index),
                                   );
@@ -139,9 +138,12 @@ class ArticlesView extends StatelessWidget {
   }
 
   Widget articleListItem(BuildContext context, int index) {
-    String formattedDate = controller.models[index].createdAt.toString().substring(0, 10);
+    final Size screenSize = MediaQuery.of(context).size;
 
-   // String formattedDate = DateFormat('yyyy-MM-dd').format(controller.models[index].createdAt);
+    String formattedDate =
+        controller.models[index].createdAt.toString().substring(0, 10);
+
+    // String formattedDate = DateFormat('yyyy-MM-dd').format(controller.models[index].createdAt);
 
     return Container(
       height:
@@ -162,7 +164,7 @@ class ArticlesView extends StatelessWidget {
         children: [
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.only(top: 5,left: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end, // Change to end
@@ -170,10 +172,10 @@ class ArticlesView extends StatelessWidget {
                   Text(
                     controller.models[index].name, // Article Title
                     style: TextStyle(
-                        fontSize: 25,
+                        fontSize: screenSize.width * 0.06,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'font1'),
-                    maxLines: 2, // Allow for two lines of text
+                    maxLines: 1, // Allow for two lines of text
                     overflow:
                         TextOverflow.ellipsis, // Truncate if text overflows
                   ),
@@ -207,8 +209,7 @@ class ArticlesView extends StatelessWidget {
                 width: 70,
                 height: 70,
                 child: Image.network(
-                  controller.models[index].image.toString(),
-                  // Replace with your asset
+                  controller.models[index].image,
                   width: 70,
                   height: 70,
                   fit: BoxFit.cover,

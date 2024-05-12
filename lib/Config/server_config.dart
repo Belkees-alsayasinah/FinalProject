@@ -5,4 +5,5 @@ class ServerConfig {
   String registerApi = 'api/investor/register';
   String getSectorApi = 'api/Type';
   String getArticlesApi = "api/Article";
+  String getSectorProjectApi = "api/Type/showProjectsByType/";
 }

@@ -9,11 +9,13 @@ import '../Style/constant.dart';
 class SingleArticleView extends StatelessWidget {
   final String title; // Title of the article
   final String description; // Description of the article
+  final String image;
 
   const SingleArticleView({
     Key? key,
     required this.title,
     required this.description,
+    required this.image,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -48,12 +50,14 @@ class SingleArticleView extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.25, // Adjust height as needed
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                  image: AssetImage('assets/images/article1.jpg'),
-                  // Replace with your asset
-                  fit: BoxFit.contain,
-                ),
+
+                // image: DecorationImage(
+                //   image: AssetImage('assets/images/article1.jpg'),
+                //   // Replace with your asset
+                //   fit: BoxFit.contain,
+                // ),
               ),
+              child: Image.network(image),
             ),
             SizedBox(height: 20),
 

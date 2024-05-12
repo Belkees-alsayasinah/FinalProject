@@ -21,7 +21,6 @@ class BasicPageController extends GetxController {
     NotificationsPage(),
     ArticlesView(),
   ];
-
   List<BottomNavigationBarItem> bottomItem = [
     BottomNavigationBarItem(label: "Profile", icon: Icon(Icons.person)),
     BottomNavigationBarItem(label: "Chart", icon: Icon(Icons.insert_chart)),

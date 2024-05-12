@@ -45,9 +45,8 @@ class LoginPageController extends GetxController {
       print("password : $password");
       await loginclick();
       if (loginState) {
-        print(loginState);
         Get.off(BasicPage());
-/////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////
         if(UserInformation.usertype=="user"||UserInformation.usertype=="User")
         // Get.to(HomePageView());
         if(UserInformation.usertype=="super_admin")

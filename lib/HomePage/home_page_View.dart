@@ -275,7 +275,10 @@ class HomePageView extends StatelessWidget {
                                       } else {
                                         return InkWell(
                                           onTap: () {
-                                            Get.to(SectorPageView());
+                                            print('gg: ${controller.models[index].id}');
+                                            Get.to(SectorPageView(), arguments: {
+                                              'id': '${controller.models[index].id}'
+                                            });
                                           },
                                           child: Stack(
                                             children: [
