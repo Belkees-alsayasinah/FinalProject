@@ -87,6 +87,15 @@ flutter:
     - family: font1
       fonts:
         - asset: assets/fonts/Arslan.ttf
+    - family: font2
+      fonts:
+        - asset: assets/fonts/AAA.ttf
+    - family: font3
+      fonts:
+        - asset: assets/fonts/OO.ttf
+    - family: font4
+      fonts:
+        - asset: assets/fonts/Aref.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

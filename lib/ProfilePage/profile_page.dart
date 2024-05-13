@@ -1,3 +1,4 @@
+import 'package:bloom_project/Components/MyListProject.dart';
 import 'package:bloom_project/EditProfile/edit_profilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,9 +8,10 @@ import '../Add_Project/add_project_ui.dart';
 import '../Style/constant.dart';
 
 class ProfilePage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
+    const style =
+    TextStyle(color: black, fontWeight: FontWeight.bold, fontSize: 26);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -44,9 +46,9 @@ class ProfilePage extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('assets/images/profile.jpg'), // Replace 'profile.jpg' with your actual image name
+              backgroundImage: AssetImage(
+                  'assets/images/profile.jpg'), // Replace 'profile.jpg' with your actual image name
             ),
-
             SizedBox(height: 15),
             Text(
               'أبو حميد',
@@ -55,7 +57,6 @@ class ProfilePage extends StatelessWidget {
                 fontFamily: 'font1',
                 fontSize: 28,
               ),
-
             ),
             Text(
               'email@gmail.com',
@@ -76,8 +77,15 @@ class ProfilePage extends StatelessWidget {
             SizedBox(height: 20),
             Expanded(
               child: ListView.separated(
-                itemBuilder: (context, index) => projectItem(context),
-                separatorBuilder: (context, index) => Divider(),
+                itemBuilder: (context, index) => MyListProject(
+                    address: 'دمشق-الجسر الأبيض',
+                    title: 'مصور فوتوغرافي',
+                    cost: '4,000,000',
+                    function: () {},
+                    onTap: () {}),
+                separatorBuilder: (context, index) => SizedBox(
+                  height: 20,
+                ),
                 itemCount: 3, // Replace with actual project count
               ),
             ),
@@ -87,12 +95,12 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-
   Widget projectItem(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(borderRadius:BorderRadius.circular(15),      color: Color(0xFF659B5E),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Color(0xFF659B5E),
       ),
-
       child: Row(
         children: [
           // Show "عرض المزيد..." on the right
@@ -112,14 +120,13 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-
-              // Add button "إضافة تقرير" on the left
               Padding(
                 padding: const EdgeInsets.only(left: 7),
                 child: TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.white,
-                    foregroundColor: textColor, // Use your defined textColor variable here
+                    foregroundColor:
+                        textColor, // Use your defined textColor variable here
                   ),
                   child: Text(
                     "إضافة تقرير",
@@ -136,21 +143,25 @@ class ProfilePage extends StatelessWidget {
               // "نجار محترف" on the right
             ],
           ),
-          SizedBox(width: 90,),
+          SizedBox(
+            width: 90,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end, // Right-align the column
+              crossAxisAlignment: CrossAxisAlignment.end,
+              // Right-align the column
               children: [
                 Text(
                   "نجار محترف",
-                  style:TextStyle(
-                 // color: textColor,
-                  fontFamily: 'font1',
-                  fontSize: 24,
+                  style: TextStyle(
+                    // color: textColor,
+                    fontFamily: 'font1',
+                    fontSize: 24,
                   ),
                 ),
-                Row( // Row for location and price
+                Row(
+                  // Row for location and price
                   mainAxisSize: MainAxisSize.min, // Minimize row width
                   children: [
                     // Location icon
@@ -166,17 +177,15 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                Row( // Row for price
+                Row(
+                  // Row for price
                   mainAxisSize: MainAxisSize.min, // Minimize row width
                   children: [
                     // Dollar sign or similar symbol
                     Text(
                       "\$ ", // Replace with your desired symbol
                       style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'font1',
-                        color: textColor
-                      ),
+                          fontSize: 24, fontFamily: 'font1', color: textColor),
                     ),
                     // "مبلغ قدره 500 $"
                     Text(
@@ -188,22 +197,11 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),                    SizedBox(width: 5),
-                Text(
-                  "...عرض المزيد",
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontFamily: 'font1',
-                      color: Colors.white
-                  ),
                 ),
-
 
               ],
             ),
           ),
-
-
         ],
       ),
     );

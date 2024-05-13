@@ -11,7 +11,7 @@ class SectorService {
   RxList<SectorModel> model = <SectorModel>[].obs;
   Future<List<SectorModel>> getSectorProjects(String token, String id) async {
     var response = await http.get(
-      Uri.parse(ServerConfig.domainNameServer + ServerConfig().getSectorProjectApi + id),
+      Uri.parse(ServerConfig.domainNameServer + ServerConfig().getSectorProjectApi + '$id'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
@@ -29,6 +29,7 @@ class SectorService {
       }
       return model;
     } else {
+
       //show error message
       return [];
     }

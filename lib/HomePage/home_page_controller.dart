@@ -8,15 +8,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import '../service/info.dart';
 
 class HomePageController extends GetxController {
-  @override
-  Widget get widget => HomePageView();
 
-
-  @override
-  void onClose() {
-    super.onClose();
-    // Clean up page-specific data or services here
-  }
   late RxBool isLoad;
   late HomePageService service;
   late RxList<HomePageModel> models;
@@ -24,11 +16,9 @@ class HomePageController extends GetxController {
   var d;
   late bool state;
   late GlobalKey<FormState> formstate;
-
   @override
   void onInit() async {
     formstate = GlobalKey<FormState>();
-
     isLoad = true.obs;
     service = HomePageService();
     models = <HomePageModel>[].obs;
@@ -41,7 +31,7 @@ class HomePageController extends GetxController {
     d = await service.getSectors(UserInformation.user_token);
     models.value.assignAll(service.model);
     models.refresh();
-    isLoad.value = false;
+    isLoad = false.obs;
     if (models.isEmpty) {
     } else if (models[0].name == "null") {}
   }

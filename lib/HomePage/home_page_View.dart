@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 
 class HomePageView extends StatelessWidget {
   HomePageController controller = Get.put(HomePageController());
+  String title = 'الأعمال الإبداعية';
 
   // قائمة لتخزين مسارات الصور
   final List<String> imagePaths = [
@@ -275,10 +276,12 @@ class HomePageView extends StatelessWidget {
                                       } else {
                                         return InkWell(
                                           onTap: () {
-                                            print('gg: ${controller.models[index].id}');
-                                            Get.to(SectorPageView(), arguments: {
-                                              'id': '${controller.models[index].id}'
-                                            });
+                                            Get.to(
+                                              SectorPageView(
+                                                id: '${controller.models[index].id}',
+                                                title: title,
+                                              ),
+                                            );
                                           },
                                           child: Stack(
                                             children: [

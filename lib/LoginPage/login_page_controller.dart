@@ -7,7 +7,6 @@ import '../Style/constant.dart';
 import 'login_page_model.dart';
 import 'login_page_service.dart';
 
-
 class LoginPageController extends GetxController {
   late String email;
   late String password;
@@ -46,12 +45,14 @@ class LoginPageController extends GetxController {
       await loginclick();
       if (loginState) {
         Get.off(BasicPage());
+        //, arguments: {'email': '$email'}
         //////////////////////////////////////////////////////////////////////
-        if(UserInformation.usertype=="user"||UserInformation.usertype=="User")
+        if (UserInformation.usertype == "user" ||
+            UserInformation.usertype == "User")
         // Get.to(HomePageView());
-        if(UserInformation.usertype=="super_admin")
-         // Get.to(HomePageView());
-        print(UserInformation.usertype);
+        if (UserInformation.usertype == "super_admin")
+          // Get.to(HomePageView());
+          print(UserInformation.usertype);
         Get.snackbar('Done', 'You have been logged in successfully',
             borderRadius: 20,
             margin: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
@@ -63,7 +64,6 @@ class LoginPageController extends GetxController {
             ),
             colorText: Colors.white,
             snackPosition: SnackPosition.TOP);
-
       } else {
         Get.snackbar('Sorry', 'There was a problem signing in',
             borderRadius: 20,
