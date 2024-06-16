@@ -31,7 +31,6 @@ class MyButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onsave,
         child: Text(
-
           text,
           style: TextStyle(
             color: textColor,
@@ -47,16 +46,7 @@ class MyButton extends StatelessWidget {
           ),
           // يمكنك تعيين قيم للظلال هنا
           elevation: 10, // قيمة التعريف يمكن تعديلها حسب الحاجة
-          shadowColor: Colors.black, // لون ا
-          // لظل
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.black.withOpacity(0.5),
-          //     spreadRadius: 2, // انتشار الظل
-          //     offset: Offset(0, 5), // تحديد الزاوية والاتجاه
-          //     blurRadius: 10, // وضوح الظل
-          //   ),
-          // ],
+          shadowColor: Colors.grey, // لون ا
         ),
       ),
     );

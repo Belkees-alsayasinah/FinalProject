@@ -1,10 +1,11 @@
 import 'package:bloom_project/Components/MyButton.dart';
-import 'package:bloom_project/LoginPage/login_page.dart';
 import 'package:bloom_project/RegisterPage/register_page.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../Login/LoginPageInv/login_page.dart';
 
 class FirstPage extends StatelessWidget {
 
@@ -20,7 +21,7 @@ class FirstPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Image.asset('assets/images/bloomLogo.png'),
+            Image.asset('assets/images/1.png'),
             SizedBox(
               height: 20,
             ),

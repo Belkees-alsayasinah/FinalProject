@@ -1,10 +1,10 @@
-import 'package:bloom_project/LoginPage/login_page.dart';
+import 'package:bloom_project/Add_Project/add_project_controller.dart';
+import 'package:bloom_project/Interests/interests_controller.dart';
+import 'package:bloom_project/service/info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../Components/MyButton.dart';
-import '../Components/TextField.dart';
 import '../Style/constant.dart';
 
 class InterestsView extends StatefulWidget {
@@ -15,41 +15,31 @@ class InterestsView extends StatefulWidget {
 }
 
 class _InterestsViewState extends State<InterestsView> {
- List<bool> selectedOptions = List.generate(12, (index) => false);
+  List<bool> selectedOptions = List.generate(20, (index) => false);
+  InterestController controller = Get.put(InterestController());
+  AddProjectController controller0 = Get.put(AddProjectController());
 
-
-  List<String> optionsNames = [
-    'المواد الغذائية',
-    'الحرف اليدوية',
-    'المناسبات الشخصية',
-    'الفن',
-    'المشاريع اليدوية',
-    'التصوير',
-    'التجارة',
-    'الطبخ',
-    'الصناعات الاستهلاكية',
-    'الزراعة',
-    'الصحة والعناية',
-    'الخدمات المهنية'
-  ];
-  //List<bool> selectedOptions = List.generate(optionsNames.length, (index) => false);
- void toggleOption(int index) {
-   if (index >= 0 && index < selectedOptions.length) {
-     setState(() {
-       selectedOptions[index] = !selectedOptions[index];
-       print(selectedOptions);
-     });
-   }
- }
+  List<int> selectedInterestsIds = [];
+  void toggleOption(int index, int id) {
+    if (index >= 0 && index < selectedOptions.length) {
+      setState(() {
+        selectedOptions[index] = !selectedOptions[index];
+        if (selectedOptions[index]) {
+          selectedInterestsIds.add(id);
+        } else {
+          selectedInterestsIds.remove(id);
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    print(optionsNames.length);
     final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
         padding:
-        const EdgeInsets.only(top: 70, bottom: 30, left: 30, right: 30),
+            const EdgeInsets.only(top: 70, bottom: 30, left: 30, right: 30),
         child: Center(
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
@@ -81,37 +71,71 @@ class _InterestsViewState extends State<InterestsView> {
                 SizedBox(
                   height: 25,
                 ),
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                  ),
-                  itemCount: optionsNames.length,
-                  itemBuilder: (context, index) {
-                    return MyButton(
-                      onsave: () {
-                        //print(optionsNames.length);
-                        toggleOption(index);
-                      },
-                      width: screenSize.width * 0.35,
-                      height: 62,
-                      text: optionsNames[index],
-                      color: selectedOptions[index] ? buttonColor : buttonColorOpa,
-                      radius: 15,
-                      textColor: black,
-                      fontSize: 20,
-                    );
-                  },
-                ),
+                Obx(() {
+                  return controller.isLoad.value
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: textColor,
+                          ),
+                        )
+                      : controller.models.length == 0
+                          ? Center(
+                              child: Text(''),
+                            )
+                          : GridView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 10,
+                              ),
+                              itemCount: controller.optionsNames.length,
+                              itemBuilder: (context, index) {
+                                if (index >= controller.optionsNames.length) {
+                                  return SizedBox(); // or any other placeholder widget
+                                }
+                                return FutureBuilder(
+                                    future: null,
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      } else if (snapshot.hasError) {
+                                        return Text('Error ${snapshot.error}');
+                                      } else {
+                                        return MyButton(
+                                          onsave: () {
+                                            //print(optionsNames.length);
+                                            toggleOption(index,
+                                                controller.models[index].id);
+                                          },
+                                          width: screenSize.width * 0.35,
+                                          height: 62,
+                                          text: controller.optionsNames[index],
+                                          color: selectedOptions[index]
+                                              ? buttonColor
+                                              : buttonColorOpa,
+                                          radius: 15,
+                                          textColor: black,
+                                          fontSize: 20,
+                                        );
+                                      }
+                                    });
+                              },
+                            );
+                }),
                 SizedBox(
                   height: 50,
                 ),
                 MyButton(
                   onsave: () {
-                    Get.to(LoginPage());
+                    UserInformation.type == "inv"
+                        ? controller.setInterests(selectedInterestsIds)
+                        : controller0.setIndex(selectedInterestsIds);
                   },
                   width: 348,
                   height: 62,

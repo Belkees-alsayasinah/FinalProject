@@ -9,6 +9,7 @@ class HomePageService {
   late bool x = false;
 
   RxList<HomePageModel> model = <HomePageModel>[].obs;
+
   Future<List<HomePageModel>> getSectors(String token) async {
     var response = await http.get(
       Uri.parse(ServerConfig.domainNameServer + ServerConfig().getSectorApi),
@@ -17,20 +18,45 @@ class HomePageService {
         'Accept': 'application/json',
       },
     );
+    print("Home");
     print(response.statusCode);
     if (response.statusCode == 200) {
       var r = await json.decode((response.body));
       Map<String, dynamic> s = r;
       List<dynamic> sectors = s['data'];
-      //RxList<HomePageModel> model = <HomePageModel>[].obs;
       for (var i in sectors) {
         model.add(HomePageModel.fromJson(i));
         print(HomePageModel.fromJson(i).name);
       }
       return model;
     } else {
-      //show error message
       return [];
     }
   }
+
+  // RxList<HomePageModel> model0 = <HomePageModel>[].obs;
+  //
+  // Future<List<HomePageModel>> getInterests(String token) async {
+  //   var response = await http.get(
+  //     Uri.parse(ServerConfig.domainNameServer +
+  //         ServerConfig().getProjectByInvInterests),
+  //     headers: {
+  //       'Authorization': 'Bearer $token',
+  //       'Accept': 'application/json',
+  //     },
+  //   );
+  //   print(response.statusCode);
+  //   if (response.statusCode == 200) {
+  //     var r = await json.decode((response.body));
+  //     Map<String, dynamic> s = r;
+  //     List<dynamic> sectors = s['data'];
+  //     for (var i in sectors) {
+  //       model.add(HomePageModel.fromJson(i));
+  //       print(HomePageModel.fromJson(i).name);
+  //     }
+  //     return model;
+  //   } else {
+  //     return [];
+  //   }
+  // }
 }

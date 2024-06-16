@@ -1,18 +1,19 @@
 import 'package:bloom_project/HomePage/basic_page.dart';
 import 'package:bloom_project/HomePage/home_page_View.dart';
+import 'package:bloom_project/Interests/interests_view.dart';
+import 'package:bloom_project/VerifyOTP/verify_otp_model.dart';
+import 'package:bloom_project/VerifyOTP/verify_otp_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../service/info.dart';
-import '../Style/constant.dart';
-import 'login_page_model.dart';
-import 'login_page_service.dart';
+import '../../../service/info.dart';
+import '../../Style/constant.dart';
 
-class LoginPageController extends GetxController {
+class VerifyOTPController extends GetxController {
   late String email;
-  late String password;
-  late LoginPageService service;
+  late String otp;
+  late VerifyOTPService service;
   late String message;
-  late bool loginState;
+  late bool verifyState;
   late RxBool remember;
   late GlobalKey<FormState> formstate;
   late RxBool isLoading;
@@ -20,39 +21,25 @@ class LoginPageController extends GetxController {
   @override
   void onInit() {
     email = '';
-    password = '';
+    otp = '';
     message = '';
-    service = LoginPageService();
-    loginState = false;
+    service = VerifyOTPService();
+    verifyState = false;
     remember = true.obs;
     isLoading = false.obs;
     formstate = GlobalKey<FormState>();
     super.onInit();
   }
 
-  void toggleCheckbox() {
-    remember.value = !remember.value;
-    update();
-  }
-
-  void onClicksignin() async {
+  void onClick() async {
     isLoading = true.obs;
     var formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();
-      print("email : $email");
-      print("password : $password");
-      await loginclick();
-      if (loginState) {
-        Get.off(BasicPage());
-        //, arguments: {'email': '$email'}
-        //////////////////////////////////////////////////////////////////////
-        if (UserInformation.usertype == "user" ||
-            UserInformation.usertype == "User")
-        // Get.to(HomePageView());
-        if (UserInformation.usertype == "super_admin")
-          // Get.to(HomePageView());
-          print(UserInformation.usertype);
+      await verifyOtp();
+      if (verifyState) {
+        Get.off(InterestsView());
+
         Get.snackbar('Done', 'You have been logged in successfully',
             borderRadius: 20,
             margin: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
@@ -81,9 +68,9 @@ class LoginPageController extends GetxController {
     isLoading = false.obs;
   }
 
-  Future<void> loginclick() async {
-    LoginPageModel user = LoginPageModel(email: email, password: password);
-    loginState = await service.login(user);
+  Future<void> verifyOtp() async {
+    VerifyOTP user = VerifyOTP(email: email, otp: otp);
+    verifyState = await service.verify(user);
     var mapmsg = service.message;
     if (mapmsg is Map) {
     } else if (mapmsg is String) {

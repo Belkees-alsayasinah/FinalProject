@@ -9,6 +9,7 @@ class SectorService {
   late bool x = false;
 
   RxList<SectorModel> model = <SectorModel>[].obs;
+
   Future<List<SectorModel>> getSectorProjects(String token, String id) async {
     var response = await http.get(
       Uri.parse(ServerConfig.domainNameServer + ServerConfig().getSectorProjectApi + '$id'),
@@ -22,15 +23,11 @@ class SectorService {
       var r = await json.decode((response.body));
       Map<String, dynamic> s = r;
       List<dynamic> sectorProjects = s['data'];
-      //RxList<HomePageModel> model = <HomePageModel>[].obs;
       for (var i in sectorProjects) {
         model.add(SectorModel.fromJson(i));
-        print(SectorModel.fromJson(i).name);
       }
       return model;
     } else {
-
-      //show error message
       return [];
     }
   }

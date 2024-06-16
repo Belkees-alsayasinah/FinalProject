@@ -5,23 +5,22 @@ import 'package:bloom_project/HomePage/home_page_controller.dart';
 import 'package:bloom_project/SearchPage/search_page_view.dart';
 import 'package:bloom_project/SectorPage/sector_page_view.dart';
 import 'package:bloom_project/Style/constant.dart';
+import 'package:bloom_project/settings_drawer/settings_drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../service/info.dart';
+
 class HomePageView extends StatelessWidget {
   HomePageController controller = Get.put(HomePageController());
   String title = 'الأعمال الإبداعية';
-
-  // قائمة لتخزين مسارات الصور
   final List<String> imagePaths = [
     'assets/images/s1.jpg',
     'assets/images/s2.jpg',
     'assets/images/s3.jpg',
     'assets/images/s4.jpg',
-    // أضف المسارات الأخرى هنا
   ];
-
   Widget _buildRandomImage() {
     final Random random = Random();
     final int index = random.nextInt(imagePaths.length);
@@ -74,173 +73,89 @@ class HomePageView extends StatelessWidget {
           ),
         ),
       ),
-      endDrawer: Container(
-        width: 200,
-        child: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(),
-                child: Center(
-                  child: Text(
-                    'الإعدادات',
-                    style: TextStyle(
-                        fontSize: 35, color: textColor, fontFamily: 'font1'),
-                  ),
-                ),
-              ),
-              ListTile(
-                title: Row(
-                  textDirection: TextDirection.rtl,
-                  children: [
-                    Icon(
-                      Icons.brightness_4_outlined,
-                      color: black,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'الوضع الليلي',
-                      style: TextStyle(
-                          color: black, fontSize: 27, fontFamily: 'font1'),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  // اتخذ إجراء عند النقر على عنصر القائمة 1
-                },
-              ),
-              ListTile(
-                title: Row(
-                  textDirection: TextDirection.rtl,
-                  children: [
-                    Icon(
-                      Icons.language,
-                      color: black,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'تغيير اللغة',
-                      style: TextStyle(
-                          color: black, fontSize: 27, fontFamily: 'font1'),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  // اتخذ إجراء عند النقر على عنصر القائمة 2
-                },
-              ),
-              ListTile(
-                title: Row(
-                  textDirection: TextDirection.rtl,
-                  children: [
-                    Icon(
-                      Icons.logout,
-                      color: black,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'تسجيل الخروج',
-                      style: TextStyle(
-                          color: black, fontSize: 27, fontFamily: 'font1'),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  // اتخذ إجراء عند النقر على عنصر القائمة 2
-                },
-              ),
-              // يمكنك إضافة المزيد من عناصر القائمة هنا
-            ],
-          ),
-        ),
-      ),
+      endDrawer: SettingsDrawer(),
       body: Padding(
         padding: const EdgeInsets.only(right: 8, top: 30),
         child: Column(
           textDirection: TextDirection.rtl,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('اقتراحات قد تناسبك:  ',
-                textDirection: TextDirection.rtl,
-                style: TextStyle(fontSize: 20, fontFamily: 'font1')),
-            Expanded(
-              child: ListView.separated(
-                reverse: true,
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                      width: 156,
-                      decoration: BoxDecoration(
-                        color: buttonColorOpa,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.5),
-                            spreadRadius: 0, // انتشار الظل
-                            offset: Offset(3, 3), // تحديد الزاوية والاتجاه
-                            blurRadius: 4, // وضوح الظل
+            if (UserInformation.type == "inv") ...[
+              Text('اقتراحات قد تناسبك:  ',
+                  textDirection: TextDirection.rtl,
+                  style: TextStyle(fontSize: 20, fontFamily: 'font1')),
+              Expanded(
+                child: ListView.separated(
+                  reverse: true,
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                        width: 156,
+                        decoration: BoxDecoration(
+                          color: buttonColorOpa,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15),
                           ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          textDirection: TextDirection.rtl,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'مصمم جرافيكي',
-                              style:
-                                  TextStyle(fontSize: 20, fontFamily: 'font1'),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.5),
+                              spreadRadius: 0,
+                              offset: Offset(3, 3),
+                              blurRadius: 4,
                             ),
-                            Text(
-                              'حمص الدبلان',
-                              style:
-                                  TextStyle(fontSize: 20, fontFamily: 'font1'),
-                            ),
-                            Text(
-                              'بمبلغ: 20000',
-                              style:
-                                  TextStyle(fontSize: 20, fontFamily: 'font1'),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Get.to(DetailsPageView());
-                              },
-                              child: Text(
-                                'عرض المزيد...',
-                                textDirection: TextDirection.rtl,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontFamily: 'font1',
-                                    color: textColor),
-                              ),
-                            )
                           ],
                         ),
-                      ));
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(width: 10);
-                },
-                itemCount: 10,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Column(
+                            textDirection: TextDirection.rtl,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'مصمم جرافيكي',
+                                style: TextStyle(
+                                    fontSize: 20, fontFamily: 'font1'),
+                              ),
+                              Text(
+                                'حمص الدبلان',
+                                style: TextStyle(
+                                    fontSize: 20, fontFamily: 'font1'),
+                              ),
+                              Text(
+                                'بمبلغ: 20000',
+                                style: TextStyle(
+                                    fontSize: 20, fontFamily: 'font1'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  // Get.to(DetailsPageView());
+                                },
+                                child: Text(
+                                  'عرض المزيد...',
+                                  textDirection: TextDirection.rtl,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: 'font1',
+                                      color: textColor),
+                                ),
+                              )
+                            ],
+                          ),
+                        ));
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(width: 10);
+                  },
+                  itemCount: 10,
+                ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
+              SizedBox(
+                height: 20,
+              ),
+            ],
             Expanded(
-                flex: 2, // Adjust the flex value as needed
+                flex: 2,
                 child: Obx(() {
                   return controller.isLoad.value
                       ? Center(

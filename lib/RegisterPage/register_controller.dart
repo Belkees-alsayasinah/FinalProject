@@ -1,4 +1,4 @@
-import 'package:bloom_project/RegisterPage/confirm_account.dart';
+import 'package:bloom_project/VerifyOTP/verify_otp_view.dart';
 import 'package:bloom_project/RegisterPage/register_model.dart';
 import 'package:bloom_project/RegisterPage/register_service.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,7 +54,7 @@ class RegisterPageController extends GetxController {
       await loginclick();
       if (loginState) {
 
-        Get.to(ConfirmAccountView());
+        Get.to(VerifyOTPView());
         print(UserInformation.usertype);
         Get.snackbar('Done', 'You have been logged in successfully',
             borderRadius: 20,
@@ -86,12 +86,10 @@ class RegisterPageController extends GetxController {
   }
 
   Future<void> loginclick() async {
-    print("h1");
     RegisterModel user = RegisterModel(email: email, password: password, firstName: firstName, lastName: lastName, location: location, phone: phone);
     loginState = await service.login(user);
     var mapmsg = service.message;
     if (mapmsg is Map) {
-      // message = '${mapmsg["email"][0]}\n${mapmsg["password"][0]}';
     } else if (mapmsg is String) {
       message = mapmsg;
     }

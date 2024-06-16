@@ -12,7 +12,6 @@ class ArticlesService {
   RxList<ArticlesModel> model = <ArticlesModel>[].obs;
 
   Future<List<ArticlesModel>> getArticles(String token) async {
-    print("hi");
     var response = await http.get(
       Uri.parse(ServerConfig.domainNameServer + ServerConfig().getArticlesApi),
       headers: {
@@ -20,20 +19,18 @@ class ArticlesService {
         'Accept': 'application/json',
       },
     );
-
+    print("articles");
     print(response.statusCode);
     if (response.statusCode == 200) {
       var r = await json.decode((response.body));
       Map<String, dynamic> s = r;
       List<dynamic> articles = s['data'];
-      //RxList<HomePageModel> model = <HomePageModel>[].obs;
       for (var i in articles) {
         model.add(ArticlesModel.fromJson(i));
         print(ArticlesModel.fromJson(i).image);
       }
       return model;
     } else {
-      //show error message
       return [];
     }
   }

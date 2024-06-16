@@ -1,21 +1,27 @@
+import 'package:bloom_project/AddReport/add_report_view.dart';
+import 'package:bloom_project/Reports/reports_view.dart';
+import 'package:bloom_project/Trasactions/transaction_details.dart';
+import 'package:bloom_project/project_tracking/pay_for_project_tracking_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
 import '../Style/constant.dart';
 import '../Trasactions/annual_transactions.dart';
 
 class MyListProject extends StatelessWidget {
-  const MyListProject({
-    required this.title,
-    required this.address,
-    required this.function,
-    required this.onTap,
-    required this.cost
-  });
+  const MyListProject(
+      {required this.title,
+      required this.address,
+      required this.function,
+      required this.onTap,
+      required this.id,
+      required this.investedProject,
+      required this.cost});
 
   final Function() function;
+  final String investedProject;
+  final String id;
   final String title;
   final String address;
   final String cost;
@@ -23,8 +29,11 @@ class MyListProject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const style =
-    TextStyle(color: black, fontWeight: FontWeight.bold, fontSize: 26,fontFamily: 'font1');
+    const style = TextStyle(
+        color: black,
+        fontWeight: FontWeight.bold,
+        fontSize: 26,
+        fontFamily: 'font1');
     final Size screenSize = MediaQuery.of(context).size;
     return InkWell(
       onTap: onTap,
@@ -73,45 +82,57 @@ class MyListProject extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     textDirection: TextDirection.rtl,
                     children: [
                       Text(
                         title,
                         style: TextStyle(
-                            fontSize: 25,
-                            fontFamily: 'font1',
-                            color: black),
+                            fontSize: 25, fontFamily: 'font1', color: black),
                       ),
-                      SizedBox(width: screenSize.width * 0.4,),
-                      PopupMenuButton(
-                        itemBuilder: (BuildContext context) {
-                          return <PopupMenuEntry>[
-                            PopupMenuItem(
-                              child: Text('المعاملات',style: style,),
-                              value: 'option1',
-                            ),
-                            PopupMenuItem(
-                              child: Text('إضافة تقرير',style: style,),
-                              value: 'option2',
-                            ),
-                            PopupMenuItem(
-                              child: Text('Option 3',style: style,),
-                              value: 'option3',
-                            ),
-                          ];
-                        },
-                        onSelected: (value) {
-                          if (value == 'option1') {
-                            Get.to(AnnualTransactions());
-                          } else if (value == 'option2') {
-                            //Get.to(a());
-                            // Navigate to another page for option 2
-                          } else if (value == 'option3') {
-                            // Navigate to another page for option 3
-                          }
-                        },
+                      SizedBox(
+                        width: screenSize.width * 0.5,
                       ),
+                      investedProject == '1'
+                          ? PopupMenuButton(
+                              itemBuilder: (BuildContext context) {
+                                return <PopupMenuEntry>[
+                                  PopupMenuItem(
+                                    child: Text(
+                                      'المعاملات',
+                                      style: style,
+                                    ),
+                                    value: 'option1',
+                                  ),
+                                  PopupMenuItem(
+                                    child: Text(
+                                      'إضافة تقرير',
+                                      style: style,
+                                    ),
+                                    value: 'option2',
+                                  ),
+                                  PopupMenuItem(
+                                    child: Text(
+                                      'عرض تقارير المشروع',
+                                      style: style,
+                                    ),
+                                    value: 'option3',
+                                  ),
+                                ];
+                              },
+                              onSelected: (value) {
+                                if (value == 'option1') {
+                                  Get.to(AnnualTransactions(id: id));
+                                } else if (value == 'option2') {
+                                  Get.to(AddReportView(id: id));
+                                } else if (value == 'option3') {
+                                  Get.to(ReportsView(
+                                      title: 'تقارير المشروع', id: id));
+                                  // Navigate to another page for option 3
+                                }
+                              },
+                            )
+                          : SizedBox(),
                     ],
                   ),
                   Row(
@@ -125,9 +146,7 @@ class MyListProject extends StatelessWidget {
                       Text(
                         address,
                         style: TextStyle(
-                            fontSize: 25,
-                            fontFamily: 'font1',
-                            color: black),
+                            fontSize: 25, fontFamily: 'font1', color: black),
                       )
                     ],
                   ),
@@ -153,7 +172,9 @@ class MyListProject extends StatelessWidget {
                                 fontFamily: 'font1',
                                 color: Colors.grey[700]),
                           ),
-                          SizedBox(width: screenSize.width * 0.20,),
+                          SizedBox(
+                            width: screenSize.width * 0.20,
+                          ),
                         ],
                       ),
                     ],

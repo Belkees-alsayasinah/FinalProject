@@ -1,31 +1,35 @@
 import 'dart:convert';
+import 'package:bloom_project/VerifyOTP/verify_otp_model.dart';
 import 'package:http/http.dart' as http;
-import '../../service/info.dart';
-import '../../service/store.dart';
-import '../Config/server_config.dart';
-import 'login_page_model.dart';
+import '../../../service/info.dart';
+import '../../../service/store.dart';
+import '../../Config/server_config.dart';
 
-class LoginPageService {
+class VerifyOTPService {
   var message;
   var token;
-  var url;
+  var user_type;
 
-  Future<bool> login(LoginPageModel model) async {
+  Future<bool> verify(VerifyOTP model) async {
     StoreInfo info = StoreInfo();
     await info.save("isLogin", "false");
     var response = await http.post(
-        Uri.parse(ServerConfig.domainNameServer + ServerConfig().loginApi),
+        Uri.parse(UserInformation.type == 'inv'
+            ? ServerConfig.domainNameServer + ServerConfig().verifyOtpInvApi
+            : ServerConfig.domainNameServer + ServerConfig().verifyOtpWorApi),
         body: {
           "email": model.email,
-          "password": model.password,
+          "otp": model.otp,
         });
     print("Body: ${response.body}");
     if (response.statusCode == 200 || response.statusCode == 201) {
       var r = jsonDecode(response.body);
-      token = r['token'];
+      token = r['access_token'];
       UserInformation.user_token = token;
+      UserInformation.usertype = r['user_type'];
       StoreInfo info = StoreInfo();
       await info.save("token", UserInformation.user_token);
+      await info.save("usertype", UserInformation.usertype);
       return true;
     } else if (response.statusCode == 404) {
       message = "Something wrong!";

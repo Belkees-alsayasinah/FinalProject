@@ -1,11 +1,11 @@
 import 'package:bloom_project/Components/TextField.dart';
-import 'package:bloom_project/LoginPage/login_page.dart';
-import 'package:bloom_project/RegisterPage/confirm_account.dart';
+import 'package:bloom_project/VerifyOTP/verify_otp_view.dart';
 import 'package:bloom_project/RegisterPage/register_controller.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../Components/MyButton.dart';
+import '../Login/LoginPageInv/login_page.dart';
 
 class RegisterPage extends StatelessWidget {
   var appPadding = 30;
@@ -291,11 +291,10 @@ class RegisterPage extends StatelessWidget {
                               controller.accountType.value = value!;
                             },
                             decoration: InputDecoration(
-                              // isDense: true, // تقليل الارتفاع
 
                               contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                              // تحديد التباعد الداخلي
-                              enabledBorder: UnderlineInputBorder( // تحديد تخطيط الخط السفلي عند عدم التركيز
+
+                              enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.grey.withOpacity(0.1),
                                 style: BorderStyle.none,
                                 ), // تحديد لون الخط
