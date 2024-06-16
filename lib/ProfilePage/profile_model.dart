@@ -1,13 +1,16 @@
 class ProfileModel {
+  User user;
   List<InvestedProjects> investedProjects;
   List<PendingProject> pendingProjects;
 
   ProfileModel({
+    required this.user,
     required this.investedProjects,
     required this.pendingProjects,
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
+    user: User.fromJson(json["user"]),
     investedProjects: List<InvestedProjects>.from(
         json["invested_projects"].map((x) => InvestedProjects.fromJson(x))),
     // pendingProjects: List<PendingProject>.from(
@@ -18,11 +21,82 @@ class ProfileModel {
       );
 
   Map<String, dynamic> toJson() => {
+    "user": user.toJson(),
     "invested_projects": List<dynamic>.from(investedProjects.map((x) => x.toJson())),
     "pending_projects": List<dynamic>.from(pendingProjects.map((x) => x.toJson())),
   };
 }
+class User {
+  int id;
+  String firstName;
+  String lastName;
+  String userType;
+  String email;
+  int verified;
+  String otp;
+  String phone;
+  String location;
+  String iDCard;
+  String personalPhoto;
+  String propertyDeed;
+  String cleanRecord;
+  DateTime createdAt;
+  DateTime updatedAt;
 
+  User({
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.userType,
+    required this.email,
+    required this.verified,
+    required this.otp,
+    required this.phone,
+    required this.location,
+    required this.iDCard,
+    required this.personalPhoto,
+    required this.propertyDeed,
+    required this.cleanRecord,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+    id: json["id"],
+    firstName: json["first_name"],
+    lastName: json["last_name"],
+    userType: json["user_type"],
+    email: json["email"],
+    verified: json["verified"],
+    otp: json["otp"],
+    phone: json["phone"],
+    location: json["location"],
+    iDCard: json["iD_card"],
+    personalPhoto: json["personal_photo"],
+    propertyDeed: json["property_deed"],
+    cleanRecord: json["clean_record"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "first_name": firstName,
+    "last_name": lastName,
+    "user_type": userType,
+    "email": email,
+    "verified": verified,
+    "otp": otp,
+    "phone": phone,
+    "location": location,
+    "iD_card": iDCard,
+    "personal_photo": personalPhoto,
+    "property_deed": propertyDeed,
+    "clean_record": cleanRecord,
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt.toIso8601String(),
+  };
+}
 class PendingProject {
   int id;
   String name;

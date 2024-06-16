@@ -5,6 +5,8 @@ import '../Style/constant.dart';
 class SettingsDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    const titleStyle = TextStyle(
+        fontFamily: 'font1', fontSize: 20, fontWeight: FontWeight.bold);
     return Container(
       width: 200,
       child: Drawer(
@@ -16,8 +18,7 @@ class SettingsDrawer extends StatelessWidget {
               child: Center(
                 child: Text(
                   'الإعدادات',
-                  style: TextStyle(
-                      fontSize: 35, color: textColor, fontFamily: 'font1'),
+                  style: titleStyle,
                 ),
               ),
             ),
@@ -34,8 +35,7 @@ class SettingsDrawer extends StatelessWidget {
                   ),
                   Text(
                     'الوضع الليلي',
-                    style: TextStyle(
-                        color: black, fontSize: 27, fontFamily: 'font1'),
+                    style: titleStyle,
                   ),
                 ],
               ),
@@ -56,8 +56,7 @@ class SettingsDrawer extends StatelessWidget {
                   ),
                   Text(
                     'تغيير اللغة',
-                    style: TextStyle(
-                        color: black, fontSize: 27, fontFamily: 'font1'),
+                    style: titleStyle,
                   ),
                 ],
               ),
@@ -78,8 +77,7 @@ class SettingsDrawer extends StatelessWidget {
                   ),
                   Text(
                     'تسجيل الخروج',
-                    style: TextStyle(
-                        color: black, fontSize: 27, fontFamily: 'font1'),
+                    style: titleStyle,
                   ),
                 ],
               ),

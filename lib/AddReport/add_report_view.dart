@@ -477,7 +477,7 @@ class AddReportView extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'font1',
         fontWeight: FontWeight.bold,
       ),

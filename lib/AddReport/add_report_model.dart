@@ -16,7 +16,7 @@ class AddReportModel {
   String transactions;
   String recommendations;
   String futurePlans;
-  String productId;
+
 
   AddReportModel(
       {required this.title,
@@ -36,5 +36,5 @@ class AddReportModel {
       required this.transactions,
       required this.recommendations,
       required this.futurePlans,
-      required this.productId});
+     });
 }

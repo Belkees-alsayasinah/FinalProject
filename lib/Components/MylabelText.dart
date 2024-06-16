@@ -12,7 +12,7 @@ class MyLabelText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 20,
+        fontSize: 18,
         fontFamily: 'font1',
         fontWeight: FontWeight.bold,
       ),

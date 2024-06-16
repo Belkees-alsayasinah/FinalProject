@@ -3,6 +3,7 @@ import 'package:bloom_project/DetailsPage/details_page_view.dart';
 import 'package:bloom_project/ProfilePage/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import '../Style/constant.dart';
 
@@ -23,8 +24,9 @@ class ProfilePage extends StatelessWidget {
           builder: (controller) {
             return controller.isLoad.value
                 ? Center(
-                    child: CircularProgressIndicator(
+                    child: SpinKitFadingCircle(
                       color: textColor,
+                      size: 50.0,
                     ),
                   )
                 : controller.models.length == 0
@@ -50,7 +52,10 @@ class ProfilePage extends StatelessWidget {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
                                   return Center(
-                                    child: CircularProgressIndicator(),
+                                    child: SpinKitFadingCircle(
+                                      color: textColor,
+                                      size: 50.0,
+                                    ),
                                   );
                                 } else if (snapshot.hasError) {
                                   return Text('Error ${snapshot.error}');

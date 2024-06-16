@@ -1,19 +1,25 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../Style/constant.dart';
+import 'notification_controller.dart';
 
 class NotificationsPage extends StatelessWidget {
+  final NotificationController notificationController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('الإشعارات', // Title text
-            style: TextStyle(
-              color: textColor,
-              fontFamily: 'font1',
-              fontSize: 34,
-            )),
+        title: Text(
+          'الإشعارات',
+          style: TextStyle(
+            color: textColor,
+            fontFamily: 'font1',
+            fontSize: 34,
+          ),
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
@@ -25,12 +31,12 @@ class NotificationsPage extends StatelessWidget {
           )
         ],
       ),
-      body: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView.builder(
-          itemCount: 3, // Replace with actual notification count
+      body: Obx(
+        () => ListView.builder(
+          itemCount: notificationController.notifications.length,
           itemBuilder: (context, index) {
-            return NotificationItem(); // No need to pass textColor
+            RemoteMessage message = notificationController.notifications[index];
+            return NotificationItem(message: message);
           },
         ),
       ),
@@ -39,60 +45,64 @@ class NotificationsPage extends StatelessWidget {
 }
 
 class NotificationItem extends StatelessWidget {
+  final RemoteMessage message;
+
+  const NotificationItem({required this.message});
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl, // Set RTL layout
+      textDirection: TextDirection.rtl,
       child: Container(
         height: MediaQuery.of(context).size.height * 0.15,
         padding: const EdgeInsets.all(16.0),
-        // Content padding
         margin: const EdgeInsets.only(bottom: 8.0),
-        // Space between notifications
         decoration: BoxDecoration(
-          color: Colors.white70, // Light gray background
+          color: Colors.white70,
           borderRadius: BorderRadius.circular(8.0),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 0, // انتشار الظل
-              offset: Offset(3, 3), // تحديد الزاوية والاتجاه
-              blurRadius: 2, // وضوح الظل
+              spreadRadius: 0,
+              offset: Offset(3, 3),
+              blurRadius: 2,
             ),
           ],
         ),
         child: Row(
           textDirection: TextDirection.rtl,
-          mainAxisAlignment: MainAxisAlignment.start, // Right-align content
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CircleAvatar(
-              // Circle avatar on the right
-              backgroundColor: Colors.grey.shade300, // Adjust background color
+              backgroundColor: Colors.grey.shade300,
               child: Icon(Icons.person, color: textColor),
             ),
-            const SizedBox(width: 20.0), // Space between avatar and text
+            const SizedBox(width: 20.0),
             Expanded(
-              // Flexible text container
               child: Column(
                 textDirection: TextDirection.rtl,
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "تم الاستثمار في مشروعك من قبل محمد الأحمد.",
-                    // Notification text (replace with actual data)
+                    message.notification!.title ?? "Notification",
                     style: TextStyle(
-                        color: Colors.black, fontFamily: 'font1', fontSize: 25),
-                    maxLines: 1, // Allow for two lines of text
+                      color: Colors.black,
+                      fontFamily: 'font1',
+                      fontSize: 25,
+                    ),
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(
-                      // height: 6,
-                      ),
+                  SizedBox(height: 6),
                   Text(
-                    "9-4-2024",
+                    message.notification!.body ??
+                        "You have a new notification.",
                     style: TextStyle(
-                        fontFamily: 'font1', fontSize: 18, color: grey),
+                      fontFamily: 'font1',
+                      fontSize: 18,
+                      color: grey,
+                    ),
                   ),
                 ],
               ),

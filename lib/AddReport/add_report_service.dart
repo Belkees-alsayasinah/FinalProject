@@ -10,7 +10,8 @@ class AddReportService {
 
   Future<bool> addReport(AddReportModel model, String id) async {
     var response = await http.post(
-      Uri.parse(ServerConfig.domainNameServer + ServerConfig().addReport),
+      Uri.parse(
+          ServerConfig.domainNameServer + ServerConfig().addReport + '/$id'),
       headers: {
         'Authorization': 'Bearer ${UserInformation.user_token}',
         'Content-Type': 'application/json',
@@ -32,7 +33,6 @@ class AddReportService {
         "maintenance_amount": model.maintenance,
         "wages_and_transactions_amount": model.transactions,
         "main_recommendations": model.recommendations,
-        "project_id": id,
       }),
     );
 

@@ -54,7 +54,7 @@ class RegisterPageController extends GetxController {
       await loginclick();
       if (loginState) {
 
-        Get.to(VerifyOTPView());
+        Get.offAll(VerifyOTPView());
         print(UserInformation.usertype);
         Get.snackbar('Done', 'You have been logged in successfully',
             borderRadius: 20,

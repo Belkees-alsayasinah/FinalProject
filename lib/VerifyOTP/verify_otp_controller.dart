@@ -38,7 +38,7 @@ class VerifyOTPController extends GetxController {
       formdata.save();
       await verifyOtp();
       if (verifyState) {
-        Get.off(InterestsView());
+        Get.offAll(InterestsView());
 
         Get.snackbar('Done', 'You have been logged in successfully',
             borderRadius: 20,

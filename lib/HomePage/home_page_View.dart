@@ -8,6 +8,7 @@ import 'package:bloom_project/Style/constant.dart';
 import 'package:bloom_project/settings_drawer/settings_drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import '../service/info.dart';
@@ -66,11 +67,7 @@ class HomePageView extends StatelessWidget {
         ],
         title: Text(
           'الصفحة الرئيسية',
-          style: TextStyle(
-            color: textColor,
-            fontFamily: 'font1',
-            fontSize: 34,
-          ),
+          style: titleStyle,
         ),
       ),
       endDrawer: SettingsDrawer(),
@@ -159,8 +156,9 @@ class HomePageView extends StatelessWidget {
                 child: Obx(() {
                   return controller.isLoad.value
                       ? Center(
-                          child: CircularProgressIndicator(
+                          child: SpinKitFadingCircle(
                             color: textColor,
+                            size: 50.0,
                           ),
                         )
                       : controller.models.length == 0

@@ -5,7 +5,7 @@ import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../Components/MyButton.dart';
-import '../Login/LoginPageInv/login_page.dart';
+import '../Login/login_page.dart';
 
 class RegisterPage extends StatelessWidget {
   var appPadding = 30;

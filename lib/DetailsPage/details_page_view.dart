@@ -4,7 +4,9 @@ import 'package:bloom_project/Style/constant.dart';
 import 'package:bloom_project/service/info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../Components/MyButton.dart';
 import '../Components/MyDetailsPage.dart';
 import '../Components/MylabelText.dart';
@@ -20,12 +22,12 @@ class DetailsPageView extends StatelessWidget {
 
   DetailsPageView(
       {Key? key,
-        required this.id,
-        required this.title,
-        required this.description,
-        required this.investment_status,
-        required this.address,
-        required this.cost})
+      required this.id,
+      required this.title,
+      required this.description,
+      required this.investment_status,
+      required this.address,
+      required this.cost})
       : super(key: key);
 
   @override
@@ -35,28 +37,28 @@ class DetailsPageView extends StatelessWidget {
       appTitle: 'التفاصيل',
       buttonWidget: UserInformation.type == 'inv'
           ? Positioned.directional(
-        textDirection: TextDirection.ltr,
-        bottom: 10,
-        end: 0,
-        start: 0,
-        child: Padding(
-          padding: EdgeInsets.only(
-              right: screenSize.width * 0.34,
-              left: screenSize.width * 0.34),
-          child: MyButton(
-            onsave: () {
-              _showCreateFolderDialog(context);
-            },
-            width: 155,
-            height: 52,
-            color: buttonColor,
-            fontSize: 26,
-            radius: 20,
-            text: "تواصل",
-            textColor: white,
-          ),
-        ),
-      )
+              textDirection: TextDirection.ltr,
+              bottom: 10,
+              end: 0,
+              start: 0,
+              child: Padding(
+                padding: EdgeInsets.only(
+                    right: screenSize.width * 0.34,
+                    left: screenSize.width * 0.34),
+                child: MyButton(
+                  onsave: () {
+                    _showCreateFolderDialog(context);
+                  },
+                  width: 155,
+                  height: 52,
+                  color: buttonColor,
+                  fontSize: 26,
+                  radius: 20,
+                  text: "تواصل",
+                  textColor: white,
+                ),
+              ),
+            )
           : SizedBox(),
       onsave: () {},
       widget: Column(
@@ -77,7 +79,7 @@ class DetailsPageView extends StatelessWidget {
               Text(
                 investment_status == '0' ? 'متاح للاستثمار' : 'مستثمر',
                 style:
-                TextStyle(fontSize: 20, fontFamily: 'font1', color: grey),
+                    TextStyle(fontSize: 20, fontFamily: 'font1', color: grey),
               ),
               Spacer(), // Spacer لدفع الـ Stack إلى اليسار
               Padding(
@@ -87,7 +89,10 @@ class DetailsPageView extends StatelessWidget {
                     builder: (controller0) {
                       return Obx(() {
                         if (controller0.isLoad.value) {
-                          return CircularProgressIndicator(); // عرض مؤشر التحميل أثناء جلب البيانات
+                          return LoadingAnimationWidget.threeRotatingDots(
+                            color: textColor,
+                            size: 30.0,
+                          );
                         } else {
                           return Column(
                             children: [
@@ -99,17 +104,19 @@ class DetailsPageView extends StatelessWidget {
                                     child: IconButton(
                                       icon: Icon(
                                         Icons.favorite,
-                                        color: Colors.white,
+                                        color: Colors.red,
                                       ),
                                       onPressed: () {
-                                        controller0.addEvaluation(id.toString());
+                                        controller0
+                                            .addEvaluation(id.toString());
                                       },
                                     ),
                                   ),
                                 ],
                               ),
                               Text(controller0.models.isNotEmpty
-                                  ? controller0.models[0].totalEvaluationCount.toString()
+                                  ? controller0.models[0].totalEvaluationCount
+                                      .toString()
                                   : '0'),
                             ],
                           );
@@ -205,20 +212,20 @@ class DetailsPageView extends StatelessWidget {
                 Expanded(child: Obx(() {
                   return controller.personal_photo.value == null
                       ? CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    radius: 30,
-                    child: Icon(Icons.image),
-                  )
+                          backgroundColor: Colors.grey,
+                          radius: 30,
+                          child: Icon(Icons.image),
+                        )
                       : CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    radius: 30,
-                    backgroundImage:
-                    controller.personal_photo.value != null
-                        ? FileImage(controller.personal_photo.value!)
-                    as ImageProvider<Object>?
-                        : AssetImage('assets/images/s1.jpg')
-                    as ImageProvider<Object>?,
-                  );
+                          backgroundColor: Colors.grey,
+                          radius: 30,
+                          backgroundImage:
+                              controller.personal_photo.value != null
+                                  ? FileImage(controller.personal_photo.value!)
+                                      as ImageProvider<Object>?
+                                  : AssetImage('assets/images/s1.jpg')
+                                      as ImageProvider<Object>?,
+                        );
                 })),
               ],
             ),
@@ -252,19 +259,19 @@ class DetailsPageView extends StatelessWidget {
                   child: Obx(() {
                     return controller.idPhoto.value == null
                         ? CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      radius: 30,
-                      child: Icon(Icons.image),
-                    )
+                            backgroundColor: Colors.grey,
+                            radius: 30,
+                            child: Icon(Icons.image),
+                          )
                         : CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      radius: 30,
-                      backgroundImage: controller.idPhoto.value != null
-                          ? FileImage(controller.idPhoto.value!)
-                      as ImageProvider<Object>?
-                          : AssetImage('assets/images/s1.jpg')
-                      as ImageProvider<Object>?,
-                    );
+                            backgroundColor: Colors.grey,
+                            radius: 30,
+                            backgroundImage: controller.idPhoto.value != null
+                                ? FileImage(controller.idPhoto.value!)
+                                    as ImageProvider<Object>?
+                                : AssetImage('assets/images/s1.jpg')
+                                    as ImageProvider<Object>?,
+                          );
                   }),
                 ),
               ],

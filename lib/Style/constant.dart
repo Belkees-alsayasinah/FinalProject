@@ -18,5 +18,5 @@ const titleStyle =
 TextStyle(
   color: textColor,
   fontFamily: 'font1',
-  fontSize: 34,
+  fontSize: 30,
 );

@@ -39,7 +39,7 @@ class ArticlesView extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 image: DecorationImage(
-                  image: AssetImage('assets/images/articles.jpg'),
+                  image: AssetImage('assets/images/news.png'),
                   // Replace with your asset
                   fit: BoxFit.contain,
                 ),

@@ -106,7 +106,6 @@ class AddReportController extends GetxController {
       transactions: transactions,
       recommendations: recommendations,
       futurePlans: futurePlans,
-      productId: id,
     );
     addReportState = await service.addReport(report, id);
     if (addReportState) Get.back();

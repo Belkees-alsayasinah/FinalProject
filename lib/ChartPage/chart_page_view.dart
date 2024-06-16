@@ -33,13 +33,14 @@ class _ChartPageViewState extends State<ChartPageView> {
                 style: titleStyle,
               ),
             ),
-            SizedBox(height: 10),
-            Image.asset(
-              'assets/images/monitor.png', // Replace with the path to your image
-              height: 200,
-              width: 200,
-            ),
-            SizedBox(height: 100),
+            SizedBox(height: 50),
+            // Image.asset(
+            //   'assets/images/chart.jpeg', // Replace with the path to your image
+            //   height: 200,
+            //   width: 200,
+            //   fit: BoxFit.contain,
+            // ),
+            // SizedBox(height: 100),
             SizedBox(
               height: 200,
               child: MyBarGraph(

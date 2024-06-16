@@ -4,6 +4,7 @@ import 'package:bloom_project/SectorPage/sector_controller.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 class SectorPageView extends StatelessWidget {
@@ -143,8 +144,9 @@ class SectorPageView extends StatelessWidget {
           builder: (controller) {
             return controller.isLoad.value
                 ? Center(
-                    child: CircularProgressIndicator(
+                    child: SpinKitFadingCircle(
                       color: textColor,
+                      size: 50.0,
                     ),
                   )
                 : controller.models.length == 0

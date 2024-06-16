@@ -3,6 +3,7 @@ import 'package:bloom_project/SearchPage/search_controller.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import '../DetailsPage/details_page_view.dart';
@@ -107,8 +108,9 @@ class _SearchPageViewState extends State<SearchPageView> {
                   child: Obx(() {
                     if (isSearching) {
                       return Center(
-                        child: CircularProgressIndicator(
+                        child: SpinKitFadingCircle(
                           color: textColor,
+                          size: 50.0,
                         ),
                       );
                     } else if (controller.models.isEmpty) {

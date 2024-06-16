@@ -1,8 +1,8 @@
 import 'package:bloom_project/HomePage/basic_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../service/info.dart';
-import '../../Style/constant.dart';
+import '../../service/info.dart';
+import '../Style/constant.dart';
 import 'login_page_model.dart';
 import 'login_page_service.dart';
 
@@ -14,7 +14,7 @@ class LoginPageController extends GetxController {
   late bool loginState;
   late RxBool remember;
   late GlobalKey<FormState> formstate;
-  late RxBool isLoading;
+  RxBool isLoading = false.obs;
 
   @override
   void onInit() {
@@ -24,7 +24,6 @@ class LoginPageController extends GetxController {
     service = LoginPageService();
     loginState = false;
     remember = true.obs;
-    isLoading = false.obs;
     formstate = GlobalKey<FormState>();
     super.onInit();
   }
@@ -35,7 +34,7 @@ class LoginPageController extends GetxController {
   }
 
   void onClicksignin() async {
-    isLoading = true.obs;
+    isLoading.value = true;
     var formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();
@@ -43,11 +42,12 @@ class LoginPageController extends GetxController {
       print("password : $password");
       await loginclick();
       if (loginState) {
-        Get.off(BasicPage());
-        if (UserInformation.usertype == "user" ||
-            UserInformation.usertype ==
-                "User") if (UserInformation.usertype == "super_admin")
+        Get.offAll(BasicPage());
+        if (UserInformation.usertype == "user" || UserInformation.usertype == "User") {
+          // Some code here
+        } else if (UserInformation.usertype == "super_admin") {
           print(UserInformation.usertype);
+        }
         Get.snackbar('Done', 'You have been logged in successfully',
             borderRadius: 20,
             margin: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
@@ -73,7 +73,7 @@ class LoginPageController extends GetxController {
             snackPosition: SnackPosition.TOP);
       }
     }
-    isLoading = false.obs;
+    isLoading.value = false;
   }
 
   Future<void> loginclick() async {
@@ -81,6 +81,7 @@ class LoginPageController extends GetxController {
     loginState = await service.login(user);
     var mapmsg = service.message;
     if (mapmsg is Map) {
+      // Handle map message
     } else if (mapmsg is String) {
       message = mapmsg;
     }

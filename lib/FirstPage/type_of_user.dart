@@ -1,16 +1,11 @@
 import 'package:bloom_project/Components/MyButton.dart';
 import 'package:bloom_project/FirstPage/first_page.dart';
-import 'package:bloom_project/RegisterPage/register_page.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:bloom_project/service/info.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Login/LoginPageInv/login_page.dart';
-
 class TypeOfUser extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +18,7 @@ class TypeOfUser extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Image.asset('assets/images/1.png'),
+            Image.asset('assets/images/logo.jpg'),
             SizedBox(
               height: 20,
             ),
@@ -53,7 +48,7 @@ class TypeOfUser extends StatelessWidget {
               fontSize: 34,
               onsave: () {
                 UserInformation.type = 'user';
-                Get.to(() => FirstPage());
+                Get.offAll(() => FirstPage());
               },
               width: 348,
               height: 66,
@@ -68,7 +63,7 @@ class TypeOfUser extends StatelessWidget {
             MyButton(
               onsave: () {
                 UserInformation.type = 'inv';
-                Get.to(FirstPage());
+                Get.offAll(() => FirstPage());
               },
               fontSize: 34,
               width: 348,

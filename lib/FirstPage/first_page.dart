@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Login/LoginPageInv/login_page.dart';
+import '../Login/login_page.dart';
 
 class FirstPage extends StatelessWidget {
 
@@ -21,7 +21,7 @@ class FirstPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Image.asset('assets/images/1.png'),
+            Image.asset('assets/images/logo.jpg'),
             SizedBox(
               height: 20,
             ),
@@ -50,7 +50,7 @@ class FirstPage extends StatelessWidget {
             MyButton(
               fontSize: 34,
               onsave: () {
-                Get.to(() => LoginPage());
+                Get.offAll(() => LoginPage());
               },
               width: 348,
               height: 66,
@@ -64,7 +64,7 @@ class FirstPage extends StatelessWidget {
             ),
             MyButton(
               onsave: () {
-                Get.to(RegisterPage());
+                Get.offAll(RegisterPage());
               },
               fontSize: 34,
               width: 348,

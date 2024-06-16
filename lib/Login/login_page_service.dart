@@ -1,24 +1,22 @@
 import 'dart:convert';
-import 'package:bloom_project/RegisterPage/register_model.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
-
 import '../../service/info.dart';
 import '../../service/store.dart';
 import '../Config/server_config.dart';
 import '../Notifications/notification_controller.dart';
 import '../Notifications/firebase_notification.dart';
+import 'login_page_model.dart';
 
-class RegisterService {
+class LoginPageService {
   var message;
   var token;
-  var url;
+  var user_type;
 
-  Future<bool> login(RegisterModel model) async {
-    print(model.email + model.password);
-
+  Future<bool> login(LoginPageModel model) async {
     StoreInfo info = StoreInfo();
     await info.save("isLogin", "false");
+
     // Initialize FirebaseNotification class
     FirebaseNotification firebaseNotification = FirebaseNotification(NotificationController());
 
@@ -27,27 +25,31 @@ class RegisterService {
     String? deviceToken = await FirebaseMessaging.instance.getToken();
     print("deviceToken: $deviceToken");
     var response = await http.post(
-        Uri.parse(
-          UserInformation.type == 'inv'
-              ? ServerConfig.domainNameServer + ServerConfig().registerApi
-              : ServerConfig.domainNameServer + ServerConfig().registerUserApi,
-        ),
-        body: {
-          "email": model.email,
-          "password": model.password,
-          "first_name": model.firstName,
-          "last_name": model.lastName,
-          "location": model.location,
-          "phone": model.phone,
-          "device_token": deviceToken ?? '',
-        });
-    print(response.statusCode);
+      Uri.parse(
+        UserInformation.type == 'inv'
+            ? ServerConfig.domainNameServer + ServerConfig().loginApiInv
+            : ServerConfig.domainNameServer + ServerConfig().loginApi,
+      ),
+      body: {
+        "email": model.email,
+        "password": model.password,
+        "device_token": deviceToken ?? '', // Pass device token in the body
+      },
+    );
+
+    print("Body: ${response.body}");
+
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print('succ');
       var r = jsonDecode(response.body);
+      token = r['token'];
+      UserInformation.user_token = token;
+      UserInformation.usertype = r['user_type'];
+      StoreInfo info = StoreInfo();
+      await info.save("token", UserInformation.user_token);
+      await info.save("usertype", UserInformation.usertype);
       return true;
     } else if (response.statusCode == 404) {
-      message = "somthings wrong!";
+      message = "Something wrong!";
       return false;
     } else {
       return false;

@@ -1,26 +1,21 @@
 import 'package:bloom_project/Components/TextField.dart';
-import 'package:bloom_project/HomePage/basic_page.dart';
-import 'package:bloom_project/HomePage/home_page_View.dart';
 import 'package:bloom_project/RegisterPage/register_page.dart';
 import 'package:bloom_project/Style/constant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import '../../Components/MyButton.dart';
-import '../../VerifyOTP/verify_otp_view.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import '../Components/MyButton.dart';
 import 'login_page_controller.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPageController loginController = Get.put(LoginPageController());
-
+  final LoginPageController loginController = Get.put(LoginPageController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding:
-            const EdgeInsets.only(top: 70, bottom: 30, left: 30, right: 30),
+        padding: const EdgeInsets.only(top: 70, bottom: 30, left: 30, right: 30),
         child: Center(
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
@@ -38,9 +33,7 @@ class LoginPage extends StatelessWidget {
                       color: textColor,
                     ),
                   ),
-                  SizedBox(
-                    height: 100,
-                  ),
+                  SizedBox(height: 100),
                   Text(
                     ':البريد الإلكتروني',
                     style: TextStyle(
@@ -61,19 +54,17 @@ class LoginPage extends StatelessWidget {
                     offset: 10,
                     width: 348,
                     hieght: 62,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'This field is required';
-                        }
-                        if (!value.contains('@') || !value.contains('.')) {
-                          return 'Incorrect format';
-                        }
-                        return null;
-                      },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'This field is required';
+                      }
+                      if (!value.contains('@') || !value.contains('.')) {
+                        return 'Incorrect format';
+                      }
+                      return null;
+                    },
                   ),
-                  SizedBox(
-                    height: 25,
-                  ),
+                  SizedBox(height: 25),
                   Text(
                     ':كلمة المرور',
                     style: TextStyle(
@@ -102,40 +93,45 @@ class LoginPage extends StatelessWidget {
                     },
                     obscureText: true,
                   ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  MyButton(
-                    fontSize: 34,
-                    onsave: () {
-                      if (loginController.formstate.currentState!.validate()) {
-                        loginController.onClicksignin();
-                      }
-                    },
-                    width: 348,
-                    height: 62,
-                    text: 'تسجيل الدخول',
-                    color: buttonColor,
-                    radius: 15,
-                    textColor: Colors.white,
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Center(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    textDirection: TextDirection.rtl,
-                    children: [
-                      Text(
-                        'ليس لديك حساب؟',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          fontFamily: 'font1',
-                        ),
+                  SizedBox(height: 50),
+                  Obx(() {
+                    return loginController.isLoading.value
+                        ? Center(
+                      child: LoadingAnimationWidget.horizontalRotatingDots(
+                        color: textColor,
+                        size: 50.0,
                       ),
-                      TextButton(
+                    )
+                        : MyButton(
+                      fontSize: 34,
+                      onsave: () {
+                        if (loginController.formstate.currentState!.validate()) {
+                          loginController.onClicksignin();
+                        }
+                      },
+                      width: 348,
+                      height: 62,
+                      text: 'تسجيل الدخول',
+                      color: buttonColor,
+                      radius: 15,
+                      textColor: Colors.white,
+                    );
+                  }),
+                  SizedBox(height: 25),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      textDirection: TextDirection.rtl,
+                      children: [
+                        Text(
+                          'ليس لديك حساب؟',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            fontFamily: 'font1',
+                          ),
+                        ),
+                        TextButton(
                           onPressed: () {
                             Get.to(RegisterPage());
                           },
@@ -147,9 +143,11 @@ class LoginPage extends StatelessWidget {
                               fontFamily: 'font1',
                               color: textColor,
                             ),
-                          )),
-                    ],
-                  )),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

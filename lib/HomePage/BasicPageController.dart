@@ -1,7 +1,7 @@
 import 'package:bloom_project/Articles/articles_page.dart';
 import 'package:bloom_project/HomePage/home_page_View.dart';
 import 'package:bloom_project/MyTabBar/myTabBar.dart';
-import 'package:bloom_project/ProfilePage/profile_page.dart';
+import 'package:bloom_project/ProfilePage/pending_project.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

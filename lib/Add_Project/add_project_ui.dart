@@ -81,18 +81,10 @@ class AddProject extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     textDirection: TextDirection.ltr,
                     children: [
-                      Text(
-                        ':نوع الحساب',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: screenSize.shortestSide * 0.06,
-                          fontFamily: 'font1',
-                        ),
-                      ),
+                      MyLabelText(text: 'نوع الحساب:'),
                       Container(
                         width: screenSize.width * 1,
                         height: 62,
-
                         decoration: BoxDecoration(
                             color: fieldColor,
                             borderRadius: BorderRadius.circular(15)),
