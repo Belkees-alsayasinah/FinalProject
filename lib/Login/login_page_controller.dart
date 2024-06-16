@@ -43,7 +43,8 @@ class LoginPageController extends GetxController {
       await loginclick();
       if (loginState) {
         Get.offAll(BasicPage());
-        if (UserInformation.usertype == "user" || UserInformation.usertype == "User") {
+        if (UserInformation.usertype == "user" ||
+            UserInformation.usertype == "User") {
           // Some code here
         } else if (UserInformation.usertype == "super_admin") {
           print(UserInformation.usertype);

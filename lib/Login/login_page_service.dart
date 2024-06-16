@@ -21,7 +21,7 @@ class LoginPageService {
     FirebaseNotification firebaseNotification = FirebaseNotification(NotificationController());
 
     // Initialize Firebase messaging and get the device token
-    await firebaseNotification.initNoti();
+    await firebaseNotification.initNotification();
     String? deviceToken = await FirebaseMessaging.instance.getToken();
     print("deviceToken: $deviceToken");
     var response = await http.post(

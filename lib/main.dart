@@ -33,7 +33,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final notificationController = Get.put(NotificationController());
   final firebaseNotification = FirebaseNotification(notificationController);
-  firebaseNotification.initNoti();
+  firebaseNotification.initNotification();
   runApp(const MyApp());
 }
 
