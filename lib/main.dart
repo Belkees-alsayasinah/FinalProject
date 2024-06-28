@@ -33,23 +33,13 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final firebaseNotification = FirebaseNotification();
   firebaseNotification.initNotification();
-
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? token = prefs.getString('token');
-  UserInformation.user_token = token ?? '';
-
-  print("token: ${UserInformation.user_token}");
-  runApp(MyApp(
-      initialPage:
-          UserInformation.user_token == '' ? TypeOfUser() : BasicPage()));
+  runApp(const MyApp());
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
-  final Widget initialPage;
-
-  const MyApp({super.key, required this.initialPage});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +51,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: initialPage,
+      home: TypeOfUser(),
     );
   }
 }

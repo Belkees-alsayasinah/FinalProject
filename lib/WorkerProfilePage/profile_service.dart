@@ -23,9 +23,7 @@ class ProfileService {
     print(response.statusCode);
     if (response.statusCode == 200) {
       var r = await json.decode(response.body);
-
       var data = r['data'];
-
       ProfileModel profileModel = ProfileModel.fromJson(data);
       model.add(profileModel);
       return model;

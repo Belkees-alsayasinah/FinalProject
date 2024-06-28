@@ -1,4 +1,6 @@
+import 'package:bloom_project/GetCanvas/get_canvas_controller.dart';
 import 'package:bloom_project/Profile/profile_tab_bar.dart';
+import 'package:bloom_project/Table/table_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,41 +38,38 @@ class DetailsPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery
-        .of(context)
-        .size;
+    final Size screenSize = MediaQuery.of(context).size;
     return MyDetailsPage(
       appTitle: 'التفاصيل',
       buttonWidget: UserInformation.type == 'inv'
           ? investment_status == '0'
-          ? Positioned.directional(
-        textDirection: TextDirection.ltr,
-        bottom: 10,
-        end: 0,
-        start: 0,
-        child: Padding(
-          padding: EdgeInsets.only(
-              right: screenSize.width * 0.34,
-              left: screenSize.width * 0.34),
-          child: Obx(() =>
-              MyButton(
-                onsave: () {
-
-                  controller.buttonText.value == "تواصل" ?
-                  _showCreateFolderDialog(context) : null;
-                },
-                width: 200,
-                height: 52,
-                color: buttonColor,
-                fontSize: 20,
-                radius: 20,
-                text: controller.buttonText.value,
-                // Observe buttonText
-                textColor: white,
-              )),
-        ),
-      )
-          : SizedBox()
+              ? Positioned.directional(
+                  textDirection: TextDirection.ltr,
+                  bottom: 10,
+                  end: 0,
+                  start: 0,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        right: screenSize.width * 0.34,
+                        left: screenSize.width * 0.34),
+                    child: Obx(() => MyButton(
+                          onsave: () {
+                            controller.buttonText.value == "تواصل"
+                                ? _showCreateFolderDialog(context)
+                                : null;
+                          },
+                          width: 200,
+                          height: 52,
+                          color: buttonColor,
+                          fontSize: 20,
+                          radius: 20,
+                          text: controller.buttonText.value,
+                          // Observe buttonText
+                          textColor: white,
+                        )),
+                  ),
+                )
+              : SizedBox()
           : SizedBox(),
       onsave: () {},
       widget: SingleChildScrollView(
@@ -125,51 +124,54 @@ class DetailsPageView extends StatelessWidget {
                 Text(
                   investment_status == '0' ? 'متاح للاستثمار' : 'مستثمر',
                   style:
-                  TextStyle(fontSize: 20, fontFamily: 'font1', color: grey),
+                      TextStyle(fontSize: 20, fontFamily: 'font1', color: grey),
                 ),
                 Spacer(), // Spacer لدفع الـ Stack إلى اليسار
                 Padding(
                   padding: const EdgeInsets.only(top: 5),
                   child: GetBuilder<AddEvaluationController>(
-                      init: AddEvaluationController(id: id.toString()),
-                      builder: (controller0) {
-                        return Obx(() {
-                          if (controller0.isLoad.value) {
-                            return LoadingAnimationWidget.discreteCircle(
-                              color: textColor,
-                              size: 30.0,
-                            );
-                          } else {
-                            return Column(
-                              children: [
-                                Stack(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 20,
-                                      backgroundColor: Colors.grey[400],
-                                      child: IconButton(
-                                        icon: Icon(
-                                          Icons.favorite,
-                                          color: Colors.red,
-                                        ),
-                                        onPressed: () {
-                                          controller0
-                                              .addEvaluation(id.toString());
-                                        },
+                    init: AddEvaluationController(id: id.toString()),
+                    builder: (controller0) {
+                      return Obx(() {
+                        if (controller0.isLoad.value) {
+                          return LoadingAnimationWidget.discreteCircle(
+                            color: textColor,
+                            size: 30.0,
+                          );
+                        } else {
+                          return Column(
+                            children: [
+                              Stack(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 20,
+                                    backgroundColor: Colors.grey[400],
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.favorite,
+                                        color: Colors.red,
                                       ),
+                                      onPressed: () {
+                                        controller0
+                                            .addEvaluation(id.toString());
+                                      },
                                     ),
-                                  ],
-                                ),
-                                Text(controller0.models.isNotEmpty
+                                  ),
+                                ],
+                              ),
+                              Obx(() {
+                                return Text(controller0.models.isNotEmpty
                                     ? controller0.models[0].totalEvaluationCount
-                                    .toString()
-                                    : '0'),
-                              ],
-                            );
-                          }
-                        });
-                      }),
-                ),
+                                        .toString()
+                                    : '0');
+                              })
+                            ],
+                          );
+                        }
+                      });
+                    },
+                  ),
+                )
               ],
             ),
             SizedBox(
@@ -240,17 +242,23 @@ class DetailsPageView extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            Center(
-              child: MyButton(
-                  onsave: () {},
-                  width: 200,
-                  height: 40,
-                  text: 'مخطط نموذج الأعمال',
-                  color: buttonColor,
-                  textColor: Colors.white,
-                  radius: 15,
-                  fontSize: 16),
-            ),
+            GetBuilder<GetCanvasController>(
+                init: GetCanvasController(id.toString()),
+                builder: (controller) {
+                  return Center(
+                    child: MyButton(
+                        onsave: () {
+                          Get.to(TableView());
+                        },
+                        width: 200,
+                        height: 40,
+                        text: 'مخطط نموذج الأعمال',
+                        color: buttonColor,
+                        textColor: Colors.white,
+                        radius: 15,
+                        fontSize: 16),
+                  );
+                })
           ],
         ),
       ),
@@ -258,9 +266,7 @@ class DetailsPageView extends StatelessWidget {
   }
 
   Future<void> _showCreateFolderDialog(BuildContext context) async {
-    final Size screenSize = MediaQuery
-        .of(context)
-        .size;
+    final Size screenSize = MediaQuery.of(context).size;
     return Get.defaultDialog(
       title: '',
       content: Container(
@@ -306,20 +312,20 @@ class DetailsPageView extends StatelessWidget {
                 Expanded(child: Obx(() {
                   return controller.personalPhoto.value == null
                       ? CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    radius: 30,
-                    child: Icon(Icons.image),
-                  )
+                          backgroundColor: Colors.grey,
+                          radius: 30,
+                          child: Icon(Icons.image),
+                        )
                       : CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    radius: 30,
-                    backgroundImage:
-                    controller.personalPhoto.value != null
-                        ? FileImage(controller.personalPhoto.value!)
-                    as ImageProvider<Object>?
-                        : AssetImage('assets/images/s1.jpg')
-                    as ImageProvider<Object>?,
-                  );
+                          backgroundColor: Colors.grey,
+                          radius: 30,
+                          backgroundImage:
+                              controller.personalPhoto.value != null
+                                  ? FileImage(controller.personalPhoto.value!)
+                                      as ImageProvider<Object>?
+                                  : AssetImage('assets/images/s1.jpg')
+                                      as ImageProvider<Object>?,
+                        );
                 })),
               ],
             ),
@@ -353,19 +359,19 @@ class DetailsPageView extends StatelessWidget {
                   child: Obx(() {
                     return controller.idPhoto.value == null
                         ? CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      radius: 30,
-                      child: Icon(Icons.image),
-                    )
+                            backgroundColor: Colors.grey,
+                            radius: 30,
+                            child: Icon(Icons.image),
+                          )
                         : CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      radius: 30,
-                      backgroundImage: controller.idPhoto.value != null
-                          ? FileImage(controller.idPhoto.value!)
-                      as ImageProvider<Object>?
-                          : AssetImage('assets/images/s1.jpg')
-                      as ImageProvider<Object>?,
-                    );
+                            backgroundColor: Colors.grey,
+                            radius: 30,
+                            backgroundImage: controller.idPhoto.value != null
+                                ? FileImage(controller.idPhoto.value!)
+                                    as ImageProvider<Object>?
+                                : AssetImage('assets/images/s1.jpg')
+                                    as ImageProvider<Object>?,
+                          );
                   }),
                 ),
               ],

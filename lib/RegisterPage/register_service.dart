@@ -14,7 +14,7 @@ class RegisterService {
   var url;
 
   Future<bool> login(RegisterModel model) async {
-    print(model.email + model.password);
+    print(model.email + model.password!);
 
     StoreInfo info = StoreInfo();
     await info.save("isLogin", "false");

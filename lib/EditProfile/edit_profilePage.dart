@@ -1,12 +1,32 @@
+import 'package:bloom_project/EditProfile/edit_profile_controller.dart';
+import 'package:bloom_project/EditProfile/edit_profile_service.dart';
+import 'package:bloom_project/RegisterPage/register_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../Components/MyButton.dart';
 import '../Components/TextField.dart';
 import '../Style/constant.dart';
 
 class EditProfilePage extends StatelessWidget {
   var appPadding = 30;
+  final String id;
+  final String firstName; // Title of the article
+  final String lastName; // Description of the article
+  final String email;
+  final String phone;
+  final String address;
+  final EditProfileService? service;
+
+  EditProfilePage({
+    Key? key,
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.phone,
+    required this.address,
+    this.service, // Pass the service through the constructor
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,31 +52,96 @@ class EditProfilePage extends StatelessWidget {
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  'تعديل الحساب',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 34,
-                    fontFamily: 'font1',
-                    color: textColor,
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  textDirection: TextDirection.rtl,
+              child: GetBuilder<EditProfileController>(
+            init: EditProfileController(),
+            builder: (controller) {
+              return Form(
+                key: controller.formstate,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
+                    Text(
+                      'تعديل الحساب',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 34,
+                        fontFamily: 'font1',
+                        color: textColor,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      textDirection: TextDirection.rtl,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          textDirection: TextDirection.ltr,
+                          children: [
+                            Text(
+                              ':الاسم الأول',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: screenSize.shortestSide * 0.06,
+                                fontFamily: 'font1',
+                              ),
+                            ),
+                            MyTextField(
+                              control: TextEditingController(text: firstName),
+                              label: '',
+                              hint: "",
+                              textInputAction: TextInputAction.next,
+                              onsave: (value) {
+                                controller.firstName = firstName!;
+                              },
+                              keyboardType: TextInputType.emailAddress,
+                              blurRadius: 8,
+                              offset: 10,
+                              width: screenSize.width * 0.42,
+                              hieght: 62,
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: screenSize.width * 0.04),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          textDirection: TextDirection.ltr,
+                          children: [
+                            Text(
+                              ':الاسم الأخير',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: screenSize.shortestSide * 0.06,
+                                fontFamily: 'font1',
+                              ),
+                            ),
+                            MyTextField(
+                              control: TextEditingController(text: lastName),
+                              label: '',
+                              hint: "",
+                              textInputAction: TextInputAction.next,
+                              onsave: (value) {},
+                              keyboardType: TextInputType.emailAddress,
+                              blurRadius: 8,
+                              offset: 10,
+                              width: screenSize.width * 0.42,
+                              hieght: 62,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       textDirection: TextDirection.ltr,
                       children: [
                         Text(
-                          ':الاسم الأول',
+                          ':البريد الإلكتروني',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: screenSize.shortestSide * 0.06,
@@ -64,6 +149,7 @@ class EditProfilePage extends StatelessWidget {
                           ),
                         ),
                         MyTextField(
+                          control: TextEditingController(text: email),
                           label: '',
                           hint: "",
                           textInputAction: TextInputAction.next,
@@ -71,171 +157,102 @@ class EditProfilePage extends StatelessWidget {
                           keyboardType: TextInputType.emailAddress,
                           blurRadius: 8,
                           offset: 10,
-                          width: screenSize.width * 0.42,
+                          width: screenSize.width * 1,
+                          hieght: 62,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      textDirection: TextDirection.ltr,
+                      children: [
+                        Text(
+                          ':رقم الجوال',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: screenSize.shortestSide * 0.06,
+                            fontFamily: 'font1',
+                          ),
+                        ),
+                        MyTextField(
+                          control: TextEditingController(text: phone),
+                          label: '',
+                          hint: "",
+                          textInputAction: TextInputAction.next,
+                          onsave: (value) {},
+                          keyboardType: TextInputType.emailAddress,
+                          blurRadius: 8,
+                          offset: 10,
+                          width: screenSize.width * 1,
+                          hieght: 62,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      textDirection: TextDirection.ltr,
+                      children: [
+                        Text(
+                          ':العنوان',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: screenSize.shortestSide * 0.06,
+                            fontFamily: 'font1',
+                          ),
+                        ),
+                        MyTextField(
+                          control: TextEditingController(text: address),
+                          label: '',
+                          hint: "",
+                          textInputAction: TextInputAction.next,
+                          onsave: (value) {},
+                          keyboardType: TextInputType.emailAddress,
+                          blurRadius: 8,
+                          offset: 10,
+                          width: screenSize.width * 1,
                           hieght: 62,
                         ),
                       ],
                     ),
                     SizedBox(width: screenSize.width * 0.04),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      textDirection: TextDirection.ltr,
-                      children: [
-                        Text(
-                          ':الاسم الأخير',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: screenSize.shortestSide * 0.06,
-                            fontFamily: 'font1',
-                          ),
-                        ),
-                        MyTextField(
-                          label: '',
-                          hint: "",
-                          textInputAction: TextInputAction.next,
-                          onsave: (value) {},
-                          keyboardType: TextInputType.emailAddress,
-                          blurRadius: 8,
-                          offset: 10,
-                          width: screenSize.width * 0.42,
-                          hieght: 62,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  textDirection: TextDirection.ltr,
-                  children: [
-                    Text(
-                      ':البريد الإلكتروني',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenSize.shortestSide * 0.06,
-                        fontFamily: 'font1',
-                      ),
+                    SizedBox(
+                      height: 25,
                     ),
-                    MyTextField(
-                      label: '',
-                      hint: "",
-                      textInputAction: TextInputAction.next,
-                      onsave: (value) {},
-                      keyboardType: TextInputType.emailAddress,
-                      blurRadius: 8,
-                      offset: 10,
-                      width: screenSize.width * 1,
-                      hieght: 62,
+                    SizedBox(
+                      height: 50,
+                    ),
+                    MyButton(
+                      fontSize: 34,
+                      onsave: () async {
+                        RegisterModel update = RegisterModel(
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email,
+                            location: address,
+                            phone: phone);
+                        var d = await service!.updateProfile(id, update);
+                      },
+                      width: 348,
+                      height: 62,
+                      text: 'تعديل الحساب',
+                      color: buttonColor,
+                      radius: 15,
+                      textColor: Colors.white,
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 25,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  textDirection: TextDirection.ltr,
-                  children: [
-                    Text(
-                      ':رقم الجوال',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenSize.shortestSide * 0.06,
-                        fontFamily: 'font1',
-                      ),
-                    ),
-                    MyTextField(
-                      label: '',
-                      hint: "",
-                      textInputAction: TextInputAction.next,
-                      onsave: (value) {},
-                      keyboardType: TextInputType.emailAddress,
-                      blurRadius: 8,
-                      offset: 10,
-                      width: screenSize.width * 1,
-                      hieght: 62,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  textDirection: TextDirection.ltr,
-                  children: [
-                    Text(
-                      ':كلمة المرور',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenSize.shortestSide * 0.06,
-                        fontFamily: 'font1',
-                      ),
-                    ),
-                    MyTextField(
-                      label: '',
-                      hint: "",
-                      textInputAction: TextInputAction.next,
-                      onsave: (value) {},
-                      keyboardType: TextInputType.emailAddress,
-                      blurRadius: 8,
-                      offset: 10,
-                      width: screenSize.width * 1,
-                      hieght: 62,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  textDirection: TextDirection.ltr,
-                  children: [
-                    Text(
-                      ':العنوان',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenSize.shortestSide * 0.06,
-                        fontFamily: 'font1',
-                      ),
-                    ),
-                    MyTextField(
-                      label: '',
-                      hint: "",
-                      textInputAction: TextInputAction.next,
-                      onsave: (value) {},
-                      keyboardType: TextInputType.emailAddress,
-                      blurRadius: 8,
-                      offset: 10,
-                      width: screenSize.width * 1,
-                      hieght: 62,
-                    ),
-                  ],
-                ),
-                SizedBox(width: screenSize.width * 0.04),
-                SizedBox(
-                  height: 25,
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                MyButton(
-                  fontSize: 34,
-                  onsave: () {},
-                  width: 348,
-                  height: 62,
-                  text: 'تعديل الحساب',
-                  color: buttonColor,
-                  radius: 15,
-                  textColor: Colors.white,
-                ),
-              ],
-            ),
-          ),
+              );
+            },
+          )),
         ),
       ),
     );

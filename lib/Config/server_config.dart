@@ -33,5 +33,9 @@ class ServerConfig {
   String getNotification = 'api/notification/getUserNotifications';
   String userLogout = 'api/user/logout';
   String investorLogout = 'api/investor/logout';
+  String chartInfo = 'api/Report-statistics';
+  String canvas = 'api/canvas/show/';
+  String investorUpdateProfile = 'api/investor/investors/update/';
+  String userUpdateProfile = 'api/user/users/update/';
   String addReportApi = "";
 }

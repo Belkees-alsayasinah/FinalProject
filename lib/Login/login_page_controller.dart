@@ -1,4 +1,5 @@
 import 'package:bloom_project/HomePage/basic_page.dart';
+import 'package:bloom_project/service/info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'login_page_model.dart';
@@ -41,10 +42,11 @@ class LoginPageController extends GetxController {
       await loginclick();
       if (loginState) {
         Get.offAll(BasicPage());
-      }
-      else{
+        print("type user : ${UserInformation.type}");
+      } else {
         Get.snackbar(
-          "عذراً","البريد الإلكتروني أو كلمة المرور غير صحيحة",
+          "عذراً",
+          "البريد الإلكتروني أو كلمة المرور غير صحيحة",
           icon: Icon(
             Icons.report_gmailerrorred,
             size: 40,

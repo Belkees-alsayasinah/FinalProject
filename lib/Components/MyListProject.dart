@@ -197,26 +197,10 @@ class MyListProject extends StatelessWidget {
                                     }
                                   },
                                 )
-                          : PopupMenuButton(
-                              itemBuilder: (BuildContext context) {
-                                return <PopupMenuEntry>[
-                                  PopupMenuItem(
-                                    child: Text(
-                                      'حذف المشروع',
-                                      style: style,
-                                    ),
-                                    value: 'option1',
-                                  ),
-                                ];
-                              },
-                              onSelected: (value) {
-                                if (value == 'option1') {
-                                  print('gg');
-                                }
-                              },
-                            ),
+                          : SizedBox(),
                     ],
                   ),
+                  SizedBox(height: 10,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     textDirection: TextDirection.rtl,
@@ -225,7 +209,9 @@ class MyListProject extends StatelessWidget {
                         locationIcon,
                         color: black,
                       ),
-                      SizedBox(width: 10,),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Text(
                         address,
                         style: TextStyle(
@@ -250,13 +236,16 @@ class MyListProject extends StatelessWidget {
                             moneyIcon,
                             color: Colors.grey[700],
                           ),
-                          SizedBox(width: 10,),
+                          SizedBox(
+                            width: 10,
+                          ),
                           Text(
                             cost,
                             style: TextStyle(
-                                fontSize: 25,
+                                fontSize: screenSize.width*0.05,
                                 fontFamily: 'font1',
                                 color: Colors.grey[700]),
+                            textDirection: TextDirection.rtl,
                           ),
                           SizedBox(
                             width: screenSize.width * 0.20,
@@ -274,3 +263,22 @@ class MyListProject extends StatelessWidget {
     );
   }
 }
+
+// PopupMenuButton(
+// itemBuilder: (BuildContext context) {
+// return <PopupMenuEntry>[
+// PopupMenuItem(
+// child: Text(
+// 'حذف المشروع',
+// style: style,
+// ),
+// value: 'option1',
+// ),
+// ];
+// },
+// onSelected: (value) {
+// if (value == 'option1') {
+// print('gg');
+// }
+// },
+// ),

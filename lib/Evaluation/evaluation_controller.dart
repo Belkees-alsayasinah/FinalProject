@@ -5,32 +5,22 @@ import 'evaluation_model.dart';
 
 class AddEvaluationController extends GetxController {
   String id;
-
   AddEvaluationController({required this.id});
 
-  late String content;
-  late bool state;
-  late String message;
-  late AddEvaluationService service;
-  late bool addEvaluationState;
   var models = <EvaluationCountModel>[].obs;
   var isLoad = true.obs;
-  var d;
-  late String update1;
+
+  late AddEvaluationService service;
 
   @override
   Future<void> onInit() async {
-    update1 = '';
-    content = '';
-    message = '';
-    addEvaluationState = false;
+    super.onInit();
     service = AddEvaluationService();
     await getdata(id);
-    super.onInit();
   }
 
   Future<void> addEvaluation(String id) async {
-    addEvaluationState = await service.addEvaluation(id);
+    bool addEvaluationState = await service.addEvaluation(id);
     if (addEvaluationState) {
       await getdata(id);
     } else {
@@ -40,11 +30,8 @@ class AddEvaluationController extends GetxController {
 
   Future<void> getdata(String id) async {
     isLoad.value = true;
-    d = await service.getEvaluationCount(UserInformation.user_token, id);
+    await service.getEvaluationCount(UserInformation.user_token, id);
     models.assignAll(service.model);
     isLoad.value = false;
-    update();
-    if (models.isEmpty) {
-    } else if (models[0].totalEvaluationCount.toString() == "null") {}
   }
 }

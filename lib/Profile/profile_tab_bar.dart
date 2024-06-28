@@ -24,12 +24,7 @@ class UserTabBar extends StatelessWidget {
         TextStyle(color: black, fontWeight: FontWeight.bold, fontSize: 26);
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.edit),
-          onPressed: () {
-            Get.to(EditProfilePage());
-          },
-        ),
+        leading: Text(''),
         actions: [
           IconButton(
               onPressed: () {

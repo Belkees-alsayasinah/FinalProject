@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../Style/constant.dart';
 
 class MyTable extends StatelessWidget {
@@ -13,20 +12,32 @@ class MyTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Table(
       border: TableBorder.all(color: grey),
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-      children: const [
+      children: [
         TableRow(
           decoration: BoxDecoration(
-            color: Colors.green,
+            color: Color(0xFF92A78E),// Updated color here
           ),
           children: [
             TableCell(
               verticalAlignment: TableCellVerticalAlignment.middle,
               child: Padding(
-                padding: EdgeInsets.all(8),
-                child: Center(child: Text('Title 11')),
+                padding: EdgeInsets.all(16),
+                child: Center(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontFamily: 'font1',
+                      fontSize: screenSize.width * 0.04,
+                      fontWeight: FontWeight.bold
+                    ),
+                    textDirection: TextDirection.rtl,
+                  ),
+                ),
               ),
             ),
           ],
@@ -35,8 +46,17 @@ class MyTable extends StatelessWidget {
           children: [
             TableCell(
               child: Padding(
-                padding: EdgeInsets.all(8),
-                child: Center(child: Text('Value 21')),
+                padding: EdgeInsets.all(16),
+                child: Center(
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                      fontFamily: 'font1',
+                      fontSize: screenSize.width * 0.04,
+                    ),
+                    textDirection: TextDirection.rtl,
+                  ),
+                ),
               ),
             ),
           ],

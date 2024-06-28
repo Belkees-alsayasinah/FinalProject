@@ -2,7 +2,7 @@ class RegisterModel {
   String firstName;
   String lastName;
   String email;
-  String password;
+  String? password;
   String phone;
   String location;
 
@@ -10,7 +10,7 @@ class RegisterModel {
     required this.firstName,
     required this.lastName,
     required this.email,
-    required this.password,
+    this.password,
     required this.location,
     required this.phone,
   });

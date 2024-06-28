@@ -53,7 +53,7 @@ class ComplaintsView extends StatelessWidget {
                 : controller.models.length == 0
                     ? Center(
                         child: Text(
-                          'لا يوجد تقارير بعد!',
+                          'لا يوجد شكاوي بعد!',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontFamily: 'font1',
@@ -118,6 +118,7 @@ class ComplaintsView extends StatelessWidget {
                                         Positioned(
                                           //bottom: 0,
                                           right: 25,
+                                          left: 25,
                                           child: Padding(
                                               padding: EdgeInsets.all(10.0),
                                               child: Column(
@@ -133,6 +134,9 @@ class ComplaintsView extends StatelessWidget {
                                                         fontSize: 25,
                                                         fontFamily: 'font1',
                                                         color: black),
+                                                    textDirection:
+                                                        TextDirection.rtl,
+                                                    maxLines: 6,
                                                   ),
                                                 ],
                                               )),

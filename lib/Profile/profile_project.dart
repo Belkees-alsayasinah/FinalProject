@@ -66,7 +66,7 @@ class UserProjects extends StatelessWidget {
                                 } else {
                                   return MyListProject(
                                     locationIcon: Icons.location_on_outlined,
-                                      moneyIcon: Icons.money,
+                                      moneyIcon: Icons.description,
                                       investedProject: '',
                                       id: pendingProject.id.toString(),
                                       address: pendingProject.location,

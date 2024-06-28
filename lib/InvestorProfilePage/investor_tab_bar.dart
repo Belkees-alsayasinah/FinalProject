@@ -16,22 +16,28 @@ class InvestorTabBar extends StatefulWidget {
 
 class _InvestorTabBarState extends State<InvestorTabBar> {
   InvestorProfilePageController controller =
-  Get.put(InvestorProfilePageController());
+      Get.put(InvestorProfilePageController());
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery
-        .of(context)
-        .size;
+    final Size screenSize = MediaQuery.of(context).size;
 
     const style =
-    TextStyle(color: black, fontWeight: FontWeight.bold, fontSize: 26);
+        TextStyle(color: black, fontWeight: FontWeight.bold, fontSize: 26);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.edit),
           onPressed: () {
-            Get.to(EditProfilePage());
+            Get.to(EditProfilePage(
+
+              id: controller.models[0].investor.id.toString(),
+              firstName: controller.models[0].investor.firstName,
+              lastName: controller.models[0].investor.lastName,
+              email: controller.models[0].investor.email,
+              phone: controller.models[0].investor.phone,
+              address: controller.models[0].investor.location,
+            ));
           },
         ),
         centerTitle: true,
@@ -66,7 +72,7 @@ class _InvestorTabBarState extends State<InvestorTabBar> {
                   ),
                 ),
               );
-            }else if (controller.models.isEmpty) {
+            } else if (controller.models.isEmpty) {
               return Center(
                 child: Text(
                   'No data available',
@@ -77,27 +83,26 @@ class _InvestorTabBarState extends State<InvestorTabBar> {
                   ),
                 ),
               );
-            }
-            else {
+            } else {
               return Column(
                 children: [
                   Obx(() {
                     return controller.isLoad.value
                         ? Center(
-                      child: SpinKitFadingCircle(
-                        color: textColor,
-                        size: 30,
-                      ),
-                    )
+                            child: SpinKitFadingCircle(
+                              color: textColor,
+                              size: 30,
+                            ),
+                          )
                         : controller.models[0].investor.personalPhoto == null
-                        ? CircleAvatar(
-                        radius: 50,
-                        backgroundImage:
-                        AssetImage('assets/images/profile.jpg'))
-                        : CircleAvatar(
-                        radius: 50,
-                        backgroundImage: NetworkImage(
-                            controller.models[0].investor.personalPhoto));
+                            ? CircleAvatar(
+                                radius: 50,
+                                backgroundImage:
+                                    AssetImage('assets/images/profile.jpg'))
+                            : CircleAvatar(
+                                radius: 50,
+                                backgroundImage: NetworkImage(controller
+                                    .models[0].investor.personalPhoto));
                   }),
                   SizedBox(height: 15),
                   Text(

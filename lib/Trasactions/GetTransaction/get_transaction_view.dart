@@ -54,7 +54,7 @@ class TransactionsView extends StatelessWidget {
                 : controller.models.length == 0
                 ? Center(
               child: Text(
-                'لا يوجد تقارير بعد!',
+                'لا يوجد معاملات بعد!',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'font1',

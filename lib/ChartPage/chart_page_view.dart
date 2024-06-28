@@ -1,6 +1,7 @@
+import 'package:bloom_project/ChartPage/chart_page_controller.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'bar_graph.dart';
 
 class ChartPageView extends StatefulWidget {
@@ -9,80 +10,160 @@ class ChartPageView extends StatefulWidget {
 }
 
 class _ChartPageViewState extends State<ChartPageView> {
-  List<double> weeklySummary = [
-    40.40,
-    99.56,
-    42.88,
-    65.98,
-    86.98,
-    22.09,
-    43.89,
-  ];
+  ChartController controller = Get.put(ChartController());
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
-      body: Column(
-        textDirection: TextDirection.rtl,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: Text(
-              'الإحصاءات', // Replace with your desired text
-              style: titleStyle,
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          textDirection: TextDirection.rtl,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Text(
+                'الإحصاءات', // Replace with your desired text
+                style: titleStyle,
+              ),
             ),
-          ),
-          SizedBox(height: 50),
-          // Image.asset(
-          //   'assets/images/chart.jpeg', // Replace with the path to your image
-          //   height: 200,
-          //   width: 200,
-          //   fit: BoxFit.contain,
-          // ),
-          // SizedBox(height: 100),
-          SizedBox(
-            height: 200,
-            child: MyBarGraph(
-              weeklySummary: weeklySummary,
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
+            SizedBox(height: 50),
+            Text(
+              'احصاءات الأربعة أشهر الأخيرة',
+              style: TextStyle(
+                  fontSize: screenSize.width * 0.05,
+                  fontFamily: 'font1',
+                  color: textColor,
+                  fontWeight: FontWeight.bold),
               textDirection: TextDirection.rtl,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '1- المشاريع التي تم الاستثمار فيها في دمشق',
-                  style: TextStyle(fontFamily: 'font1', fontSize: 16),
-                  textDirection: TextDirection.rtl,
-                ),
-                SizedBox(height: 10,),
-                Text(
-                  '2- المشاريع الأكثر استثمارا من القطاع الإبداعي',
-                  style: TextStyle(fontFamily: 'font1', fontSize: 16),
-                  textDirection: TextDirection.rtl,
-                ),
-                SizedBox(height: 10,),
-                Text(
-                  '4- المشاريع التي حققت أعلى نسبة أرباح في الأعمال الصناعية',
-                  style: TextStyle(fontFamily: 'font1', fontSize: 16),
-                  textDirection: TextDirection.rtl,
-                ),
-                SizedBox(height: 10,),
-                Text(
-                  '4- المشاريع التي حققت أعلى نسبة أرباح ضمن مبلغ الاستثمار 15000000',
-                  style: TextStyle(fontFamily: 'font1', fontSize: 16),
-                  textDirection: TextDirection.rtl,
-                ),
-              ],
             ),
-          )
-        ],
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'صافي الربح الكلي',
+              style: TextStyle(
+                fontSize: screenSize.width * 0.05,
+                fontFamily: 'font1',
+                color: textColor,
+              ),
+              textDirection: TextDirection.rtl,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 200,
+              child: Obx(() {
+                if (controller.isLoad.value) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (controller.message.isNotEmpty) {
+                  return Center(child: Text(controller.message));
+                } else {
+                  return MyBarGraph(
+                    weeklySummary: controller.totalNetProfits.toList(),
+                    months: controller.months.toList(), // تمرير أسماء الأشهر
+                  );
+                }
+              }),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'أرباح أصحاب الأعمال',
+              style: TextStyle(
+                fontSize: screenSize.width * 0.05,
+                fontFamily: 'font1',
+                color: textColor,
+              ),
+              textDirection: TextDirection.rtl,
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              height: 200,
+              child: Obx(() {
+                if (controller.isLoad.value) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (controller.message.isNotEmpty) {
+                  return Center(child: Text(controller.message));
+                } else {
+                  return MyBarGraph(
+                    weeklySummary: controller.totalNetProfitEmployer.toList(),
+                    months: controller.months.toList(), // تمرير أسماء الأشهر
+                  );
+                }
+              }),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Text(
+              'أرباح المستثمرين',
+              style: TextStyle(
+                fontSize: screenSize.width * 0.05,
+                fontFamily: 'font1',
+                color: textColor,
+              ),
+              textDirection: TextDirection.rtl,
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              height: 200,
+              child: Obx(() {
+                if (controller.isLoad.value) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (controller.message.isNotEmpty) {
+                  return Center(child: Text(controller.message));
+                } else {
+                  return MyBarGraph(
+                    weeklySummary: controller.totalNetProfitInvestor.toList(),
+                    months: controller.months.toList(), // تمرير أسماء الأشهر
+                  );
+                }
+              }),
+            ),
+
+            SizedBox(
+              height: 15,
+            ),
+
+            Text(
+              'إجمالي الإيرادات',
+              style: TextStyle(
+                fontSize: screenSize.width * 0.05,
+                fontFamily: 'font1',
+                color: textColor,
+              ),
+              textDirection: TextDirection.rtl,
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              height: 200,
+              child: Obx(() {
+                if (controller.isLoad.value) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (controller.message.isNotEmpty) {
+                  return Center(child: Text(controller.message));
+                } else {
+                  return MyBarGraph(
+                    weeklySummary: controller.totalRevenue.toList(),
+                    months: controller.months.toList(), // تمرير أسماء الأشهر
+                  );
+                }
+              }),
+            ),
+          ],
+        ),
       ),
     );
   }

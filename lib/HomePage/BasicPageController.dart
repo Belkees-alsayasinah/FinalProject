@@ -17,6 +17,7 @@ class BasicPageController extends GetxController {
   PageController pageController = PageController(initialPage: 2);
 
   List<Widget> screens = [
+
     UserInformation.type == 'inv' ? InvestorTabBar() : MyTabBar(),
     ChartPageView(),
     HomePageView(),
