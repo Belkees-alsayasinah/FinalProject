@@ -53,40 +53,33 @@ class RegisterPageController extends GetxController {
       print("password : $password");
       await loginclick();
       if (loginState) {
-
         Get.offAll(VerifyOTPView());
         print(UserInformation.usertype);
-        Get.snackbar('Done', 'You have been logged in successfully',
-            borderRadius: 20,
-            margin: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-            backgroundColor: Colors.blueGrey,
-            icon: Icon(
-              Icons.emoji_emotions_outlined,
-              size: 40,
-              color: Colors.white,
-            ),
-            colorText: Colors.white,
-            snackPosition: SnackPosition.TOP);
 
       } else {
-        Get.snackbar('Sorry', 'There was a problem signing in',
-            borderRadius: 20,
-            margin: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-            backgroundColor: Colors.red,
-            icon: Icon(
-              Icons.report_problem_outlined,
-              size: 40,
-              color: Colors.white,
-            ),
-            colorText: Colors.white,
-            snackPosition: SnackPosition.TOP);
+        Get.snackbar(
+          "عذراً","يوجد مشكلة في عملية إنشاء الحساب",
+          icon: Icon(
+            Icons.report_gmailerrorred,
+            size: 40,
+            // color: Colors.white,
+          ),
+          duration: Duration(seconds: 5),
+          snackPosition: SnackPosition.TOP,
+        );
       }
     }
     isLoading = false.obs;
   }
 
   Future<void> loginclick() async {
-    RegisterModel user = RegisterModel(email: email, password: password, firstName: firstName, lastName: lastName, location: location, phone: phone);
+    RegisterModel user = RegisterModel(
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        location: location,
+        phone: phone);
     loginState = await service.login(user);
     var mapmsg = service.message;
     if (mapmsg is Map) {

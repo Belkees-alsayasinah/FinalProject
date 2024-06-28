@@ -8,25 +8,38 @@ import 'package:get/get.dart';
 class TypeOfUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(
           top: 40,
           bottom: 30,
-          left: 10,
-          right: 10,
+          left: 20,
+          right: 20,
         ),
         child: Column(
           children: [
-            Image.asset('assets/images/logo.jpg'),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: SizedBox(
+                width: screenSize.width * 0.4, // عرض الصورة
+                height: screenSize.height * 0.3, // ارتفاع الصورة
+                child: Hero(
+                  tag: 'imageHero',
+                  child: Image.asset(
+                    'assets/images/bloom.jpg',
+                  ),
+                )
+              ),
+            ),
             SizedBox(
-              height: 20,
+              height: screenSize.height * 0.25,
             ),
             Text(
               'أهلاً وسهلاً',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 30,
+                fontSize: screenSize.width * 0.07,
                 fontFamily: 'font1',
               ),
             ),
@@ -34,12 +47,13 @@ class TypeOfUser extends StatelessWidget {
               height: 8,
             ),
             Text(
-              'يمكنك إنشاء الحساب وتسجيل الدخول بسهولة مع بلوم!',
+              'يمكنك اختيار نوع الحساب الذي تريد التسجيل به!',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 15,
+                fontSize: screenSize.width * 0.04,
                 fontFamily: 'font1',
               ),
+              textDirection: TextDirection.rtl,
             ),
             SizedBox(
               height: 30,
@@ -50,8 +64,8 @@ class TypeOfUser extends StatelessWidget {
                 UserInformation.type = 'user';
                 Get.offAll(() => FirstPage());
               },
-              width: 348,
-              height: 66,
+              width: screenSize.width * 1,
+              height: screenSize.height * 0.08,
               text: 'صاحب عمل',
               color: buttonColor,
               radius: 15,
@@ -66,8 +80,8 @@ class TypeOfUser extends StatelessWidget {
                 Get.offAll(() => FirstPage());
               },
               fontSize: 34,
-              width: 348,
-              height: 66,
+              width: screenSize.width * 1,
+              height: screenSize.height * 0.08,
               text: 'مستثمر',
               color: buttonColorOpa,
               radius: 15,

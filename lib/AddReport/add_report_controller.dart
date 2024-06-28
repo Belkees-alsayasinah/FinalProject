@@ -1,6 +1,5 @@
 import 'package:bloom_project/AddReport/add_report_model.dart';
 import 'package:bloom_project/AddReport/add_report_service.dart';
-import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,10 +46,9 @@ class AddReportController extends GetxController {
     transactions = '';
     recommendations = '';
     futurePlans = '';
-    title = 'gggg';
+    title = 'title';
     service = AddReportService();
     addReportState = false;
-
     super.onInit();
   }
 
@@ -59,31 +57,7 @@ class AddReportController extends GetxController {
     if (formdata!.validate()) {
       formdata.save();
       await addReportClick(id);
-      if (addReportState) {
-        Get.snackbar('Done', 'The report has been added successfully',
-            borderRadius: 20,
-            margin: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-            backgroundColor: buttonColorOpa,
-            icon: Icon(
-              Icons.emoji_emotions_outlined,
-              size: 40,
-              color: Colors.white,
-            ),
-            colorText: Colors.white,
-            snackPosition: SnackPosition.TOP);
-      } else {
-        Get.snackbar('Sorry', 'The report has not been added',
-            borderRadius: 20,
-            margin: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-            backgroundColor: Colors.red,
-            icon: Icon(
-              Icons.report_problem_outlined,
-              size: 40,
-              color: Colors.white,
-            ),
-            colorText: Colors.white,
-            snackPosition: SnackPosition.TOP);
-      }
+      if (addReportState) {}
     }
   }
 

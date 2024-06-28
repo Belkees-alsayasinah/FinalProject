@@ -11,25 +11,38 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(
           top: 40,
           bottom: 30,
-          left: 10,
-          right: 10,
+          left: 20,
+          right: 20,
         ),
         child: Column(
           children: [
-            Image.asset('assets/images/logo.jpg'),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: SizedBox(
+                width: screenSize.width * 0.4, // عرض الصورة
+                height: screenSize.height * 0.3, // ارتفاع الصورة
+                child: Hero(
+                  tag: 'dash',
+                  child: Image.asset(
+                    'assets/images/bloom.jpg',
+                  ),
+                )
+              ),
+            ),
             SizedBox(
-              height: 20,
+              height: screenSize.height * 0.25,
             ),
             Text(
               'أهلاً وسهلاً',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 30,
+                fontSize: screenSize.width * 0.07,
                 fontFamily: 'font1',
               ),
             ),
@@ -40,7 +53,7 @@ class FirstPage extends StatelessWidget {
               'يمكنك إنشاء الحساب وتسجيل الدخول بسهولة مع بلوم!',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 15,
+                fontSize: screenSize.width * 0.04,
                 fontFamily: 'font1',
               ),
             ),
@@ -52,8 +65,8 @@ class FirstPage extends StatelessWidget {
               onsave: () {
                 Get.offAll(() => LoginPage());
               },
-              width: 348,
-              height: 66,
+              width: screenSize.width * 1,
+              height: screenSize.height * 0.08,
               text: 'تسجيل الدخول',
               color: buttonColor,
               radius: 15,
@@ -67,8 +80,8 @@ class FirstPage extends StatelessWidget {
                 Get.offAll(RegisterPage());
               },
               fontSize: 34,
-              width: 348,
-              height: 66,
+              width: screenSize.width * 1,
+              height: screenSize.height * 0.08,
               text: 'إنشاء حساب',
               color: buttonColorOpa,
               radius: 15,

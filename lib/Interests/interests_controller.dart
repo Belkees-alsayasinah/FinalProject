@@ -1,3 +1,4 @@
+import 'package:bloom_project/AddCanvas/canvas_view.dart';
 import 'package:bloom_project/HomePage/basic_page.dart';
 import 'package:bloom_project/Interests/interests_model.dart';
 import 'package:bloom_project/Interests/interests_service.dart';

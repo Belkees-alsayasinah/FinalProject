@@ -1,12 +1,18 @@
 import 'package:bloom_project/Components/MyListProject.dart';
-import 'package:bloom_project/ProfilePage/profile_controller.dart';
+import 'package:bloom_project/Profile/profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import '../Style/constant.dart';
 
-class InvestmentProjects extends StatelessWidget {
-  ProfilePageController controller = Get.put(ProfilePageController());
+class UserProjects extends StatelessWidget {
+  final String id;
+
+  UserProjects({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +23,8 @@ class InvestmentProjects extends StatelessWidget {
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.all(10.0),
-      child: GetBuilder<ProfilePageController>(
-          init: ProfilePageController(),
+      child: GetBuilder<UserProfilePageController>(
+          init: UserProfilePageController(id),
           builder: (controller) {
             return controller.isLoad.value
                 ? Center(
@@ -27,11 +33,10 @@ class InvestmentProjects extends StatelessWidget {
                       size: 50.0,
                     ),
                   )
-                : controller.models.isEmpty ||
-                        controller.models[0].investedProjects.isEmpty
+                : controller.models.length == 0
                     ? Center(
                         child: Text(
-                          'لا يوجد مشاريع مستثمرة بعد!',
+                          'لا يوجد مشاريع بعد!',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontFamily: 'font1',
@@ -43,8 +48,8 @@ class InvestmentProjects extends StatelessWidget {
                     : ListView.separated(
                         physics: BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
-                          final investedtProject =
-                              controller.models[0].investedProjects[index];
+                          final pendingProject =
+                              controller.models[0].projects[index];
                           return FutureBuilder(
                               future: null,
                               builder: (context, snapshot) {
@@ -60,13 +65,14 @@ class InvestmentProjects extends StatelessWidget {
                                   return Text('Error ${snapshot.error}');
                                 } else {
                                   return MyListProject(
-                                      investedProject: investedtProject
-                                          .investmentStatus
-                                          .toString(),
-                                      id: investedtProject.id.toString(),
-                                      address: investedtProject.location,
-                                      title: investedtProject.name,
-                                      cost: investedtProject.amount.toString(),
+                                    locationIcon: Icons.location_on_outlined,
+                                      moneyIcon: Icons.money,
+                                      investedProject: '',
+                                      id: pendingProject.id.toString(),
+                                      address: pendingProject.location,
+                                      title: pendingProject.name,
+                                      cost:
+                                          pendingProject.description.toString(),
                                       function: () {},
                                       onTap: () {});
                                 }
@@ -75,7 +81,8 @@ class InvestmentProjects extends StatelessWidget {
                         separatorBuilder: (context, index) => SizedBox(
                           height: 20,
                         ),
-                        itemCount: controller.models[0].investedProjects.length,
+                        itemCount: controller.models[0].projects
+                            .length, // Replace with actual project count
                       );
           }),
     ));

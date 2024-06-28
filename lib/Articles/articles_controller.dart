@@ -8,8 +8,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import '../service/info.dart';
 
 class ArticlesController extends GetxController {
-  @override
-  Widget get widget => ArticlesView();
+
   late RxBool isLoad;
   late ArticlesService service;
   late RxList<ArticlesModel> models;
@@ -18,30 +17,21 @@ class ArticlesController extends GetxController {
   late bool state;
   late GlobalKey<FormState> formstate;
 
-
-  @override
-  void onClose() {
-    super.onClose();
-    // Clean up page-specific data or services here
-  }
   @override
   void onInit() async {
     formstate = GlobalKey<FormState>();
-
     isLoad = true.obs;
     service = ArticlesService();
     models = <ArticlesModel>[].obs;
     message = '';
-
     await getdata();
   }
 
   getdata() async {
-    print("1");
-    d = await service.getArticles(UserInformation.user_token);
-    models.value.assignAll(service.model);
-    models.refresh();
-    isLoad.value = false;
+    d = await service.fetchArticles(UserInformation.user_token).listen((event) {
+      models.value = event;
+      isLoad.value = false;
+    });
     if (models.isEmpty) {
       print("null");
     } else if (models[0].name == "null") {

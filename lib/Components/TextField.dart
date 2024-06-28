@@ -16,8 +16,8 @@ class MyTextField extends StatelessWidget {
   final int max;
   final double blurRadius;
   final double offset;
-final double width;
-final int hieght;
+  final double width;
+  final double hieght; // تعديل: تغيير 'hieght' إلى 'height'
 
   const MyTextField({
     Key? key,
@@ -35,13 +35,15 @@ final int hieght;
     required this.blurRadius,
     required this.offset,
     required this.width,
-    required this.hieght,
+    required this.hieght, // تعديل: تغيير 'hieght' إلى 'height'
     this.max = 1,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: width, // ضبط العرض
+      height: hieght.toDouble(), // ضبط الارتفاع
       padding: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -51,36 +53,35 @@ final int hieght;
             color: Color.fromARGB(143, 205, 204, 208),
             blurRadius: blurRadius,
             offset: Offset(10, offset),
-            spreadRadius: -3, // Controls the shadow spread inward
-          )
+            spreadRadius: -3,
+          ),
         ],
       ),
-      child:ConstrainedBox(
+      child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxWidth: width - 16, // Adjust for padding
-          maxHeight: hieght - 16, // Adjust for padding
+          maxWidth: width - 16, // تعديل العرض
+          maxHeight: hieght - 16, // تعديل الارتفاع
         ),
         child: TextField(
           textDirection: TextDirection.rtl,
-
-        controller: control,
-        onChanged: onsave,
-        obscureText: obscureText,
-        textInputAction: textInputAction,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          labelText: label,
-          hintText: hint,
-          hintStyle: TextStyle(
-            color: Colors.grey[400],
+          controller: control,
+          onChanged: onsave,
+          obscureText: obscureText,
+          textInputAction: textInputAction,
+          keyboardType: keyboardType,
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            labelText: label,
+            hintText: hint,
+            hintStyle: TextStyle(
+              color: Colors.grey[400],
+            ),
+            suffix: icon != null ? Icon(icon) : null,
+            suffixIcon: suffixPressed != null ? IconButton(onPressed: suffixPressed!, icon: Icon(Icons.clear)) : null,
           ),
-          suffix: icon != null ? Icon(icon) : null,
-          suffixIcon: suffixPressed != null ? IconButton(onPressed: suffixPressed!, icon: Icon(Icons.clear)) : null,
-        ),
           textAlign: TextAlign.right,
+        ),
       ),
-    ),
     );
   }
 }

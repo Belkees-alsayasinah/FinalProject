@@ -1,7 +1,8 @@
 import 'package:bloom_project/Articles/articles_page.dart';
 import 'package:bloom_project/HomePage/home_page_View.dart';
+import 'package:bloom_project/InvestorProfilePage/investor_tab_bar.dart';
 import 'package:bloom_project/MyTabBar/myTabBar.dart';
-import 'package:bloom_project/ProfilePage/pending_project.dart';
+import 'package:bloom_project/service/info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,7 @@ class BasicPageController extends GetxController {
   PageController pageController = PageController(initialPage: 2);
 
   List<Widget> screens = [
-    MyTabBar(),
+    UserInformation.type == 'inv' ? InvestorTabBar() : MyTabBar(),
     ChartPageView(),
     HomePageView(),
     NotificationsPage(),

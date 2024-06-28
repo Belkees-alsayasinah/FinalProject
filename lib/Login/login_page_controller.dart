@@ -1,8 +1,6 @@
 import 'package:bloom_project/HomePage/basic_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../service/info.dart';
-import '../Style/constant.dart';
 import 'login_page_model.dart';
 import 'login_page_service.dart';
 
@@ -43,35 +41,18 @@ class LoginPageController extends GetxController {
       await loginclick();
       if (loginState) {
         Get.offAll(BasicPage());
-        if (UserInformation.usertype == "user" ||
-            UserInformation.usertype == "User") {
-          // Some code here
-        } else if (UserInformation.usertype == "super_admin") {
-          print(UserInformation.usertype);
-        }
-        Get.snackbar('Done', 'You have been logged in successfully',
-            borderRadius: 20,
-            margin: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-            backgroundColor: buttonColorOpa,
-            icon: Icon(
-              Icons.emoji_emotions_outlined,
-              size: 40,
-              color: Colors.white,
-            ),
-            colorText: Colors.white,
-            snackPosition: SnackPosition.TOP);
-      } else {
-        Get.snackbar('Sorry', 'There was a problem signing in',
-            borderRadius: 20,
-            margin: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-            backgroundColor: Colors.red,
-            icon: Icon(
-              Icons.report_problem_outlined,
-              size: 40,
-              color: Colors.white,
-            ),
-            colorText: Colors.white,
-            snackPosition: SnackPosition.TOP);
+      }
+      else{
+        Get.snackbar(
+          "عذراً","البريد الإلكتروني أو كلمة المرور غير صحيحة",
+          icon: Icon(
+            Icons.report_gmailerrorred,
+            size: 40,
+            // color: Colors.white,
+          ),
+          duration: Duration(seconds: 5),
+          snackPosition: SnackPosition.TOP,
+        );
       }
     }
     isLoading.value = false;
@@ -82,8 +63,8 @@ class LoginPageController extends GetxController {
     loginState = await service.login(user);
     var mapmsg = service.message;
     if (mapmsg is Map) {
-      // Handle map message
     } else if (mapmsg is String) {
+      isLoading.value = false;
       message = mapmsg;
     }
   }

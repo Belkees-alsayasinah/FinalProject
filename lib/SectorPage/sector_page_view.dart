@@ -2,15 +2,15 @@ import 'package:bloom_project/DetailsPage/details_page_view.dart';
 import 'package:bloom_project/SearchPage/search_page_view.dart';
 import 'package:bloom_project/SectorPage/sector_controller.dart';
 import 'package:bloom_project/Style/constant.dart';
+import 'package:bloom_project/settings_drawer/settings_drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 class SectorPageView extends StatelessWidget {
-  final String id; // Title of the article
-  final String title; // Description of the article
-  // SectorController controller = Get.put(SectorController());
+  final String id;
+  final String title;
 
   SectorPageView({
     Key? key,
@@ -50,93 +50,7 @@ class SectorPageView extends StatelessWidget {
           title: Text(title,
               style: TextStyle(
                   color: textColor, fontFamily: 'font1', fontSize: 34))),
-      endDrawer: Container(
-        width: 200,
-        child: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(),
-                child: Center(
-                  child: Text(
-                    'الإعدادات',
-                    style: TextStyle(
-                        fontSize: 35, color: textColor, fontFamily: 'font1'),
-                  ),
-                ),
-              ),
-              ListTile(
-                title: Row(
-                  textDirection: TextDirection.rtl,
-                  children: [
-                    Icon(
-                      Icons.brightness_4_outlined,
-                      color: black,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'الوضع الليلي',
-                      style: TextStyle(
-                          color: black, fontSize: 27, fontFamily: 'font1'),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  // اتخذ إجراء عند النقر على عنصر القائمة 1
-                },
-              ),
-              ListTile(
-                title: Row(
-                  textDirection: TextDirection.rtl,
-                  children: [
-                    Icon(
-                      Icons.language,
-                      color: black,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'تغيير اللغة',
-                      style: TextStyle(
-                          color: black, fontSize: 27, fontFamily: 'font1'),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  // اتخذ إجراء عند النقر على عنصر القائمة 2
-                },
-              ),
-              ListTile(
-                title: Row(
-                  textDirection: TextDirection.rtl,
-                  children: [
-                    Icon(
-                      Icons.logout,
-                      color: black,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'تسجيل الخروج',
-                      style: TextStyle(
-                          color: black, fontSize: 27, fontFamily: 'font1'),
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  // اتخذ إجراء عند النقر على عنصر القائمة 2
-                },
-              ),
-              // يمكنك إضافة المزيد من عناصر القائمة هنا
-            ],
-          ),
-        ),
-      ),
+      endDrawer: SettingsDrawer(),
       body: Padding(
         padding: const EdgeInsets.only(right: 10, top: 30, left: 10),
         child: GetBuilder<SectorController>(
@@ -179,6 +93,8 @@ class SectorPageView extends StatelessWidget {
                                     onTap: () {
                                       Get.to(DetailsPageView(
                                         id: controller.models[index].id,
+                                        userID: controller.models[index].userId
+                                            .toString(),
                                         title: controller.models[index].name,
                                         description: controller
                                             .models[index].description,
@@ -193,8 +109,8 @@ class SectorPageView extends StatelessWidget {
                                     child: Stack(
                                       children: [
                                         Container(
-                                          width: 386,
-                                          height: 167,
+                                          width: screenSize.width * 1,
+                                          height: screenSize.height * 0.2,
                                           decoration: BoxDecoration(
                                             color: buttonColor,
                                             borderRadius: BorderRadius.all(
@@ -247,9 +163,14 @@ class SectorPageView extends StatelessWidget {
                                                     controller
                                                         .models[index].name,
                                                     style: TextStyle(
-                                                        fontSize: 25,
+                                                        fontSize:
+                                                            screenSize.width *
+                                                                0.06,
                                                         fontFamily: 'font1',
                                                         color: black),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
                                                   ),
                                                   Row(
                                                     mainAxisAlignment:
@@ -257,19 +178,19 @@ class SectorPageView extends StatelessWidget {
                                                     textDirection:
                                                         TextDirection.rtl,
                                                     children: [
-                                                      Icon(
-                                                        Icons
-                                                            .location_on_outlined,
-                                                        color: black,
-                                                      ),
+                                                      Icon(Icons.location_on_outlined),
+                                                      SizedBox(width: 10,),
                                                       Text(
-                                                        controller.models[index]
-                                                            .location,
+                                                        "العنوان: ${controller.models[index].location}",
                                                         style: TextStyle(
-                                                            fontSize: 25,
+                                                            fontSize: screenSize
+                                                                    .width *
+                                                                0.04,
                                                             fontFamily: 'font1',
                                                             color: black),
-                                                      )
+                                                        textDirection:
+                                                            TextDirection.rtl,
+                                                      ),
                                                     ],
                                                   ),
                                                   SizedBox(
@@ -281,17 +202,14 @@ class SectorPageView extends StatelessWidget {
                                                     textDirection:
                                                         TextDirection.rtl,
                                                     children: [
-                                                      Icon(
-                                                        Icons
-                                                            .attach_money_rounded,
-                                                        color: Colors.grey[700],
-                                                      ),
+                                                      Icon(Icons.money),
+                                                      SizedBox(width: 10,),
                                                       Text(
-                                                        controller.models[index]
-                                                            .amount
-                                                            .toString(),
+                                                        "المبلغ المطلوب: ${controller.models[index].amount.toString()}",
                                                         style: TextStyle(
-                                                            fontSize: 20,
+                                                            fontSize: screenSize
+                                                                    .width *
+                                                                0.04,
                                                             fontFamily: 'font1',
                                                             color: Colors
                                                                 .grey[700]),

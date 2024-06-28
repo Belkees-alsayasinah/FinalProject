@@ -1,23 +1,29 @@
 import 'package:bloom_project/AddReport/add_report_view.dart';
+import 'package:bloom_project/Complaints/complaints_view.dart';
 import 'package:bloom_project/Reports/reports_view.dart';
-import 'package:bloom_project/Trasactions/transaction_details.dart';
-import 'package:bloom_project/project_tracking/pay_for_project_tracking_ui.dart';
+import 'package:bloom_project/Trasactions/GetTransaction/get_transaction_view.dart';
+import 'package:bloom_project/service/info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import '../AddComplaint/complaint_view.dart';
 import '../Style/constant.dart';
 import '../Trasactions/annual_transactions.dart';
 
 class MyListProject extends StatelessWidget {
-  const MyListProject(
-      {required this.title,
-      required this.address,
-      required this.function,
-      required this.onTap,
-      required this.id,
-      required this.investedProject,
-      required this.cost});
+  const MyListProject({
+    required this.title,
+    required this.address,
+    required this.function,
+    required this.onTap,
+    required this.id,
+    required this.investedProject,
+    required this.cost,
+    this.locationIcon,
+    this.moneyIcon,
+    this.userID,
+  });
 
   final Function() function;
   final String investedProject;
@@ -25,14 +31,18 @@ class MyListProject extends StatelessWidget {
   final String title;
   final String address;
   final String cost;
+  final IconData? locationIcon;
+  final IconData? moneyIcon;
+  final String? userID;
   final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
+    print("ddd: $investedProject");
     const style = TextStyle(
         color: black,
         fontWeight: FontWeight.bold,
-        fontSize: 26,
+        fontSize: 18,
         fontFamily: 'font1');
     final Size screenSize = MediaQuery.of(context).size;
     return InkWell(
@@ -40,8 +50,8 @@ class MyListProject extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            width: 386,
-            height: 167,
+            width: screenSize.width * 1,
+            height: screenSize.height * 0.2,
             decoration: BoxDecoration(
               color: buttonColor,
               borderRadius: BorderRadius.all(
@@ -88,51 +98,123 @@ class MyListProject extends StatelessWidget {
                       Text(
                         title,
                         style: TextStyle(
-                            fontSize: 25, fontFamily: 'font1', color: black),
+                            fontSize: screenSize.width * 0.06,
+                            fontFamily: 'font1',
+                            color: black),
                       ),
                       SizedBox(
-                        width: screenSize.width * 0.5,
+                        width: screenSize.width * 0.3,
                       ),
                       investedProject == '1'
-                          ? PopupMenuButton(
+                          ? UserInformation.type == 'inv'
+                              ? PopupMenuButton(
+                                  itemBuilder: (BuildContext context) {
+                                    return <PopupMenuEntry>[
+                                      PopupMenuItem(
+                                        child: Text(
+                                          'إضافة شكوى',
+                                          style: style,
+                                        ),
+                                        value: 'option1',
+                                      ),
+                                      PopupMenuItem(
+                                        child: Text(
+                                          'عرض تقارير المشروع',
+                                          style: style,
+                                        ),
+                                        value: 'option2',
+                                      ),
+                                      PopupMenuItem(
+                                        child: Text(
+                                          'عرض شكاوي المشروع',
+                                          style: style,
+                                        ),
+                                        value: 'option3',
+                                      ),
+                                    ];
+                                  },
+                                  onSelected: (value) {
+                                    if (value == 'option1') {
+                                      print('gg');
+                                      Get.to(ComplaintView(
+                                        id: id,
+                                      ));
+                                    } else if (value == 'option2') {
+                                      Get.to(ReportsView(
+                                          title: 'تقارير المشروع', id: id));
+                                      // Navigate to another page for option 3
+                                    } else if (value == 'option3') {
+                                      Get.to(ComplaintsView(
+                                          title: 'شكاوي المشروع', id: id));
+                                      // Navigate to another page for option 3
+                                    }
+                                  },
+                                )
+                              : PopupMenuButton(
+                                  itemBuilder: (BuildContext context) {
+                                    return <PopupMenuEntry>[
+                                      PopupMenuItem(
+                                        child: Text(
+                                          'المعاملات',
+                                          style: style,
+                                        ),
+                                        value: 'option1',
+                                      ),
+                                      PopupMenuItem(
+                                        child: Text(
+                                          'إضافة تقرير',
+                                          style: style,
+                                        ),
+                                        value: 'option2',
+                                      ),
+                                      PopupMenuItem(
+                                        child: Text(
+                                          'عرض تقارير المشروع',
+                                          style: style,
+                                        ),
+                                        value: 'option3',
+                                      ),
+                                      PopupMenuItem(
+                                        child: Text(
+                                          'عرض معاملات المشروع',
+                                          style: style,
+                                        ),
+                                        value: 'option4',
+                                      ),
+                                    ];
+                                  },
+                                  onSelected: (value) {
+                                    if (value == 'option1') {
+                                      Get.to(AnnualTransactions(id: id));
+                                    } else if (value == 'option2') {
+                                      Get.to(AddReportView(id: id));
+                                    } else if (value == 'option3') {
+                                      Get.to(ReportsView(
+                                          title: 'تقارير المشروع', id: id));
+                                    } else if (value == 'option4') {
+                                      Get.to(TransactionsView(
+                                          title: 'معاملات المشروع', id: id));
+                                    }
+                                  },
+                                )
+                          : PopupMenuButton(
                               itemBuilder: (BuildContext context) {
                                 return <PopupMenuEntry>[
                                   PopupMenuItem(
                                     child: Text(
-                                      'المعاملات',
+                                      'حذف المشروع',
                                       style: style,
                                     ),
                                     value: 'option1',
-                                  ),
-                                  PopupMenuItem(
-                                    child: Text(
-                                      'إضافة تقرير',
-                                      style: style,
-                                    ),
-                                    value: 'option2',
-                                  ),
-                                  PopupMenuItem(
-                                    child: Text(
-                                      'عرض تقارير المشروع',
-                                      style: style,
-                                    ),
-                                    value: 'option3',
                                   ),
                                 ];
                               },
                               onSelected: (value) {
                                 if (value == 'option1') {
-                                  Get.to(AnnualTransactions(id: id));
-                                } else if (value == 'option2') {
-                                  Get.to(AddReportView(id: id));
-                                } else if (value == 'option3') {
-                                  Get.to(ReportsView(
-                                      title: 'تقارير المشروع', id: id));
-                                  // Navigate to another page for option 3
+                                  print('gg');
                                 }
                               },
-                            )
-                          : SizedBox(),
+                            ),
                     ],
                   ),
                   Row(
@@ -140,13 +222,16 @@ class MyListProject extends StatelessWidget {
                     textDirection: TextDirection.rtl,
                     children: [
                       Icon(
-                        Icons.location_on_outlined,
+                        locationIcon,
                         color: black,
                       ),
+                      SizedBox(width: 10,),
                       Text(
                         address,
                         style: TextStyle(
-                            fontSize: 25, fontFamily: 'font1', color: black),
+                            fontSize: screenSize.width * 0.04,
+                            fontFamily: 'font1',
+                            color: black),
                       )
                     ],
                   ),
@@ -162,9 +247,10 @@ class MyListProject extends StatelessWidget {
                         textDirection: TextDirection.rtl,
                         children: [
                           Icon(
-                            Icons.attach_money_rounded,
+                            moneyIcon,
                             color: Colors.grey[700],
                           ),
+                          SizedBox(width: 10,),
                           Text(
                             cost,
                             style: TextStyle(

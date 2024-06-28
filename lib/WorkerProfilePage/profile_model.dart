@@ -10,22 +10,22 @@ class ProfileModel {
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
-    user: User.fromJson(json["user"]),
-    investedProjects: List<InvestedProjects>.from(
-        json["invested_projects"].map((x) => InvestedProjects.fromJson(x))),
-    // pendingProjects: List<PendingProject>.from(
-        //         json["pending_projects"].map((x) => PendingProject.fromJson(x))),
-
+        user: User.fromJson(json["user"]),
+        investedProjects: List<InvestedProjects>.from(
+            json["invested_projects"].map((x) => InvestedProjects.fromJson(x))),
         pendingProjects: List<PendingProject>.from(
-        json["pending_projects"].values.map((x) => PendingProject.fromJson(x))),
+            json["pending_projects"].map((x) => PendingProject.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-    "user": user.toJson(),
-    "invested_projects": List<dynamic>.from(investedProjects.map((x) => x.toJson())),
-    "pending_projects": List<dynamic>.from(pendingProjects.map((x) => x.toJson())),
-  };
+        "user": user.toJson(),
+        "invested_projects":
+            List<dynamic>.from(investedProjects.map((x) => x.toJson())),
+        "pending_projects":
+            List<dynamic>.from(pendingProjects.map((x) => x.toJson())),
+      };
 }
+
 class User {
   int id;
   String firstName;
@@ -62,46 +62,47 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    id: json["id"],
-    firstName: json["first_name"],
-    lastName: json["last_name"],
-    userType: json["user_type"],
-    email: json["email"],
-    verified: json["verified"],
-    otp: json["otp"],
-    phone: json["phone"],
-    location: json["location"],
-    iDCard: json["iD_card"],
-    personalPhoto: json["personal_photo"],
-    propertyDeed: json["property_deed"],
-    cleanRecord: json["clean_record"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
-  );
+        id: json["id"],
+        firstName: json["first_name"],
+        lastName: json["last_name"],
+        userType: json["user_type"],
+        email: json["email"],
+        verified: json["verified"],
+        otp: json["otp"],
+        phone: json["phone"],
+        location: json["location"],
+        iDCard: json["iD_card"] ?? '',
+        personalPhoto: json["personal_photo"] ?? '',
+        propertyDeed: json["property_deed"] ?? '',
+        cleanRecord: json["clean_record"] ?? '',
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "first_name": firstName,
-    "last_name": lastName,
-    "user_type": userType,
-    "email": email,
-    "verified": verified,
-    "otp": otp,
-    "phone": phone,
-    "location": location,
-    "iD_card": iDCard,
-    "personal_photo": personalPhoto,
-    "property_deed": propertyDeed,
-    "clean_record": cleanRecord,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
-  };
+        "id": id,
+        "first_name": firstName,
+        "last_name": lastName,
+        "user_type": userType,
+        "email": email,
+        "verified": verified,
+        "otp": otp,
+        "phone": phone,
+        "location": location,
+        "iD_card": iDCard,
+        "personal_photo": personalPhoto,
+        "property_deed": propertyDeed,
+        "clean_record": cleanRecord,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
 }
+
 class PendingProject {
   int id;
   String name;
   String description;
-  String feasibilityStudy;
+
   int amount;
   String location;
   int investmentStatus;
@@ -116,7 +117,6 @@ class PendingProject {
     required this.id,
     required this.name,
     required this.description,
-    required this.feasibilityStudy,
     required this.amount,
     required this.location,
     required this.investmentStatus,
@@ -132,7 +132,6 @@ class PendingProject {
         id: json["id"],
         name: json["name"],
         description: json["description"],
-        feasibilityStudy: json["feasibility_study"],
         amount: json["amount"],
         location: json["location"],
         investmentStatus: json["investment_status"],
@@ -148,7 +147,6 @@ class PendingProject {
         "id": id,
         "name": name,
         "description": description,
-        "feasibility_study": feasibilityStudy,
         "amount": amount,
         "location": location,
         "investment_status": investmentStatus,
@@ -165,7 +163,7 @@ class InvestedProjects {
   int id;
   String name;
   String description;
-  String feasibilityStudy;
+
   int amount;
   String location;
   int investmentStatus;
@@ -180,7 +178,6 @@ class InvestedProjects {
     required this.id,
     required this.name,
     required this.description,
-    required this.feasibilityStudy,
     required this.amount,
     required this.location,
     required this.investmentStatus,
@@ -197,7 +194,6 @@ class InvestedProjects {
         id: json["id"],
         name: json["name"],
         description: json["description"],
-        feasibilityStudy: json["feasibility_study"],
         amount: json["amount"],
         location: json["location"],
         investmentStatus: json["investment_status"],
@@ -213,7 +209,6 @@ class InvestedProjects {
         "id": id,
         "name": name,
         "description": description,
-        "feasibility_study": feasibilityStudy,
         "amount": amount,
         "location": location,
         "investment_status": investmentStatus,

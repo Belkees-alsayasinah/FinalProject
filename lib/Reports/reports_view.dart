@@ -21,6 +21,7 @@ class ReportsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("id: $id");
     final Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -116,8 +117,8 @@ class ReportsView extends StatelessWidget {
                                     child: Stack(
                                       children: [
                                         Container(
-                                          width: 386,
-                                          height: 167,
+                                          width: screenSize.width * 1,
+                                          height: screenSize.height * 0.2,
                                           decoration: BoxDecoration(
                                             color: buttonColor,
                                             borderRadius: BorderRadius.all(
@@ -163,59 +164,44 @@ class ReportsView extends StatelessWidget {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    controller.models[index]
-                                                        .achievedGoalsSummary,
+                                                    "ملخص الأهداف التي تم تحقيقها: ${controller.models[index].achievedGoalsSummary}",
                                                     style: TextStyle(
-                                                        fontSize: 25,
+                                                        fontSize:
+                                                            screenSize.width *
+                                                                0.05,
                                                         fontFamily: 'font1',
                                                         color: black),
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
                                                     textDirection:
                                                         TextDirection.rtl,
-                                                    children: [
-                                                      Icon(
-                                                        Icons
-                                                            .location_on_outlined,
-                                                        color: black,
-                                                      ),
-                                                      Text(
-                                                        controller.models[index]
-                                                            .unachievedGoalsSummary,
-                                                        style: TextStyle(
-                                                            fontSize: 25,
-                                                            fontFamily: 'font1',
-                                                            color: black),
-                                                      )
-                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 7,
+                                                  ),
+                                                  Text(
+                                                    "ملخص الأهداف التي لم تتحقق: ${controller.models[index].unachievedGoalsSummary}",
+                                                    style: TextStyle(
+                                                        fontSize:
+                                                            screenSize.width *
+                                                                0.05,
+                                                        fontFamily: 'font1',
+                                                        color: black),
+                                                    textDirection:
+                                                        TextDirection.rtl,
                                                   ),
                                                   SizedBox(
                                                     height: 20,
                                                   ),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
+                                                  Text(
+                                                    "صافي الربح: ${controller.models[index].overallNetProfit.toString()}",
+                                                    style: TextStyle(
+                                                        fontSize:
+                                                            screenSize.width *
+                                                                0.05,
+                                                        fontFamily: 'font1',
+                                                        color:
+                                                            Colors.grey[700]),
                                                     textDirection:
                                                         TextDirection.rtl,
-                                                    children: [
-                                                      Icon(
-                                                        Icons
-                                                            .attach_money_rounded,
-                                                        color: Colors.grey[700],
-                                                      ),
-                                                      Text(
-                                                        controller.models[index]
-                                                            .overallNetProfit
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontFamily: 'font1',
-                                                            color: Colors
-                                                                .grey[700]),
-                                                      )
-                                                    ],
                                                   ),
                                                 ],
                                               )),

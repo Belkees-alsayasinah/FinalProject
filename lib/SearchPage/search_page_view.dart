@@ -72,7 +72,7 @@ class _SearchPageViewState extends State<SearchPageView> {
                       ),
                       onSelected: _handleFilterOption,
                       itemBuilder: (BuildContext context) =>
-                      <PopupMenuEntry<String>>[
+                          <PopupMenuEntry<String>>[
                         PopupMenuItem<String>(
                           value: 'price',
                           child: Text('البحث حسب السعر'),
@@ -91,12 +91,14 @@ class _SearchPageViewState extends State<SearchPageView> {
                       ),
                       onPressed: () {
                         setState(() {
-                          isSearching = true; // تحديث حالة البحث عند النقر على زر البحث
+                          isSearching =
+                              true; // تحديث حالة البحث عند النقر على زر البحث
                         });
                         String searchText = widget.priceController.text;
                         controller.getdata(searchText).then((_) {
                           setState(() {
-                            isSearching = false; // تحديث حالة البحث بعد انتهاء البحث
+                            isSearching =
+                                false; // تحديث حالة البحث بعد انتهاء البحث
                           });
                         });
                       },
@@ -136,10 +138,13 @@ class _SearchPageViewState extends State<SearchPageView> {
                               Get.to(DetailsPageView(
                                 id: controller.models[index].id,
                                 title: controller.models[index].name,
-                                description: controller.models[index].description,
+                                description:
+                                    controller.models[index].description,
                                 address: controller.models[index].location,
                                 cost: controller.models[index].amount,
-                                investment_status: controller.models[index].investmentStatus.toString(),
+                                investment_status: controller
+                                    .models[index].investmentStatus
+                                    .toString(),
                               ));
                             },
                             child: Stack(
@@ -184,7 +189,8 @@ class _SearchPageViewState extends State<SearchPageView> {
                                     padding: EdgeInsets.all(10.0),
                                     child: Column(
                                       textDirection: TextDirection.rtl,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           controller.models[index].name,
@@ -194,18 +200,26 @@ class _SearchPageViewState extends State<SearchPageView> {
                                             color: black,
                                           ),
                                         ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           textDirection: TextDirection.rtl,
                                           children: [
                                             Icon(
                                               Icons.location_on_outlined,
                                               color: black,
                                             ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
                                             Text(
                                               controller.models[index].location,
                                               style: TextStyle(
-                                                fontSize: 25,
+                                                fontSize:
+                                                    screenSize.width * 0.04,
                                                 fontFamily: 'font1',
                                                 color: black,
                                               ),
@@ -214,17 +228,23 @@ class _SearchPageViewState extends State<SearchPageView> {
                                         ),
                                         SizedBox(height: 20),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           textDirection: TextDirection.rtl,
                                           children: [
                                             Icon(
-                                              Icons.attach_money_rounded,
+                                              Icons.money,
                                               color: Colors.grey[700],
                                             ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
                                             Text(
-                                              controller.models[index].amount.toString(),
+                                              controller.models[index].amount
+                                                  .toString(),
                                               style: TextStyle(
-                                                fontSize: 20,
+                                                fontSize:
+                                                    screenSize.width * 0.04,
                                                 fontFamily: 'font1',
                                                 color: Colors.grey[700],
                                               ),

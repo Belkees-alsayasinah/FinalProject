@@ -14,6 +14,8 @@ class VerifyOTPView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Padding(
         padding:
@@ -67,8 +69,8 @@ class VerifyOTPView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    hieght: screenSize.height * 0.08,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -100,8 +102,8 @@ class VerifyOTPView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    hieght: screenSize.height * 0.08,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -122,8 +124,8 @@ class VerifyOTPView extends StatelessWidget {
                         controller.onClick();
                       }
                     },
-                    width: 348,
-                    height: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.08,
                     text: 'التحقق',
                     color: buttonColor,
                     radius: 15,

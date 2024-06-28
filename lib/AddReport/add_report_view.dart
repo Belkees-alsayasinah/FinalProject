@@ -456,6 +456,7 @@ class AddReportView extends StatelessWidget {
                     fontSize: 34,
                     onsave: () {
                       controller.onClickAddReport(id);
+                      controller.addReportState ? Navigator.pop(context) : null;
                     },
                     width: 348,
                     height: 62,

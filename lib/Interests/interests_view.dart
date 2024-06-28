@@ -37,6 +37,16 @@ class _InterestsViewState extends State<InterestsView> {
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: textColor),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: Padding(
         padding:
             const EdgeInsets.only(top: 70, bottom: 30, left: 30, right: 30),
@@ -58,8 +68,17 @@ class _InterestsViewState extends State<InterestsView> {
                 SizedBox(
                   height: 40,
                 ),
-                Text(
+                UserInformation.type == 'inv'? Text(
                   'اختر اهتماماتك بعناية، ستظهر لك المواضيع التي اخترتها في مقدّمة المشاريع لتسهّل عليك عملية البحث.',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontFamily: 'font1',
+                    color: grey,
+                  ),
+                  textDirection: TextDirection.rtl,
+                ): Text(
+                  'قم بتحديد المواضيع التي ينتمي لها مشروعك لتساعد المستثمرين في الوصول اليه.',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,

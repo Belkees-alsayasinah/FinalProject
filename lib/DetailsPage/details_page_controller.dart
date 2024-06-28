@@ -7,21 +7,13 @@ import '../service/info.dart';
 import 'package:http/http.dart' as http;
 
 class DetailsPageController extends GetxController {
-
-  late Rx<File?> personal_photo = Rx<File?>(null);
-  late Rx<File?> idPhoto = Rx<File?>(null);
-  late String message;
-  late bool loginState;
-  late RxBool isLoading;
-  late String fileName;
-  late String fileName1;
-  late Rx<File?> selectedFile = Rx<File?>(null);
+  var personalPhoto = Rx<File?>(null);
+  var idPhoto = Rx<File?>(null);
+  var buttonText = 'تواصل'.obs;
+  var isLoading = false.obs;
 
   @override
   void onInit() {
-    message = '';
-    loginState = false;
-    isLoading = false.obs;
     super.onInit();
   }
 
@@ -29,12 +21,11 @@ class DetailsPageController extends GetxController {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.any,
-        allowMultiple: false, // Change to false to ensure single file selection
+        allowMultiple: false,
       );
       if (result != null) {
         File file = File(result.files.single.path ?? "");
         _onFileSelected(file, field);
-        update();
       }
     } catch (e) {
       print(e);
@@ -44,11 +35,9 @@ class DetailsPageController extends GetxController {
   void _onFileSelected(File file, String field) {
     switch (field) {
       case 'personal_photo':
-        fileName1 = file.path.split(r'/').last;
-        personal_photo.value = file;
+        personalPhoto.value = file;
         break;
       case 'idPhoto':
-        fileName = file.path.split(r'/').last;
         idPhoto.value = file;
         break;
       default:
@@ -56,45 +45,43 @@ class DetailsPageController extends GetxController {
     }
   }
 
-  var uploaded = false;
-
   Future<void> uploadPhotos(int id) async {
     var headers = {'Authorization': 'Bearer ${UserInformation.user_token}'};
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse(ServerConfig.domainNameServer + ServerConfig().communicationRequest + '$id'),
+      Uri.parse(ServerConfig.domainNameServer +
+          ServerConfig().communicationRequest +
+          '$id'),
     );
-    if (personal_photo.value != null &&
-        personal_photo.value!.lengthSync() > 0) {
-      request.files.add(
-        await http.MultipartFile.fromBytes(
-          'personal_photo',
-          Uint8List.fromList(personal_photo.value!.readAsBytesSync()),
-          filename: fileName1,
-        ),
-      );
+    print("id: $id");
+    print(personalPhoto.value);
+    print(idPhoto.value);
+    if (personalPhoto.value != null && personalPhoto.value!.lengthSync() > 0) {
+      request.files.add(await http.MultipartFile.fromBytes(
+        'personal_photo',
+        Uint8List.fromList(personalPhoto.value!.readAsBytesSync()),
+        filename: personalPhoto.value!.path.split('/').last,
+      ));
     }
     if (idPhoto.value != null && idPhoto.value!.lengthSync() > 0) {
-      request.files.add(
-        await http.MultipartFile.fromBytes(
-          'iD_card',
-          Uint8List.fromList(idPhoto.value!.readAsBytesSync()),
-          filename: fileName,
-        ),
-      );
+      request.files.add(await http.MultipartFile.fromBytes(
+        'iD_card',
+        Uint8List.fromList(idPhoto.value!.readAsBytesSync()),
+        filename: idPhoto.value!.path.split('/').last,
+      ));
     }
 
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200 || response.statusCode == 201) {
-      uploaded = true;
-      selectedFile.value = null;
+      buttonText.value = 'قيد المعالجة';
+
+
       Get.back();
     } else {
-      print(response.reasonPhrase);
-      print(response.statusCode);
-      print('error');
+      print('Error: ${response.reasonPhrase}');
+      print('Status Code: ${response.statusCode}');
     }
   }
 }

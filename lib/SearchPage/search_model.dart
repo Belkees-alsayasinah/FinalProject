@@ -8,7 +8,6 @@ class SearchModel {
   int id;
   String name;
   String description;
-  String feasibilityStudy;
   int amount;
   String location;
   int investmentStatus;
@@ -22,7 +21,6 @@ class SearchModel {
     required this.id,
     required this.name,
     required this.description,
-    required this.feasibilityStudy,
     required this.amount,
     required this.location,
     required this.investmentStatus,
@@ -38,7 +36,6 @@ class SearchModel {
     id: json["id"],
     name: json["name"],
     description: json["description"],
-    feasibilityStudy: json["feasibility_study"],
     amount: json["amount"],
     location: json["location"],
     investmentStatus: json["investment_status"],
@@ -54,7 +51,6 @@ class SearchModel {
     "id": id,
     "name": name,
     "description": description,
-    "feasibility_study": feasibilityStudy,
     "amount": amount,
     "location": location,
     "investment_status": investmentStatus,

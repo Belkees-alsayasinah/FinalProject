@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,11 +11,24 @@ class EditProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
-   // EditProfileController controller = Get.put(EditProfileController());
+    // EditProfileController controller = Get.put(EditProfileController());
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(
+                Icons.arrow_forward_ios,
+                size: screenSize.width * 0.1,
+                color: textColor,
+              )),
+        ],
+      ),
       body: Padding(
         padding:
-        const EdgeInsets.only(top: 70, bottom: 30, left: 20, right: 20),
+            const EdgeInsets.only(top: 30, bottom: 30, left: 20, right: 20),
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Center(
@@ -176,7 +188,9 @@ class EditProfilePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 25,),
+                SizedBox(
+                  height: 25,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   textDirection: TextDirection.ltr,
@@ -203,14 +217,15 @@ class EditProfilePage extends StatelessWidget {
                   ],
                 ),
                 SizedBox(width: screenSize.width * 0.04),
-                SizedBox(height: 25,),
+                SizedBox(
+                  height: 25,
+                ),
                 SizedBox(
                   height: 50,
                 ),
                 MyButton(
                   fontSize: 34,
-                  onsave: () {
-                  },
+                  onsave: () {},
                   width: 348,
                   height: 62,
                   text: 'تعديل الحساب',

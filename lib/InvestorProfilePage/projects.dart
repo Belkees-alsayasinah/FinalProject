@@ -1,14 +1,19 @@
 import 'package:bloom_project/Components/MyListProject.dart';
 import 'package:bloom_project/DetailsPage/details_page_view.dart';
-import 'package:bloom_project/ProfilePage/profile_controller.dart';
+import 'package:bloom_project/InvestorProfilePage/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import '../Style/constant.dart';
 
-class ProfilePage extends StatelessWidget {
-  ProfilePageController controller = Get.put(ProfilePageController());
+class Projects extends StatelessWidget {
+  String userID;
+
+  Projects({required this.userID});
+
+  InvestorProfilePageController controller =
+      Get.put(InvestorProfilePageController());
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +24,8 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.all(10.0),
-      child: GetBuilder<ProfilePageController>(
-          init: ProfilePageController(),
+      child: GetBuilder<InvestorProfilePageController>(
+          init: InvestorProfilePageController(),
           builder: (controller) {
             return controller.isLoad.value
                 ? Center(
@@ -45,7 +50,7 @@ class ProfilePage extends StatelessWidget {
                         physics: BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           final pendingProject =
-                              controller.models[0].pendingProjects[index];
+                              controller.models[0].projects[index];
                           return FutureBuilder(
                               future: null,
                               builder: (context, snapshot) {
@@ -61,7 +66,12 @@ class ProfilePage extends StatelessWidget {
                                   return Text('Error ${snapshot.error}');
                                 } else {
                                   return MyListProject(
-                                    investedProject: pendingProject.investmentStatus.toString(),
+                                    locationIcon: Icons.location_on_outlined,
+                                      moneyIcon: Icons.money,
+                                      userID: userID,
+                                      investedProject: pendingProject
+                                          .investmentStatus
+                                          .toString(),
                                       id: pendingProject.id.toString(),
                                       address: pendingProject.location,
                                       title: pendingProject.name,
@@ -70,27 +80,22 @@ class ProfilePage extends StatelessWidget {
                                       onTap: () {
                                         Get.to(
                                           DetailsPageView(
-                                              id: controller.models[0]
-                                                  .pendingProjects[index].id,
-                                              title: controller.models[0]
-                                                  .pendingProjects[index].name,
-                                              description: controller
-                                                  .models[0]
-                                                  .pendingProjects[index]
-                                                  .description,
-                                              investment_status: controller
-                                                  .models[0]
-                                                  .pendingProjects[index]
-                                                  .investmentStatus
-                                                  .toString(),
-                                              address: controller
-                                                  .models[0]
-                                                  .pendingProjects[index]
-                                                  .location,
-                                              cost: controller
-                                                  .models[0]
-                                                  .pendingProjects[index]
-                                                  .amount),
+                                            id: controller
+                                                .models[0].projects[index].id,
+                                            title: controller
+                                                .models[0].projects[index].name,
+                                            description: controller.models[0]
+                                                .projects[index].description,
+                                            investment_status: controller
+                                                .models[0]
+                                                .projects[index]
+                                                .investmentStatus
+                                                .toString(),
+                                            address: controller.models[0]
+                                                .projects[index].location,
+                                            cost: controller.models[0]
+                                                .projects[index].amount,
+                                          ),
                                         );
                                       });
                                 }
@@ -99,7 +104,7 @@ class ProfilePage extends StatelessWidget {
                         separatorBuilder: (context, index) => SizedBox(
                           height: 20,
                         ),
-                        itemCount: controller.models[0].pendingProjects
+                        itemCount: controller.models[0].projects
                             .length, // Replace with actual project count
                       );
           }),

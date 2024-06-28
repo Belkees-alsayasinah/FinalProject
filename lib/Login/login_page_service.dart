@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import '../../service/info.dart';
 import '../../service/store.dart';
 import '../Config/server_config.dart';
-import '../Notifications/notification_controller.dart';
 import '../Notifications/firebase_notification.dart';
 import 'login_page_model.dart';
 
@@ -16,11 +15,8 @@ class LoginPageService {
   Future<bool> login(LoginPageModel model) async {
     StoreInfo info = StoreInfo();
     await info.save("isLogin", "false");
+    FirebaseNotification firebaseNotification = FirebaseNotification();
 
-    // Initialize FirebaseNotification class
-    FirebaseNotification firebaseNotification = FirebaseNotification(NotificationController());
-
-    // Initialize Firebase messaging and get the device token
     await firebaseNotification.initNotification();
     String? deviceToken = await FirebaseMessaging.instance.getToken();
     print("deviceToken: $deviceToken");
@@ -42,6 +38,8 @@ class LoginPageService {
     if (response.statusCode == 200 || response.statusCode == 201) {
       var r = jsonDecode(response.body);
       token = r['token'];
+      UserInformation.profileType = r['id'];
+      print(r['id']);
       UserInformation.user_token = token;
       UserInformation.usertype = r['user_type'];
       StoreInfo info = StoreInfo();

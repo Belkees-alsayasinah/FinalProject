@@ -1,5 +1,6 @@
 import 'package:bloom_project/Style/constant.dart';
 import 'package:bloom_project/Trasactions/transactionController.dart';
+import 'package:bloom_project/Trasactions/upload_photo_for_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -27,6 +28,7 @@ class TransactionDetails extends StatelessWidget {
 
   @override
   build(BuildContext context) {
+    print("tans: $id");
     final Size screenSize = MediaQuery.of(context).size;
     return MyDetailsPage(
       appTitle: 'تفاصيل المعاملة',
@@ -153,8 +155,8 @@ class TransactionDetails extends StatelessWidget {
                   child: Column(
                     children: [
                       MyLabelText(text: 'اشعار الدفع:'),
-                      GetBuilder<TransactionController>(
-                          init: TransactionController(id),
+                      GetBuilder<UploadPhotoTransactionController>(
+                          init: UploadPhotoTransactionController(id),
                           builder: (controller) {
                             return MyButton(
                                 onsave: () {
@@ -172,8 +174,8 @@ class TransactionDetails extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: GetBuilder<TransactionController>(
-                      init: TransactionController(id),
+                  child: GetBuilder<UploadPhotoTransactionController>(
+                      init: UploadPhotoTransactionController(id),
                       builder: (controller) {
                         return controller.image.value == null
                             ? CircleAvatar(
@@ -211,8 +213,8 @@ class TransactionDetails extends StatelessWidget {
                 fontSize: 30),
           ),
         ),
-        GetBuilder<TransactionController>(
-            init: TransactionController(id),
+        GetBuilder<UploadPhotoTransactionController>(
+            init: UploadPhotoTransactionController(id),
             builder: (controller) {
               return TextButton(
                 onPressed: () {

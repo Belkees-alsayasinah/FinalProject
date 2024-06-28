@@ -14,7 +14,7 @@ class ReportService {
     var response = await http.get(
       Uri.parse(ServerConfig.domainNameServer +
           ServerConfig().getMyReports +
-          '$id/reports'),
+          '$id'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
@@ -24,8 +24,8 @@ class ReportService {
     if (response.statusCode == 200) {
       var r = await json.decode((response.body));
       Map<String, dynamic> s = r;
-      List<dynamic> sectorProjects = s['data'];
-      for (var i in sectorProjects) {
+      List<dynamic> reports = s['data'];
+      for (var i in reports) {
         model.add(ReportsModel.fromJson(i));
 
       }

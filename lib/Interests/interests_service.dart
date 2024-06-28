@@ -42,8 +42,6 @@ class InterestService {
     Map<String, List<int>> requestBody = {
       'interests': fileIds,
     };
-    print(jsonEncode(requestBody));
-    print(token);
     final response = await http.post(
       Uri.parse(ServerConfig.domainNameServer + ServerConfig().addInterestInv),
       body: json.encode(requestBody),
@@ -52,7 +50,8 @@ class InterestService {
         'Accept': 'application/json',
       },
     );
-
+    print(response.statusCode);
+    print(token);
     if (response.statusCode == 200) {
       print('interested saved successfully');
       final responseBody = json.decode(response.body);

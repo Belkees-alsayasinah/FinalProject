@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:bloom_project/RegisterPage/register_model.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
-
 import '../../service/info.dart';
 import '../../service/store.dart';
 import '../Config/server_config.dart';
@@ -20,12 +19,14 @@ class RegisterService {
     StoreInfo info = StoreInfo();
     await info.save("isLogin", "false");
     // Initialize FirebaseNotification class
-    FirebaseNotification firebaseNotification = FirebaseNotification(NotificationController());
+    FirebaseNotification firebaseNotification =
+        FirebaseNotification();
 
     // Initialize Firebase messaging and get the device token
     await firebaseNotification.initNotification();
     String? deviceToken = await FirebaseMessaging.instance.getToken();
     print("deviceToken: $deviceToken");
+    print("type: ${UserInformation.usertype}");
     var response = await http.post(
         Uri.parse(
           UserInformation.type == 'inv'
@@ -42,9 +43,11 @@ class RegisterService {
           "device_token": deviceToken ?? '',
         });
     print(response.statusCode);
+    print(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print('succ');
       var r = jsonDecode(response.body);
+      UserInformation.profileType = r['user']['id'];
+
       return true;
     } else if (response.statusCode == 404) {
       message = "somthings wrong!";

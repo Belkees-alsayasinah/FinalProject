@@ -3,6 +3,7 @@ import 'package:bloom_project/Components/MyButton.dart';
 import 'package:bloom_project/Components/MylabelText.dart';
 import 'package:bloom_project/HomePage/home_page_controller.dart';
 import 'package:bloom_project/Interests/interests_view.dart';
+import 'package:bloom_project/WorkerProfilePage/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -12,6 +13,7 @@ import '../Style/constant.dart';
 class AddProject extends StatelessWidget {
   AddProjectController controller = Get.put(AddProjectController());
   HomePageController homePageController = Get.put(HomePageController());
+  final ProfilePageController profilePageController = Get.find();
   bool isSelected = false;
 
   @override
@@ -79,7 +81,7 @@ class AddProject extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     textDirection: TextDirection.ltr,
                     children: [
-                      MyLabelText(text: 'نوع الحساب:'),
+                      MyLabelText(text: 'نوع المشروع:'),
                       Container(
                         width: screenSize.width * 1,
                         height: 62,
@@ -176,43 +178,6 @@ class AddProject extends StatelessWidget {
                     height: 25,
                   ),
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    textDirection: TextDirection.rtl,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            MyLabelText(text: 'دراسة الجدوى:'),
-                            MyButton(
-                                onsave: () {
-                                  controller.pickPdf('feasibilityStudy');
-                                },
-                                width: screenSize.width * 0.3,
-                                height: 62,
-                                text: 'تحديد',
-                                color: Colors.white,
-                                textColor: black,
-                                radius: 15,
-                                fontSize: 20)
-                          ],
-                        ),
-                      ),
-                      //SizedBox(width: 40,),
-                      Expanded(child: Obx(() {
-                        return controller.feasibilityStudy.value == null
-                            ? Icon(Icons.file_copy)
-                            : Text(
-                                controller.fileName1,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              );
-                      })),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     textDirection: TextDirection.rtl,
                     children: [
@@ -237,21 +202,25 @@ class AddProject extends StatelessWidget {
                       //SizedBox(width: 40,),
                       Expanded(child: Obx(() {
                         return controller.idPhoto.value == null
-                            ? CircleAvatar(
-                                backgroundColor: Colors.grey,
-                                radius: 50,
-                                child: Icon(Icons.image),
-                              )
+                            ? profilePageController.models[0].user.iDCard ==
+                                    null
+                                ? CircleAvatar(
+                                    backgroundColor: Colors.grey,
+                                    radius: 50,
+                                    child: Icon(Icons.image),
+                                  )
+                                : CircleAvatar(
+                                    backgroundColor: Colors.grey,
+                                    radius: 50,
+                                    backgroundImage: NetworkImage(
+                                        profilePageController
+                                            .models[0].user.iDCard))
                             : CircleAvatar(
                                 backgroundColor: Colors.grey,
                                 radius: 50,
                                 backgroundImage:
-                                    controller.idPhoto.value != null
-                                        ? FileImage(controller.idPhoto.value!)
-                                            as ImageProvider<Object>?
-                                        : AssetImage('assets/images/s1.jpg')
-                                            as ImageProvider<Object>?,
-                              );
+                                    FileImage(controller.idPhoto.value!)
+                                        as ImageProvider<Object>?);
                       })),
                     ],
                   ),
@@ -283,11 +252,20 @@ class AddProject extends StatelessWidget {
                       //SizedBox(width: 40,),
                       Expanded(child: Obx(() {
                         return controller.contract.value == null
-                            ? CircleAvatar(
-                                backgroundColor: Colors.grey,
-                                radius: 50,
-                                child: Icon(Icons.image),
-                              )
+                            ? profilePageController
+                                        .models[0].user.propertyDeed ==
+                                    null
+                                ? CircleAvatar(
+                                    backgroundColor: Colors.grey,
+                                    radius: 50,
+                                    child: Icon(Icons.image),
+                                  )
+                                : CircleAvatar(
+                                    backgroundColor: Colors.grey,
+                                    radius: 50,
+                                    backgroundImage: NetworkImage(
+                                        profilePageController
+                                            .models[0].user.propertyDeed))
                             : CircleAvatar(
                                 backgroundColor: Colors.grey,
                                 radius: 50,
@@ -329,11 +307,20 @@ class AddProject extends StatelessWidget {
                       //SizedBox(width: 40,),
                       Expanded(child: Obx(() {
                         return controller.personalPhoto.value == null
-                            ? CircleAvatar(
-                                backgroundColor: Colors.grey,
-                                radius: 50,
-                                child: Icon(Icons.image),
-                              )
+                            ? profilePageController
+                                        .models[0].user.personalPhoto ==
+                                    null
+                                ? CircleAvatar(
+                                    backgroundColor: Colors.grey,
+                                    radius: 50,
+                                    child: Icon(Icons.image),
+                                  )
+                                : CircleAvatar(
+                                    backgroundColor: Colors.grey,
+                                    radius: 50,
+                                    backgroundImage: NetworkImage(
+                                        profilePageController
+                                            .models[0].user.personalPhoto))
                             : CircleAvatar(
                                 backgroundColor: Colors.grey,
                                 radius: 50,
@@ -376,11 +363,20 @@ class AddProject extends StatelessWidget {
                       //SizedBox(width: 40,),
                       Expanded(child: Obx(() {
                         return controller.notRule.value == null
-                            ? CircleAvatar(
-                                backgroundColor: Colors.grey,
-                                radius: 50,
-                                child: Icon(Icons.image),
-                              )
+                            ? profilePageController
+                                        .models[0].user.cleanRecord ==
+                                    null
+                                ? CircleAvatar(
+                                    backgroundColor: Colors.grey,
+                                    radius: 50,
+                                    child: Icon(Icons.image),
+                                  )
+                                : CircleAvatar(
+                                    backgroundColor: Colors.grey,
+                                    radius: 50,
+                                    backgroundImage: NetworkImage(
+                                        profilePageController
+                                            .models[0].user.cleanRecord))
                             : CircleAvatar(
                                 backgroundColor: Colors.grey,
                                 radius: 50,
@@ -404,7 +400,7 @@ class AddProject extends StatelessWidget {
                     },
                     width: 348,
                     height: 62,
-                    text: 'إرسال التقرير',
+                    text: 'إضافة المشروع',
                     color: buttonColor,
                     radius: 15,
                     textColor: Colors.white,

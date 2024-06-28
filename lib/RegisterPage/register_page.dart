@@ -260,70 +260,8 @@ class RegisterPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(width: screenSize.width * 0.04),
-                  SizedBox(height: 25,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    textDirection: TextDirection.ltr,
-                    children: [
-                      Text(
-                        ':نوع الحساب',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: screenSize.shortestSide * 0.06,
-                          fontFamily: 'font1',
-                        ),
-                      ),
-                      Container(
-                        width: screenSize.width * 1,
-                        height: 62,
+                  // SizedBox(width: screenSize.width * 0.04),
 
-                        decoration: BoxDecoration(
-                            color: fieldColor,
-                            borderRadius: BorderRadius.circular(15)
-                        ),
-                       // margin: EdgeInsets.symmetric(horizontal: 20),
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Obx(() => SingleChildScrollView(
-                          child: DropdownButtonFormField<String>(
-                            value: controller.accountType.value,
-                            onChanged: (value) {
-                              controller.accountType.value = value!;
-                            },
-                            decoration: InputDecoration(
-
-                              contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey.withOpacity(0.1),
-                                style: BorderStyle.none,
-                                ), // تحديد لون الخط
-                              ),
-                            ),
-                            style: TextStyle(
-                              fontFamily: 'font1', // تعديل نوع الخط هنا
-                              fontSize: 25, // تعديل حجم الخط هنا
-                              fontWeight: FontWeight.normal, // تعديل سماكة الخط هنا
-                              color: Colors.black, // تعديل لون الخط هنا
-                            ),
-                            dropdownColor: fieldColor,
-                            focusColor: fieldColor,
-                            isExpanded: false,
-                            items: [
-                              DropdownMenuItem(
-                                value: 'عامل',
-                                child: Text('صاحب عمل'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'مستثمر',
-                                child: Text('مستثمر'),
-                              ),
-                            ],
-                          ),
-                        )),
-                      ),
-                    ],
-                  ),
                   SizedBox(
                     height: 50,
                   ),

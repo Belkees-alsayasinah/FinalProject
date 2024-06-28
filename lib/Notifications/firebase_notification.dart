@@ -6,9 +6,9 @@ import 'package:get/get.dart';
 
 class FirebaseNotification {
   final _firebaseMessaging = FirebaseMessaging.instance;
-  final NotificationController notificationController;
-
-  FirebaseNotification(this.notificationController);
+  // final NotificationController notificationController;
+  //
+  // FirebaseNotification(this.notificationController);
 
   Future<void> initNotification() async {
     await _firebaseMessaging.requestPermission();
@@ -20,7 +20,7 @@ class FirebaseNotification {
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       if (message.notification != null) {
-        notificationController.addNotification(message);
+        // notificationController.addNotification(message);
         Get.snackbar(
           message.notification!.title ?? 'Notification',
           message.notification!.body ?? 'You have a new notification',
@@ -38,7 +38,7 @@ class FirebaseNotification {
 
   void handleMessaging(RemoteMessage? message) {
     if (message == null) return;
-    notificationController.addNotification(message);
+    // notificationController.addNotification(message);
     if (message.notification != null) {
       Get.snackbar(
         message.notification!.title ?? 'Notification',

@@ -1,15 +1,15 @@
-import 'package:bloom_project/ProfilePage/invested_projects.dart';
-import 'package:bloom_project/ProfilePage/profile_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';  // استيراد حزمة flutter
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../Add_Project/add_project_ui.dart';
 import '../EditProfile/edit_profilePage.dart';
-import '../ProfilePage/pending_project.dart';
 import '../Style/constant.dart';
+import '../WorkerProfilePage/invested_projects.dart';
+import '../WorkerProfilePage/pending_project.dart';
+import '../WorkerProfilePage/profile_controller.dart';
 
 class MyTabBar extends StatefulWidget {
   @override
@@ -23,7 +23,8 @@ class _MyTabBarState extends State<MyTabBar> {
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
 
-    const style = TextStyle(color: black, fontWeight: FontWeight.bold, fontSize: 26);
+    const style =
+        TextStyle(color: black, fontWeight: FontWeight.bold, fontSize: 26);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -54,48 +55,74 @@ class _MyTabBarState extends State<MyTabBar> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(children: [
-          CircleAvatar(
-            radius: 50,
-            backgroundImage: AssetImage(
-                'assets/images/profile.jpg'), // Replace 'profile.jpg' with your actual image name
-          ),
-          SizedBox(height: 15),
           Obx(() {
-            return controller.isLoad.value
-                ? Center(
-              child: LoadingAnimationWidget.horizontalRotatingDots(
-                color: textColor,
-                size: 50.0,
-              ),
-            )
-                : Column(
-              children: [
-                Text(
-                  "${controller.models[0].user.firstName} ${controller.models[0].user.lastName}",
+            if (controller.isLoad.value) {
+              return Center(
+                child: LoadingAnimationWidget.horizontalRotatingDots(
+                  color: textColor,
+                  size: 50.0,
+                ),
+              );
+            } else if (controller.models.isEmpty) {
+              return Center(
+                child: Text(
+                  'No data available',
                   style: TextStyle(
                     color: textColor,
                     fontFamily: 'font1',
                     fontSize: 18,
                   ),
                 ),
-                Text(
-                  controller.models[0].user.email,
-                  style: TextStyle(
-                    color: textColor,
-                    fontFamily: 'font1',
-                    fontSize: 18,
+              );
+            } else {
+              return Column(
+                children: [
+                  Obx(() {
+                    return controller.isLoad.value
+                        ? Center(
+                            child: SpinKitFadingCircle(
+                              color: textColor,
+                              size: 30,
+                            ),
+                          )
+                        : controller.models[0].user.personalPhoto == null
+                            ? CircleAvatar(
+                                radius: 50,
+                                backgroundImage:
+                                    AssetImage('assets/images/profile.jpg'))
+                            : CircleAvatar(
+                                radius: 50,
+                                backgroundImage: NetworkImage(
+                                    controller.models[0].user.personalPhoto));
+                  }),
+                  SizedBox(height: 15),
+                  Text(
+                    "${controller.models[0].user.firstName} ${controller.models[0].user.lastName}",
+                    style: TextStyle(
+                      color: textColor,
+                      fontFamily: 'font1',
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-                Text(
-                  controller.models[0].user.phone,
-                  style: TextStyle(
-                    color: textColor,
-                    fontFamily: 'font1',
-                    fontSize: 18,
+                  Text(
+                    controller.models[0].user.email,
+                    style: TextStyle(
+                      color: textColor,
+                      fontFamily: 'font1',
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-              ],
-            );
+                  Text(
+                    controller.models[0].user.phone,
+                    style: TextStyle(
+                      color: textColor,
+                      fontFamily: 'font1',
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              );
+            }
           }),
           DefaultTabController(
             length: 2,
@@ -117,6 +144,7 @@ class _MyTabBarState extends State<MyTabBar> {
                 body: TabBarView(
                   children: [
                     ProfilePage(),
+                    // Assuming you have a class named PendingProjects
                     InvestmentProjects(),
                   ],
                 ),

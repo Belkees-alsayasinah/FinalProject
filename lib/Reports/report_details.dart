@@ -51,154 +51,191 @@ class ReportDetails extends StatelessWidget {
       buttonWidget: SizedBox(),
       onsave: () {},
       widget: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            textDirection: TextDirection.rtl,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              MyLabelText(text: 'الأهداف التي تم تحقيقها:'),
-              Text(
-                achievedGoalsSummary,
-                style: TextStyle(fontSize: 34, fontFamily: 'font1'),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'الأهداف التي لم يتم تحقيقها:'),
-              Text(unAchievedGoalsSummary,
+        child: Align(
+          alignment: Alignment.topRight,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              textDirection: TextDirection.rtl,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MyLabelText(text: 'الأهداف التي تم تحقيقها:'),
+                Text(
+                  achievedGoalsSummary,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'المبلغ المستثمر:'),
-              Text(investorAmount,
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
                   textDirection: TextDirection.rtl,
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                MyLabelText(text: 'الأهداف التي لم يتم تحقيقها:'),
+                Text(unAchievedGoalsSummary,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'التكاليف الإجمالية:'),
-              Text(totalCosts,
-                  textDirection: TextDirection.rtl,
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
+                  textDirection: TextDirection.rtl,),
+                SizedBox(
+                  height: 15,
+                ),
+                MyLabelText(text: 'المبلغ المستثمر:'),
+                Text(investorAmount,
+                    textDirection: TextDirection.rtl,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'الإيرادات الإجمالية:'),
-              Text(totalRevenue,
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
+                 ),
+                SizedBox(
+                  height: 15,
+                ),
+                MyLabelText(text: 'التكاليف الإجمالية:'),
+                Text(totalCosts,
+                    textDirection: TextDirection.rtl,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'الأرباح الصافية:'),
-              Text(netProfit,
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
+                  ),
+                SizedBox(
+                  height: 15,
+                ),
+                MyLabelText(text: 'الإيرادات الإجمالية:'),
+                Text(totalRevenue,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'صافي الربح للمستثمر:'),
-              Text(netProfitInvestor,
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
+                  textDirection: TextDirection.rtl,),
+                SizedBox(
+                  height: 15,
+                ),
+                MyLabelText(text: 'الأرباح الصافية:'),
+                Text(netProfit,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'صافي الربح لصاحب العمل:'),
-              Text(netProfitEmployer,
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
+                  textDirection: TextDirection.rtl,),
+                SizedBox(
+                  height: 15,
+                ),
+                MyLabelText(text: 'صافي الربح للمستثمر:'),
+                Text(netProfitInvestor,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'المواد المستلمة:'),
-              Text(receivedMaterials,
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
+                  textDirection: TextDirection.rtl,),
+                SizedBox(
+                  height: 15,
+                ),
+                MyLabelText(text: 'صافي الربح لصاحب العمل:'),
+                Text(netProfitEmployer,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'سعر المواد:'),
-              Text(materialPrice,
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
+                  textDirection: TextDirection.rtl,),
+                SizedBox(
+                  height: 15,
+                ),
+                MyLabelText(text: 'المواد المستلمة:'),
+                Text(receivedMaterials,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'إجمالي المبيعات:'),
-              Text(totalSales,
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
+                  textDirection: TextDirection.rtl,),
+                SizedBox(
+                  height: 15,
+                ),
+                MyLabelText(text: 'سعر المواد:'),
+                Text(materialPrice,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'صافي الربح الكلي:'),
-              Text(overallNetProfit,
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
+                  textDirection: TextDirection.rtl,),
+                SizedBox(
+                  height: 15,
+                ),
+                MyLabelText(text: 'إجمالي المبيعات:'),
+                Text(totalSales,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'مبلغ الصيانة:'),
-              Text(maintenanceAmount,
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
+                  textDirection: TextDirection.rtl,),
+                SizedBox(
+                  height: 15,
+                ),
+                MyLabelText(text: 'صافي الربح الكلي:'),
+                Text(overallNetProfit,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'مبلغ الأجور والمعاملات:'),
-              Text(wagesAndTransactionsAmount,
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
+                  textDirection: TextDirection.rtl,),
+                SizedBox(
+                  height: 15,
+                ),
+                MyLabelText(text: 'مبلغ الصيانة:'),
+                Text(maintenanceAmount,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'التوصيات الرئيسية:'),
-              Text(mainRecommendations,
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
+                  textDirection: TextDirection.rtl,),
+                SizedBox(
+                  height: 15,
+                ),
+                MyLabelText(text: 'مبلغ الأجور والمعاملات:'),
+                Text(wagesAndTransactionsAmount,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-              SizedBox(
-                height: 15,
-              ),
-              MyLabelText(text: 'الخطط المستقبلية لتحسين العمل:'),
-              Text("gg",
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
+                  textDirection: TextDirection.rtl,),
+                SizedBox(
+                  height: 15,
+                ),
+                MyLabelText(text: 'التوصيات الرئيسية:'),
+                Text(mainRecommendations,
                   style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'font2',
-                  )),
-            ],
+                    fontSize: screenSize.width*0.05,
+                    fontFamily: 'font1',
+
+                  ),
+                  textDirection: TextDirection.rtl,),
+                SizedBox(
+                  height: 15,
+                ),
+                // MyLabelText(text: 'الخطط المستقبلية لتحسين العمل:'),
+                // Text("gg",
+                //     style: TextStyle(
+                //       fontSize: 20,
+                //       fontFamily: 'font2',
+                //     )),
+              ],
+            ),
           ),
         ),
       ),

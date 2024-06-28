@@ -1,6 +1,12 @@
+import 'package:bloom_project/FirstPage/type_of_user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../Config/server_config.dart';
 import '../Style/constant.dart';
+import '../service/info.dart';
+import '../service/store.dart';
+import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
 
 class SettingsDrawer extends StatelessWidget {
   @override
@@ -82,7 +88,7 @@ class SettingsDrawer extends StatelessWidget {
                 ],
               ),
               onTap: () {
-                // اتخذ إجراء عند النقر على عنصر القائمة 3
+                onLogout();
               },
             ),
             // يمكنك إضافة المزيد من عناصر القائمة هنا
@@ -90,5 +96,22 @@ class SettingsDrawer extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> onLogout() async {
+    var response = await http.get(
+      Uri.parse(UserInformation.type == 'inv'
+          ? ServerConfig.domainNameServer + ServerConfig().investorLogout
+          : ServerConfig.domainNameServer + ServerConfig().userLogout),
+      headers: {'Authorization': 'Bearer ${UserInformation.user_token}'},
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      print('logout');
+      StoreInfo info = StoreInfo();
+      Get.offAll(() => TypeOfUser());
+      await info.remove("token");
+    } else {
+      print(response.statusCode);
+    }
   }
 }

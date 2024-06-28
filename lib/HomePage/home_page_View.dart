@@ -15,13 +15,13 @@ import '../service/info.dart';
 
 class HomePageView extends StatelessWidget {
   HomePageController controller = Get.put(HomePageController());
-  String title = 'الأعمال الإبداعية';
   final List<String> imagePaths = [
     'assets/images/s1.jpg',
     'assets/images/s2.jpg',
     'assets/images/s3.jpg',
     'assets/images/s4.jpg',
   ];
+
   Widget _buildRandomImage() {
     final Random random = Random();
     final int index = random.nextInt(imagePaths.length);
@@ -77,76 +77,169 @@ class HomePageView extends StatelessWidget {
           textDirection: TextDirection.rtl,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (UserInformation.type == "inv") ...[
+            if (UserInformation.type == "inv" &&
+                controller.models0.isNotEmpty) ...[
               Text('اقتراحات قد تناسبك:  ',
                   textDirection: TextDirection.rtl,
                   style: TextStyle(fontSize: 20, fontFamily: 'font1')),
-              Expanded(
-                child: ListView.separated(
-                  reverse: true,
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                        width: 156,
-                        decoration: BoxDecoration(
-                          color: buttonColorOpa,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.5),
-                              spreadRadius: 0,
-                              offset: Offset(3, 3),
-                              blurRadius: 4,
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Column(
-                            textDirection: TextDirection.rtl,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'مصمم جرافيكي',
-                                style: TextStyle(
-                                    fontSize: 20, fontFamily: 'font1'),
-                              ),
-                              Text(
-                                'حمص الدبلان',
-                                style: TextStyle(
-                                    fontSize: 20, fontFamily: 'font1'),
-                              ),
-                              Text(
-                                'بمبلغ: 20000',
-                                style: TextStyle(
-                                    fontSize: 20, fontFamily: 'font1'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  // Get.to(DetailsPageView());
-                                },
-                                child: Text(
-                                  'عرض المزيد...',
-                                  textDirection: TextDirection.rtl,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontFamily: 'font1',
-                                      color: textColor),
-                                ),
-                              )
-                            ],
-                          ),
-                        ));
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return SizedBox(width: 10);
-                  },
-                  itemCount: 10,
-                ),
+              SizedBox(
+                height: 10,
               ),
+              Expanded(child: Obx(() {
+                return controller.isLoad0.value
+                    ? Center(
+                        child: SpinKitFadingCircle(
+                          color: textColor,
+                          size: 50.0,
+                        ),
+                      )
+                    : controller.models0.length == 0
+                        ? Center(
+                            child: Text(
+                              'لا يوجد اقتراحات لاهتماماتك!',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'font1',
+                                  fontSize: screenSize.shortestSide * 0.04,
+                                  color: textColor),
+                              textDirection: TextDirection.rtl,
+                            ),
+                          )
+                        : ListView.separated(
+                            reverse: true,
+                            physics: BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (BuildContext context, int index) {
+                              if (index >= controller.models0.length) {
+                                return Container(); // تجنب الوصول إلى عناصر خارج الحدود
+                              }
+                              return FutureBuilder(
+                                  future: null,
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    } else if (snapshot.hasError) {
+                                      return Text('Error ${snapshot.error}');
+                                    } else {
+                                      return InkWell(
+                                        onTap: () {
+                                          Get.to(DetailsPageView(
+                                            id: controller.models0[index].id,
+                                            title:
+                                                controller.models0[index].name,
+                                            description: controller
+                                                .models0[index].description,
+                                            investment_status: controller
+                                                .models0[index].investmentStatus
+                                                .toString(),
+                                            address: controller
+                                                .models0[index].location,
+                                            cost: controller
+                                                .models0[index].amount,
+                                          ));
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              ///todo
+                                                width: screenSize.width * 0.5,
+                                                height: screenSize.width * 0.43,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey[100],
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                    Radius.circular(15),
+                                                  ),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.grey
+                                                          .withOpacity(0.5),
+                                                      spreadRadius: 0,
+                                                      offset: Offset(3, 3),
+                                                      blurRadius: 4,
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      15.0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    textDirection:
+                                                        TextDirection.rtl,
+                                                    children: [
+                                                      Icon(
+                                                        Icons
+                                                            .arrow_drop_down_sharp,
+                                                        color: textColor,
+                                                      ),
+                                                      Text(
+                                                        controller
+                                                            .models0[index]
+                                                            .name,
+                                                        style: TextStyle(
+                                                          fontSize: 25,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontFamily: 'font1',
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        controller
+                                                            .models0[index]
+                                                            .amount
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                          color: grey,
+                                                          fontSize: 18,
+                                                          fontFamily: 'font1',
+                                                        ),
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        textDirection:
+                                                            TextDirection.rtl,
+                                                        children: [
+                                                          Text(
+                                                            "العنون: ${controller.models0[index].location}",
+                                                            style: TextStyle(
+                                                              color: grey,
+                                                              fontSize: 18,
+                                                              fontFamily:
+                                                                  'font1',
+                                                            ),
+                                                            textDirection: TextDirection.rtl,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )),
+                                            SizedBox(
+                                              height: 16,
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }
+                                  });
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(
+                                width: 20,
+                              );
+                            },
+                            itemCount: controller.models0.length,
+                          );
+              })),
               SizedBox(
                 height: 20,
               ),
@@ -176,6 +269,9 @@ class HomePageView extends StatelessWidget {
                           : ListView.separated(
                               physics: BouncingScrollPhysics(),
                               itemBuilder: (context, index) {
+                                if (index >= controller.models.length) {
+                                  return Container(); // تجنب الوصول إلى عناصر خارج الحدود
+                                }
                                 return FutureBuilder(
                                     future: null,
                                     builder: (context, snapshot) {
@@ -192,15 +288,16 @@ class HomePageView extends StatelessWidget {
                                             Get.to(
                                               SectorPageView(
                                                 id: '${controller.models[index].id}',
-                                                title: title,
+                                                title:
+                                                    '${controller.models[index].name}',
                                               ),
                                             );
                                           },
                                           child: Stack(
                                             children: [
                                               Container(
-                                                width: 386,
-                                                height: 167,
+                                                width: screenSize.width * 1,
+                                                height: screenSize.height * 0.2,
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.only(
@@ -253,7 +350,9 @@ class HomePageView extends StatelessWidget {
                                     });
                               },
                               separatorBuilder: (context, index) {
-                                return SizedBox(height: 20);
+                                return SizedBox(
+                                  height: 10,
+                                );
                               },
                               itemCount: controller.models.length,
                             );

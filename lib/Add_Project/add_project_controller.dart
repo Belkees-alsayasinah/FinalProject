@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:archive/archive.dart';
+import 'package:bloom_project/AddCanvas/canvas_view.dart';
 import 'package:bloom_project/HomePage/basic_page.dart';
+import 'package:bloom_project/Profile/profile_controller.dart';
 import 'package:bloom_project/RegisterPage/register_service.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,12 +16,12 @@ import '../service/info.dart';
 import 'package:http/http.dart' as http;
 
 class AddProjectController extends GetxController {
+  // final UserProfilePageController controller = Get.put(UserProfilePageController(id));
   late RxString sector;
   late GlobalKey<FormState> formstate;
   late String title;
   late String description;
   late String amount;
-  late Rx<File?> feasibilityStudy = Rx<File?>(null);
   late Rx<File?> idPhoto = Rx<File?>(null);
   late Rx<File?> personalPhoto = Rx<File?>(null);
   late Rx<File?> contract = Rx<File?>(null);
@@ -27,13 +30,14 @@ class AddProjectController extends GetxController {
   late String message;
   late bool loginState;
   late RxBool isLoading;
-  late String fileName1;
   late String fileName2;
   late String fileName3;
   late String fileName4;
   late String fileName5;
   List<int> indexes = [];
   late Rx<File?> selectedFile = Rx<File?>(null);
+
+  late int projectId; // متحول جديد لحفظ الـ id
 
   @override
   void onInit() {
@@ -61,9 +65,6 @@ class AddProjectController extends GetxController {
       if (result != null) {
         File file = File(result.files.single.path ?? "");
         switch (field) {
-          case 'feasibilityStudy':
-            fileName1 = file.path.split(r'/').last;
-            break;
           case 'idPhoto':
             fileName2 = file.path.split(r'/').last;
             break;
@@ -91,9 +92,6 @@ class AddProjectController extends GetxController {
 
   void _onFileSelected(File file, String field) {
     switch (field) {
-      case 'feasibilityStudy':
-        feasibilityStudy.value = file;
-        break;
       case 'idPhoto':
         idPhoto.value = file;
         break;
@@ -113,104 +111,6 @@ class AddProjectController extends GetxController {
 
   var uploaded = false;
 
-  // Future<void> uploadPdf() async {
-  //   print("1");
-  //   var headers = {
-  //     'Authorization': 'Bearer ${UserInformation.user_token}',
-  //     'Accept': 'application/json',
-  //   };
-  //   var request = http.MultipartRequest(
-  //     'POST',
-  //     Uri.parse(ServerConfig.domainNameServer + ServerConfig().addProject),
-  //   );
-  //   request.fields.addAll({
-  //     'name': title,
-  //     'description': description,
-  //     'location': 'Damas',
-  //     'amount': amount,
-  //     'type_id': sector.value,
-  //   });
-  //   for (int index in indexes) {
-  //     print(index);
-  //     request.fields['interests[]'] = index.toString();
-  //
-  //     print("print");
-  //     print(request.fields['interests[]']);
-  //   }
-  //   if (feasibilityStudy.value != null &&
-  //       feasibilityStudy.value!.lengthSync() > 0) {
-  //     print("2");
-  //     request.files.add(
-  //       await http.MultipartFile.fromBytes(
-  //         'feasibility_study',
-  //         Uint8List.fromList(feasibilityStudy.value!.readAsBytesSync()),
-  //         filename: fileName1,
-  //       ),
-  //     );
-  //   }
-  //   // if (feasibilityStudy.value != null) {
-  //   //   print("2");
-  //   //   request.files.add(
-  //   //     await http.MultipartFile.fromBytes(
-  //   //       'feasibility_study',
-  //   //       Uint8List.fromList(feasibilityStudy.value!.readAsBytesSync()),
-  //   //       filename: fileName1,
-  //   //     ),
-  //   //   );
-  //   // }
-  //   if (idPhoto.value != null) {
-  //     print("3");
-  //     request.files.add(
-  //       await http.MultipartFile.fromBytes(
-  //         'iD_card',
-  //         Uint8List.fromList(idPhoto.value!.readAsBytesSync()),
-  //         filename: fileName2,
-  //       ),
-  //     );
-  //   }
-  //   if (personalPhoto.value != null) {
-  //     print("4");
-  //     request.files.add(
-  //       await http.MultipartFile.fromBytes(
-  //         'personal_photo',
-  //         Uint8List.fromList(personalPhoto.value!.readAsBytesSync()),
-  //         filename: fileName3,
-  //       ),
-  //     );
-  //   }
-  //   if (contract.value != null) {
-  //     print("5");
-  //     request.files.add(
-  //       await http.MultipartFile.fromBytes(
-  //         'property_deed',
-  //         Uint8List.fromList(contract.value!.readAsBytesSync()),
-  //         filename: fileName4,
-  //       ),
-  //     );
-  //   }
-  //   if (notRule.value != null) {
-  //     print("6");
-  //     request.files.add(
-  //       await http.MultipartFile.fromBytes(
-  //         'clean_record',
-  //         Uint8List.fromList(notRule.value!.readAsBytesSync()),
-  //         filename: fileName5,
-  //       ),
-  //     );
-  //   }
-  //
-  //   http.StreamedResponse response = await request.send();
-  //   if (response.statusCode == 200 || response.statusCode == 201) {
-  //     uploaded = true;
-  //     selectedFile.value = null;
-  //   } else {
-  //     var responseData = await response.stream.bytesToString();
-  //     // print("rr: " + responseData); // طباعة تفاصيل الخطأ
-  //     print(response.reasonPhrase);
-  //     print(response.statusCode);
-  //     print('error');
-  //   }
-  // }
   Future<void> uploadPdf() async {
     var headers = {
       'Authorization': 'Bearer ${UserInformation.user_token}',
@@ -229,18 +129,8 @@ class AddProjectController extends GetxController {
     for (int index in indexes) {
       request.fields['interests[]'] = index.toString();
     }
-    if (feasibilityStudy.value != null &&
-        feasibilityStudy.value!.lengthSync() > 0) {
-      request.files.add(
-        await http.MultipartFile.fromBytes(
-          'feasibility_study',
-          Uint8List.fromList(feasibilityStudy.value!.readAsBytesSync()),
-          filename: fileName1,
-        ),
-      );
-    }
+
     if (idPhoto.value != null && idPhoto.value!.lengthSync() > 0) {
-      print("dooo2");
       request.files.add(
         await http.MultipartFile.fromBytes(
           'iD_card',
@@ -250,7 +140,6 @@ class AddProjectController extends GetxController {
       );
     }
     if (personalPhoto.value != null && personalPhoto.value!.lengthSync() > 0) {
-      print("dooo3");
       request.files.add(
         await http.MultipartFile.fromBytes(
           'personal_photo',
@@ -260,7 +149,6 @@ class AddProjectController extends GetxController {
       );
     }
     if (contract.value != null && contract.value!.lengthSync() > 0) {
-      print("dooo4");
       request.files.add(
         await http.MultipartFile.fromBytes(
           'property_deed',
@@ -270,7 +158,6 @@ class AddProjectController extends GetxController {
       );
     }
     if (notRule.value != null && notRule.value!.lengthSync() > 0) {
-      print("dooo5");
       request.files.add(
         await http.MultipartFile.fromBytes(
           'clean_record',
@@ -281,15 +168,17 @@ class AddProjectController extends GetxController {
     }
 
     request.headers.addAll(headers);
-    print("dooo6");
     http.StreamedResponse response = await request.send();
     var responseData = await response.stream.bytesToString();
-    print("dooo7");
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print("2000");
+      print("200");
       uploaded = true;
       selectedFile.value = null;
-      Get.to(BasicPage());
+
+      var jsonResponse = json.decode(responseData);
+      projectId = jsonResponse['data']['id']; // استخراج الـ id من الريسبونس
+      // await controller.getdata();
+      Get.to(AddCanvasView(id: projectId.toString()));
     } else {
       print(responseData); // طباعة تفاصيل الخطأ
       print(response.reasonPhrase);
