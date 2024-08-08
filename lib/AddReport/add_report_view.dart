@@ -67,8 +67,8 @@ class AddReportView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -93,8 +93,8 @@ class AddReportView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -116,8 +116,8 @@ class AddReportView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -144,7 +144,7 @@ class AddReportView extends StatelessWidget {
                             blurRadius: 8,
                             offset: 10,
                             width: screenSize.width * 0.4,
-                            hieght: 62,
+                            height: screenSize.height * 0.1,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'This field is required';
@@ -174,7 +174,7 @@ class AddReportView extends StatelessWidget {
                             blurRadius: 8,
                             offset: 10,
                             width: screenSize.width * 0.4,
-                            hieght: 62,
+                            height: screenSize.height * 0.1,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'This field is required';
@@ -200,8 +200,8 @@ class AddReportView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -231,7 +231,7 @@ class AddReportView extends StatelessWidget {
                             blurRadius: 8,
                             offset: 10,
                             width: screenSize.width * 0.4,
-                            hieght: 62,
+                            height: screenSize.height * 0.1,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'This field is required';
@@ -261,7 +261,7 @@ class AddReportView extends StatelessWidget {
                               blurRadius: 8,
                               offset: 10,
                               width: screenSize.width * 0.4,
-                              hieght: 62,
+                              height: screenSize.height * 0.1,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'This field is required';
@@ -286,8 +286,8 @@ class AddReportView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -308,8 +308,8 @@ class AddReportView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -330,8 +330,8 @@ class AddReportView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -352,8 +352,8 @@ class AddReportView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -374,8 +374,8 @@ class AddReportView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -396,8 +396,8 @@ class AddReportView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -418,8 +418,8 @@ class AddReportView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -440,8 +440,8 @@ class AddReportView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -458,8 +458,8 @@ class AddReportView extends StatelessWidget {
                       controller.onClickAddReport(id);
                       controller.addReportState ? Navigator.pop(context) : null;
                     },
-                    width: 348,
-                    height: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.08,
                     text: 'إرسال التقرير',
                     color: buttonColor,
                     radius: 15,

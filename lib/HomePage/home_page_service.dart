@@ -10,7 +10,7 @@ class HomePageService {
   late bool x = false;
 
   Stream<List<HomePageModel>> fetchSectors(String user_token) {
-    return Stream.periodic(const Duration(seconds: 20))
+    return Stream.periodic(const Duration(seconds: 3))
         .asyncMap((event) => getSectors(user_token));
   }
 

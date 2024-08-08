@@ -68,8 +68,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -95,8 +95,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -118,8 +118,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -141,8 +141,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -164,8 +164,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -188,8 +188,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -213,8 +213,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -236,8 +236,8 @@ class AddCanvasView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -258,8 +258,8 @@ class AddCanvasView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -281,8 +281,8 @@ class AddCanvasView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -303,8 +303,8 @@ class AddCanvasView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -325,8 +325,8 @@ class AddCanvasView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -347,8 +347,8 @@ class AddCanvasView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -369,8 +369,8 @@ class AddCanvasView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -392,8 +392,8 @@ class AddCanvasView extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       blurRadius: 8,
                       offset: 10,
-                      width: 348,
-                      hieght: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -414,8 +414,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -437,8 +437,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -462,8 +462,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -487,8 +487,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -511,8 +511,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -535,8 +535,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -559,8 +559,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -583,8 +583,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -606,8 +606,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -629,8 +629,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -652,8 +652,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -675,8 +675,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -698,8 +698,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -721,8 +721,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -744,8 +744,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -768,8 +768,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -791,8 +791,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -814,8 +814,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -837,8 +837,8 @@ class AddCanvasView extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -854,9 +854,9 @@ class AddCanvasView extends StatelessWidget {
                     onsave: () {
                       controller.onClickAddCanvas(id);
                     },
-                    width: 348,
-                    height: 62,
-                    text: 'إرسال التقرير',
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
+                    text: 'إرسال النموذج',
                     color: buttonColor,
                     radius: 15,
                     textColor: Colors.white,

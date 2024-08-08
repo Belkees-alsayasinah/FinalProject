@@ -8,7 +8,10 @@ import '../Config/server_config.dart';
 class NotificationService {
   late String message;
   late bool x = false;
-
+  Stream<List<NotificationModel>> fetchNotification(String user_token) {
+    return Stream.periodic(const Duration(seconds: 5))
+        .asyncMap((event) => getNotification(user_token));
+  }
   RxList<NotificationModel> model = <NotificationModel>[].obs;
 
   Future<List<NotificationModel>> getNotification(String token) async {

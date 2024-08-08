@@ -1,4 +1,5 @@
 import 'package:bloom_project/Articles/articles_page.dart';
+import 'package:bloom_project/ChatScreen/chat_screen.dart';
 import 'package:bloom_project/HomePage/home_page_View.dart';
 import 'package:bloom_project/InvestorProfilePage/investor_tab_bar.dart';
 import 'package:bloom_project/MyTabBar/myTabBar.dart';
@@ -17,12 +18,12 @@ class BasicPageController extends GetxController {
   PageController pageController = PageController(initialPage: 2);
 
   List<Widget> screens = [
-
     UserInformation.type == 'inv' ? InvestorTabBar() : MyTabBar(),
     ChartPageView(),
     HomePageView(),
     NotificationsPage(),
     ArticlesView(),
+    ChatScreen(),
   ];
   List<BottomNavigationBarItem> bottomItem = [
     BottomNavigationBarItem(label: "Profile", icon: Icon(Icons.person)),
@@ -31,6 +32,7 @@ class BasicPageController extends GetxController {
     BottomNavigationBarItem(
         label: "Notification", icon: Icon(Icons.notifications)),
     BottomNavigationBarItem(label: "Article", icon: Icon(Icons.article)),
+    BottomNavigationBarItem(label: "Chat", icon: Icon(Icons.chat)),
   ];
 
   void changeBottomNavBar(int index) {

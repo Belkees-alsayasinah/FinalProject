@@ -62,8 +62,9 @@ class AddProject extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.08,
+
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -73,6 +74,7 @@ class AddProject extends StatelessWidget {
                       }
                       return null;
                     },
+                    max: 5, // تعيين max إلى 5 للسماح بما يصل إلى 5 أسطر من النص
                   ),
                   SizedBox(
                     height: 25,
@@ -84,7 +86,7 @@ class AddProject extends StatelessWidget {
                       MyLabelText(text: 'نوع المشروع:'),
                       Container(
                         width: screenSize.width * 1,
-                        height: 62,
+                        height: 75,
                         decoration: BoxDecoration(
                             color: fieldColor,
                             borderRadius: BorderRadius.circular(15)),
@@ -142,8 +144,8 @@ class AddProject extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -165,8 +167,31 @@ class AddProject extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'This field is required';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  MyLabelText(text: 'العنوان:'),
+                  MyTextField(
+                    label: '',
+                    hint: "",
+                    textInputAction: TextInputAction.next,
+                    onsave: (value) {
+                      controller.location = value!;
+                    },
+                    keyboardType: TextInputType.text,
+                    blurRadius: 8,
+                    offset: 10,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.1,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -398,8 +423,8 @@ class AddProject extends StatelessWidget {
                     onsave: () {
                       Get.to(InterestsView());
                     },
-                    width: 348,
-                    height: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.08,
                     text: 'إضافة المشروع',
                     color: buttonColor,
                     radius: 15,

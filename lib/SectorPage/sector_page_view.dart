@@ -3,6 +3,7 @@ import 'package:bloom_project/SearchPage/search_page_view.dart';
 import 'package:bloom_project/SectorPage/sector_controller.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:bloom_project/settings_drawer/settings_drawer.dart';
+import 'package:bloom_project/try.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -91,7 +92,7 @@ class SectorPageView extends StatelessWidget {
                                 } else {
                                   return InkWell(
                                     onTap: () {
-                                      Get.to(DetailsPageView(
+                                      Get.to(PlannerScreen(
                                         id: controller.models[index].id,
                                         userID: controller.models[index].userId
                                             .toString(),

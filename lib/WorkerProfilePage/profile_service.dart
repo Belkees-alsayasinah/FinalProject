@@ -9,6 +9,11 @@ class ProfileService {
   late String message;
   late bool x = false;
 
+  Stream<List<ProfileModel>> fetchProfileData(String user_token) {
+    return Stream.periodic(const Duration(seconds: 3))
+        .asyncMap((event) => getProfileData(user_token));
+  }
+
   RxList<ProfileModel> model = <ProfileModel>[].obs;
 
   Future<List<ProfileModel>> getProfileData(String token) async {
@@ -25,26 +30,11 @@ class ProfileService {
       var r = await json.decode(response.body);
       var data = r['data'];
       ProfileModel profileModel = ProfileModel.fromJson(data);
+      model.clear();
       model.add(profileModel);
       return model;
     } else {
       throw Exception('Failed to load profile data');
     }
-  }
-
-  //delete
-  Future<bool> deleteData(int id) async {
-    final response = await http.post(
-      Uri.parse(
-          'http://127.0.0.1:8000/api/employee/destroyUser/$id'),
-      headers: {'Authorization': 'Bearer ${UserInformation.user_token}'},
-    );
-    if (response.statusCode == 200 || response.statusCode == 201) {
-
-      return true;
-    }
-
-    print(response.statusCode);
-    return false;
   }
 }

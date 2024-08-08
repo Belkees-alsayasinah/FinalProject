@@ -1,4 +1,5 @@
 import 'package:bloom_project/Articles/articles_page.dart';
+import 'package:bloom_project/Chat_Websocket/chat.dart';
 import 'package:bloom_project/FirstPage/first_page.dart';
 import 'package:bloom_project/FirstPage/type_of_user.dart';
 import 'package:bloom_project/HomePage/basic_page.dart';
@@ -10,6 +11,7 @@ import 'package:bloom_project/SearchPage/search_page_view.dart';
 import 'package:bloom_project/project_tracking/pay_for_project_tracking_ui.dart';
 import 'package:bloom_project/project_tracking/request_for_project_tracking.dart';
 import 'package:bloom_project/service/info.dart';
+import 'package:bloom_project/try.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';

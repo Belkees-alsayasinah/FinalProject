@@ -56,7 +56,7 @@ class DetailsPageView extends StatelessWidget {
                           onsave: () {
                             controller.buttonText.value == "تواصل"
                                 ? _showCreateFolderDialog(context)
-                                : null;
+                                : _showCreateFolderDialog(context);
                           },
                           width: 200,
                           height: 52,
@@ -95,11 +95,9 @@ class DetailsPageView extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.grey.withOpacity(0.4),
                       // تأكد من أنك تستخدم Colors.grey
-                      borderRadius: BorderRadius.circular(
-                          10), // تحديد نصف قطر تدوير الحواف
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
-                      // إضافة Center لضمان أن النص يظهر في الوسط
                       child: Text(
                         'الملف الشخصي',
                         style: TextStyle(fontSize: 10),
@@ -123,10 +121,12 @@ class DetailsPageView extends StatelessWidget {
                 ),
                 Text(
                   investment_status == '0' ? 'متاح للاستثمار' : 'مستثمر',
-                  style:
-                      TextStyle(fontSize: 20, fontFamily: 'font1', color: grey),
+                  style: TextStyle(
+                      fontSize: screenSize.width * 0.05,
+                      fontFamily: 'font1',
+                      color: grey),
                 ),
-                Spacer(), // Spacer لدفع الـ Stack إلى اليسار
+                Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(top: 5),
                   child: GetBuilder<AddEvaluationController>(
@@ -136,7 +136,7 @@ class DetailsPageView extends StatelessWidget {
                         if (controller0.isLoad.value) {
                           return LoadingAnimationWidget.discreteCircle(
                             color: textColor,
-                            size: 30.0,
+                            size: 10,
                           );
                         } else {
                           return Column(
@@ -144,12 +144,13 @@ class DetailsPageView extends StatelessWidget {
                               Stack(
                                 children: [
                                   CircleAvatar(
-                                    radius: 20,
+                                    radius: screenSize.width * 0.03,
                                     backgroundColor: Colors.grey[400],
                                     child: IconButton(
                                       icon: Icon(
                                         Icons.favorite,
                                         color: Colors.red,
+                                        size: screenSize.width * 0.03,
                                       ),
                                       onPressed: () {
                                         controller0
@@ -163,7 +164,7 @@ class DetailsPageView extends StatelessWidget {
                                 return Text(controller0.models.isNotEmpty
                                     ? controller0.models[0].totalEvaluationCount
                                         .toString()
-                                    : '0');
+                                    : '0',style: TextStyle(fontSize: screenSize.width * 0.026),);
                               })
                             ],
                           );

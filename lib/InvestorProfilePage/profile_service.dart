@@ -8,6 +8,11 @@ class InvestorProfileService {
   late String message;
   late bool x = false;
 
+  Stream<List<InvestorProfileModel>> fetchProfileData(String user_token) {
+    return Stream.periodic(const Duration(seconds: 3))
+        .asyncMap((event) => getProfileData(user_token));
+  }
+
   RxList<InvestorProfileModel> model = <InvestorProfileModel>[].obs;
 
   Future<List<InvestorProfileModel>> getProfileData(String token) async {
@@ -26,6 +31,7 @@ class InvestorProfileService {
       print('ff');
       var data = r['data'];
       InvestorProfileModel profileModel = InvestorProfileModel.fromJson(data);
+      model.clear();
       model.add(profileModel);
       print("aaaaaaaa");
       // print(profileModel.projects[0].name);

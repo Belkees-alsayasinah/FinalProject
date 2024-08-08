@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 class FirebaseNotification {
   final _firebaseMessaging = FirebaseMessaging.instance;
+
   // final NotificationController notificationController;
   //
   // FirebaseNotification(this.notificationController);
@@ -32,6 +33,7 @@ class FirebaseNotification {
           duration: Duration(seconds: 5),
           snackPosition: SnackPosition.TOP,
         );
+        final NotificationController controller = Get.find();
       }
     });
   }
@@ -40,17 +42,17 @@ class FirebaseNotification {
     if (message == null) return;
     // notificationController.addNotification(message);
     if (message.notification != null) {
-      Get.snackbar(
-        message.notification!.title ?? 'Notification',
-        message.notification!.body ?? 'You have a new notification',
-        icon: Icon(
-          Icons.notifications,
-          size: 40,
-          // color: Colors.white,
-        ),
-        duration: Duration(seconds: 5),
-        snackPosition: SnackPosition.TOP,
-      );
+      // Get.snackbar(
+      //   message.notification!.title ?? 'Notification',
+      //   message.notification!.body ?? 'You have a new notification',
+      //   icon: Icon(
+      //     Icons.notifications,
+      //     size: 40,
+      //     // color: Colors.white,
+      //   ),
+      //   duration: Duration(seconds: 5),
+      //   snackPosition: SnackPosition.TOP,
+      // );
     }
   }
 

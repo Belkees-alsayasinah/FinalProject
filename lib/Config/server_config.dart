@@ -1,5 +1,8 @@
 class ServerConfig {
+  //static const domainNameServer = 'https://grad2222.000webhostapp.com/';
   static const domainNameServer = 'https://noor-demo-store.webmyidea.com/';
+
+
   String loginApi = 'api/user/login';
   String loginApiInv = 'api/investor/login';
   String registerApi = 'api/investor/register';

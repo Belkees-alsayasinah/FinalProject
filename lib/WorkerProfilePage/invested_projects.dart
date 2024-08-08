@@ -3,6 +3,7 @@ import 'package:bloom_project/WorkerProfilePage/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import '../DetailsPage/details_page_view.dart';
 import '../Style/constant.dart';
 
 class InvestmentProjects extends StatelessWidget {
@@ -70,7 +71,31 @@ class InvestmentProjects extends StatelessWidget {
                                       title: investedtProject.name,
                                       cost: investedtProject.amount.toString(),
                                       function: () {},
-                                      onTap: () {});
+                                      onTap: () {
+                                        Get.to(
+                                          DetailsPageView(
+                                            id: controller.models[0]
+                                                .investedProjects[index].id,
+                                            title: controller.models[0]
+                                                .investedProjects[index].name,
+                                            description: controller
+                                                .models[0]
+                                                .investedProjects[index]
+                                                .description,
+                                            investment_status: controller
+                                                .models[0]
+                                                .investedProjects[index]
+                                                .investmentStatus
+                                                .toString(),
+                                            address: controller
+                                                .models[0]
+                                                .investedProjects[index]
+                                                .location,
+                                            cost: controller.models[0]
+                                                .investedProjects[index].amount,
+                                          ),
+                                        );
+                                      });
                                 }
                               });
                         },

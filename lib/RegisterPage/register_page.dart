@@ -1,5 +1,4 @@
 import 'package:bloom_project/Components/TextField.dart';
-import 'package:bloom_project/VerifyOTP/verify_otp_view.dart';
 import 'package:bloom_project/RegisterPage/register_controller.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +64,7 @@ class RegisterPage extends StatelessWidget {
                             blurRadius: 8,
                             offset: 10,
                             width: screenSize.width * 0.42,
-                            hieght: 62,
+                            height: screenSize.height * 0.1,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'this field is required';
@@ -99,7 +98,7 @@ class RegisterPage extends StatelessWidget {
                             blurRadius: 8,
                             offset: 10,
                             width: screenSize.width * 0.42,
-                            hieght: 62,
+                            height: screenSize.height * 0.1,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'this field is required';
@@ -137,13 +136,13 @@ class RegisterPage extends StatelessWidget {
                         blurRadius: 8,
                         offset: 10,
                         width: screenSize.width * 1,
-                        hieght: 62,
+
+                        height: screenSize.height * 0.1,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'this field is required';
                           }
-                          if (!value.contains('@') ||
-                              !value.contains('.')) {
+                          if (!value.contains('@') || !value.contains('.')) {
                             return 'incorrect formula';
                           }
                           return null;
@@ -177,7 +176,7 @@ class RegisterPage extends StatelessWidget {
                         blurRadius: 8,
                         offset: 10,
                         width: screenSize.width * 1,
-                        hieght: 62,
+                        height: screenSize.height * 0.1,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'this field is required';
@@ -213,7 +212,7 @@ class RegisterPage extends StatelessWidget {
                         blurRadius: 8,
                         offset: 10,
                         width: screenSize.width * 1,
-                        hieght: 62,
+                        height: screenSize.height * 0.1,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'this field is required';
@@ -222,10 +221,13 @@ class RegisterPage extends StatelessWidget {
                           return null;
                         },
                         obscureText: true,
+                        max: 1,
                       ),
                     ],
                   ),
-                  SizedBox(height: 25,),
+                  SizedBox(
+                    height: 25,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     textDirection: TextDirection.ltr,
@@ -249,7 +251,7 @@ class RegisterPage extends StatelessWidget {
                         blurRadius: 8,
                         offset: 10,
                         width: screenSize.width * 1,
-                        hieght: 62,
+                        height: screenSize.height * 0.1,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'this field is required';
@@ -268,14 +270,12 @@ class RegisterPage extends StatelessWidget {
                   MyButton(
                     fontSize: 34,
                     onsave: () {
-                      if (controller
-                          .formstate.currentState!
-                          .validate()) {
+                      if (controller.formstate.currentState!.validate()) {
                         controller.onClickSignIn();
                       }
                     },
-                    width: 348,
-                    height: 62,
+                    width: screenSize.width * 1,
+                    height: screenSize.height * 0.1,
                     text: 'إنشاء الحساب',
                     color: buttonColor,
                     radius: 15,
@@ -299,7 +299,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                       TextButton(
                           onPressed: () {
-                            Get.to(LoginPage());
+                            // Get.to(LoginPage());
                           },
                           child: Text(
                             'تسجيل الدخول',

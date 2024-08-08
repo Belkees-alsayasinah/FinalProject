@@ -30,14 +30,23 @@ class _MyTabBarState extends State<MyTabBar> {
         leading: IconButton(
           icon: Icon(Icons.edit),
           onPressed: () {
-            Get.to(EditProfilePage(
-              id: controller.models[0].user.id.toString(),
-              firstName: controller.models[0].user.firstName,
-              lastName: controller.models[0].user.lastName,
-              email: controller.models[0].user.email,
-              phone: controller.models[0].user.phone,
-              address: controller.models[0].user.location,
-            ));
+            Get.to(
+                EditProfilePage(
+                  id: controller.models[0].user.id.toString(),
+                  firstName: controller.models[0].user.firstName,
+                  lastName: controller.models[0].user.lastName,
+                  email: controller.models[0].user.email,
+                  phone: controller.models[0].user.phone,
+                  address: controller.models[0].user.location,
+                ),
+                arguments: {
+                  'firstName': controller.models[0].user.firstName,
+                  'lastName': controller.models[0].user.lastName,
+                  'email': controller.models[0].user.email,
+                  'phone': controller.models[0].user.phone,
+                  'address': controller.models[0].user.location,
+                  'id': controller.models[0].user.id.toString(),
+                });
           },
         ),
         centerTitle: true,

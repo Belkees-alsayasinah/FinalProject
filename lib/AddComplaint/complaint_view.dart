@@ -70,7 +70,7 @@ class ComplaintView extends StatelessWidget {
                           blurRadius: 8,
                           offset: 10,
                           width: 348,
-                          hieght: 200,
+                          height: 200,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'This field is required';

@@ -33,59 +33,61 @@ class TransactionDetails extends StatelessWidget {
     return MyDetailsPage(
       appTitle: 'تفاصيل المعاملة',
       onsave: () {},
-      widget: Column(
-        textDirection: TextDirection.rtl,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            textDirection: TextDirection.rtl,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                textDirection: TextDirection.rtl,
-                'تفاصيل المعاملة:',
-                style: TextStyle(fontSize: 30, fontFamily: 'font1'),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            name,
-            style: TextStyle(fontSize: 18, color: black),
-            textAlign: TextAlign.right,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            description,
-            style: TextStyle(fontSize: 18, color: black),
-            textAlign: TextAlign.right,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            'الخصم: ${discount}',
-            style: TextStyle(
-              fontSize: 18,
+      widget: SingleChildScrollView(
+        child: Column(
+          textDirection: TextDirection.rtl,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              textDirection: TextDirection.rtl,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  textDirection: TextDirection.rtl,
+                  'تفاصيل المعاملة:',
+                  style: TextStyle(fontSize: 30, fontFamily: 'font1'),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+              ],
             ),
-            textAlign: TextAlign.right,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            price,
-            style: TextStyle(fontSize: 18, color: black),
-            textAlign: TextAlign.right,
-          ),
-        ],
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              name,
+              style: TextStyle(fontSize: 18, color: black),
+              textAlign: TextAlign.right,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              description,
+              style: TextStyle(fontSize: 18, color: black),
+              textAlign: TextAlign.right,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'الخصم: ${discount}',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+              textAlign: TextAlign.right,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              price,
+              style: TextStyle(fontSize: 18, color: black),
+              textAlign: TextAlign.right,
+            ),
+          ],
+        ),
       ),
       buttonWidget: Positioned.directional(
         textDirection: TextDirection.ltr,
@@ -218,7 +220,9 @@ class TransactionDetails extends StatelessWidget {
             builder: (controller) {
               return TextButton(
                 onPressed: () {
-                  controller.uploadPdf();
+                  controller
+                      .uploadPdf()
+                      .then((value) => Navigator.pop(context));
                 },
                 child: Text(
                   'تأكيد الدفع',

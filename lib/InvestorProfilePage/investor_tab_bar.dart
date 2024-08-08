@@ -29,15 +29,23 @@ class _InvestorTabBarState extends State<InvestorTabBar> {
         leading: IconButton(
           icon: Icon(Icons.edit),
           onPressed: () {
-            Get.to(EditProfilePage(
-
-              id: controller.models[0].investor.id.toString(),
-              firstName: controller.models[0].investor.firstName,
-              lastName: controller.models[0].investor.lastName,
-              email: controller.models[0].investor.email,
-              phone: controller.models[0].investor.phone,
-              address: controller.models[0].investor.location,
-            ));
+            Get.to(
+                EditProfilePage(
+                  id: controller.models[0].investor.id.toString(),
+                  firstName: controller.models[0].investor.firstName,
+                  lastName: controller.models[0].investor.lastName,
+                  email: controller.models[0].investor.email,
+                  phone: controller.models[0].investor.phone,
+                  address: controller.models[0].investor.location,
+                ),
+                arguments: {
+                  'firstName': controller.models[0].investor.firstName,
+                  'lastName': controller.models[0].investor.lastName,
+                  'email': controller.models[0].investor.email,
+                  'phone': controller.models[0].investor.phone,
+                  'address': controller.models[0].investor.location,
+                  'id': controller.models[0].investor.id.toString(),
+                });
           },
         ),
         centerTitle: true,

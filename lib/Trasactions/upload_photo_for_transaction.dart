@@ -93,6 +93,7 @@ class UploadPhotoTransactionController extends GetxController {
       uploaded = true;
       selectedFile.value = null;
       Get.back();
+
       update();
     } else {
       print(response.reasonPhrase);

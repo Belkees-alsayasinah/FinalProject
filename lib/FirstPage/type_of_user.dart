@@ -22,15 +22,14 @@ class TypeOfUser extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: SizedBox(
-                width: screenSize.width * 0.4, // عرض الصورة
-                height: screenSize.height * 0.3, // ارتفاع الصورة
-                child: Hero(
-                  tag: 'imageHero',
-                  child: Image.asset(
-                    'assets/images/bloom.jpg',
-                  ),
-                )
-              ),
+                  width: screenSize.width * 0.6, // عرض الصورة
+                  height: screenSize.height * 0.3, // ارتفاع الصورة
+                  child: Hero(
+                    tag: 'imageHero',
+                    child: Image.asset(
+                      'assets/images/logo.jpg',
+                    ),
+                  )),
             ),
             SizedBox(
               height: screenSize.height * 0.25,

@@ -13,9 +13,11 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 70, bottom: 30, left: 30, right: 30),
+        padding:
+            const EdgeInsets.only(top: 70, bottom: 30, left: 30, right: 30),
         child: Center(
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
@@ -44,7 +46,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   MyTextField(
                     label: '',
-                    hint: "",
+                    hint: "أدخل البريد الإلكتروني",
                     textInputAction: TextInputAction.next,
                     onsave: (value) {
                       loginController.email = value!;
@@ -52,8 +54,8 @@ class LoginPage extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.08,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -63,6 +65,7 @@ class LoginPage extends StatelessWidget {
                       }
                       return null;
                     },
+                    max: 1, // Changed maxLines to 1
                   ),
                   SizedBox(height: 25),
                   Text(
@@ -75,47 +78,50 @@ class LoginPage extends StatelessWidget {
                   ),
                   MyTextField(
                     label: '',
-                    hint: "",
-                    textInputAction: TextInputAction.next,
+                    hint: "ادخل كلمة المرور",
+                    textInputAction: TextInputAction.done,
                     onsave: (value) {
-                      loginController.password = value!;
+                      // save value
                     },
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true, // تمكين إخفاء كلمة المرور
                     blurRadius: 8,
                     offset: 10,
-                    width: 348,
-                    hieght: 62,
+                    width: screenSize.width * 0.9,
+                    height: screenSize.height * 0.08,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
                       }
                       return null;
                     },
-                    obscureText: true,
                   ),
+
                   SizedBox(height: 50),
                   Obx(() {
                     return loginController.isLoading.value
                         ? Center(
-                      child: LoadingAnimationWidget.horizontalRotatingDots(
-                        color: textColor,
-                        size: 50.0,
-                      ),
-                    )
+                            child:
+                                LoadingAnimationWidget.horizontalRotatingDots(
+                              color: textColor,
+                              size: 50.0,
+                            ),
+                          )
                         : MyButton(
-                      fontSize: 34,
-                      onsave: () {
-                        if (loginController.formstate.currentState!.validate()) {
-                          loginController.onClicksignin();
-                        }
-                      },
-                      width: 348,
-                      height: 62,
-                      text: 'تسجيل الدخول',
-                      color: buttonColor,
-                      radius: 15,
-                      textColor: Colors.white,
-                    );
+                            fontSize: 34,
+                            onsave: () {
+                              if (loginController.formstate.currentState!
+                                  .validate()) {
+                                loginController.onClicksignin();
+                              }
+                            },
+                            width: 348,
+                            height: 62,
+                            text: 'تسجيل الدخول',
+                            color: buttonColor,
+                            radius: 15,
+                            textColor: Colors.white,
+                          );
                   }),
                   SizedBox(height: 25),
                   Center(

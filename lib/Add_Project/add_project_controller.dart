@@ -22,6 +22,7 @@ class AddProjectController extends GetxController {
   late String title;
   late String description;
   late String amount;
+  late String location;
   late Rx<File?> idPhoto = Rx<File?>(null);
   late Rx<File?> personalPhoto = Rx<File?>(null);
   late Rx<File?> contract = Rx<File?>(null);
@@ -45,6 +46,7 @@ class AddProjectController extends GetxController {
     sector = ''.obs;
     title = '';
     description = '';
+    location = '';
     message = '';
     loginState = false;
     isLoading = false.obs;
@@ -122,7 +124,7 @@ class AddProjectController extends GetxController {
     request.fields.addAll({
       'name': title,
       'description': description,
-      'location': 'damascus',
+      'location': location,
       'amount': amount,
       'type_id': sector.value,
     });

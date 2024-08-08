@@ -13,7 +13,12 @@ class MyDetailsPage extends StatelessWidget {
   final Widget buttonWidget;
   final String appTitle;
 
-   MyDetailsPage({Key? key, required this.onsave, required this.widget,required this.buttonWidget, required this.appTitle})
+  MyDetailsPage(
+      {Key? key,
+      required this.onsave,
+      required this.widget,
+      required this.buttonWidget,
+      required this.appTitle})
       : super(key: key);
 
   @override
@@ -78,7 +83,7 @@ class MyDetailsPage extends StatelessWidget {
             top: 0,
             right: 0,
             child: Padding(
-                padding: EdgeInsets.all(6.0),
+                padding: EdgeInsets.only(top: 10, left: 6, bottom: 6, right: 6),
                 child: Row(
                   children: [
                     IconButton(

@@ -34,6 +34,7 @@ class EditProfilePage extends StatelessWidget {
     // EditProfileController controller = Get.put(EditProfileController());
     return Scaffold(
       appBar: AppBar(
+        leading: Text(' '),
         actions: [
           IconButton(
               onPressed: () {
@@ -89,18 +90,19 @@ class EditProfilePage extends StatelessWidget {
                               ),
                             ),
                             MyTextField(
-                              control: TextEditingController(text: firstName),
+                              control: TextEditingController(
+                                  text: controller.firstName),
                               label: '',
                               hint: "",
                               textInputAction: TextInputAction.next,
                               onsave: (value) {
-                                controller.firstName = firstName!;
+                                controller.firstName = value!;
                               },
                               keyboardType: TextInputType.emailAddress,
                               blurRadius: 8,
                               offset: 10,
                               width: screenSize.width * 0.42,
-                              hieght: 62,
+                              height: screenSize.height * 0.1,
                             ),
                           ],
                         ),
@@ -118,16 +120,19 @@ class EditProfilePage extends StatelessWidget {
                               ),
                             ),
                             MyTextField(
-                              control: TextEditingController(text: lastName),
+                              control: TextEditingController(
+                                  text: controller.lastName),
                               label: '',
                               hint: "",
                               textInputAction: TextInputAction.next,
-                              onsave: (value) {},
+                              onsave: (value) {
+                                controller.lastName = value!;
+                              },
                               keyboardType: TextInputType.emailAddress,
                               blurRadius: 8,
                               offset: 10,
                               width: screenSize.width * 0.42,
-                              hieght: 62,
+                              height: screenSize.height * 0.1,
                             ),
                           ],
                         )
@@ -149,16 +154,19 @@ class EditProfilePage extends StatelessWidget {
                           ),
                         ),
                         MyTextField(
-                          control: TextEditingController(text: email),
+                          control:
+                              TextEditingController(text: controller.email),
                           label: '',
                           hint: "",
                           textInputAction: TextInputAction.next,
-                          onsave: (value) {},
+                          onsave: (value) {
+                            controller.email = value!;
+                          },
                           keyboardType: TextInputType.emailAddress,
                           blurRadius: 8,
                           offset: 10,
                           width: screenSize.width * 1,
-                          hieght: 62,
+                          height: screenSize.height * 0.1,
                         ),
                       ],
                     ),
@@ -178,16 +186,19 @@ class EditProfilePage extends StatelessWidget {
                           ),
                         ),
                         MyTextField(
-                          control: TextEditingController(text: phone),
+                          control:
+                              TextEditingController(text: controller.phone),
                           label: '',
                           hint: "",
                           textInputAction: TextInputAction.next,
-                          onsave: (value) {},
+                          onsave: (value) {
+                            controller.phone = value!;
+                          },
                           keyboardType: TextInputType.emailAddress,
                           blurRadius: 8,
                           offset: 10,
                           width: screenSize.width * 1,
-                          hieght: 62,
+                          height: screenSize.height * 0.1,
                         ),
                       ],
                     ),
@@ -210,16 +221,19 @@ class EditProfilePage extends StatelessWidget {
                           ),
                         ),
                         MyTextField(
-                          control: TextEditingController(text: address),
+                          control:
+                              TextEditingController(text: controller.address),
                           label: '',
                           hint: "",
                           textInputAction: TextInputAction.next,
-                          onsave: (value) {},
-                          keyboardType: TextInputType.emailAddress,
+                          onsave: (value) {
+                            controller.address = value!;
+                          },
+                          keyboardType: TextInputType.text,
                           blurRadius: 8,
                           offset: 10,
                           width: screenSize.width * 1,
-                          hieght: 62,
+                          height: screenSize.height * 0.1,
                         ),
                       ],
                     ),
@@ -233,16 +247,12 @@ class EditProfilePage extends StatelessWidget {
                     MyButton(
                       fontSize: 34,
                       onsave: () async {
-                        RegisterModel update = RegisterModel(
-                            firstName: firstName,
-                            lastName: lastName,
-                            email: email,
-                            location: address,
-                            phone: phone);
-                        var d = await service!.updateProfile(id, update);
+                        if (controller.formstate.currentState!.validate()) {
+                          controller.onUpdate();
+                        }
                       },
-                      width: 348,
-                      height: 62,
+                      width: screenSize.width * 0.9,
+                      height: screenSize.height * 0.08,
                       text: 'تعديل الحساب',
                       color: buttonColor,
                       radius: 15,

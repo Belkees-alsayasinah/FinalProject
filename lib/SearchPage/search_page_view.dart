@@ -61,8 +61,9 @@ class _SearchPageViewState extends State<SearchPageView> {
                       blurRadius: 8,
                       offset: 10,
                       width: screenSize.width * 0.6,
-                      hieght: 62,
+                      height: screenSize.height * 0.1,
                       control: widget.priceController,
+                      max: 5,
                     ),
                     PopupMenuButton<String>(
                       icon: Icon(

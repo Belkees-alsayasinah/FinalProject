@@ -1,4 +1,3 @@
-import 'package:bloom_project/HomePage/GetInterestsModel.dart';
 import 'package:bloom_project/Notifications/notifiation_service.dart';
 import 'package:bloom_project/Notifications/notification_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,10 +28,12 @@ class NotificationController extends GetxController {
   getdata() async {
     isLoad.value = true;
     try {
-      d = await service.getNotification(UserInformation.user_token);
-      models.assignAll(service.model);
-      isLoad.value = false;
-      update();
+      d = await service
+          .fetchNotification(UserInformation.user_token)
+          .listen((event) {
+        models.value = event;
+        isLoad.value = false;
+      });
     } finally {
       isLoad.value = false;
     }

@@ -25,12 +25,12 @@ class FirstPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: SizedBox(
-                width: screenSize.width * 0.4, // عرض الصورة
+                width: screenSize.width * 0.6, // عرض الصورة
                 height: screenSize.height * 0.3, // ارتفاع الصورة
                 child: Hero(
                   tag: 'dash',
                   child: Image.asset(
-                    'assets/images/bloom.jpg',
+                    'assets/images/logo.jpg',
                   ),
                 )
               ),
@@ -63,7 +63,7 @@ class FirstPage extends StatelessWidget {
             MyButton(
               fontSize: 34,
               onsave: () {
-                Get.offAll(() => LoginPage());
+                 Get.offAll(() => LoginPage());
               },
               width: screenSize.width * 1,
               height: screenSize.height * 0.08,

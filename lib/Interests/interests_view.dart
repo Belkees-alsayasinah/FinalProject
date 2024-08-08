@@ -20,6 +20,7 @@ class _InterestsViewState extends State<InterestsView> {
   AddProjectController controller0 = Get.put(AddProjectController());
 
   List<int> selectedInterestsIds = [];
+
   void toggleOption(int index, int id) {
     if (index >= 0 && index < selectedOptions.length) {
       setState(() {
@@ -38,14 +39,18 @@ class _InterestsViewState extends State<InterestsView> {
     final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: textColor),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        leading: Text(' '),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(
+                Icons.arrow_forward_ios,
+                size: screenSize.width * 0.1,
+                color: textColor,
+              )),
+        ],
       ),
       body: Padding(
         padding:
@@ -68,25 +73,27 @@ class _InterestsViewState extends State<InterestsView> {
                 SizedBox(
                   height: 40,
                 ),
-                UserInformation.type == 'inv'? Text(
-                  'اختر اهتماماتك بعناية، ستظهر لك المواضيع التي اخترتها في مقدّمة المشاريع لتسهّل عليك عملية البحث.',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    fontFamily: 'font1',
-                    color: grey,
-                  ),
-                  textDirection: TextDirection.rtl,
-                ): Text(
-                  'قم بتحديد المواضيع التي ينتمي لها مشروعك لتساعد المستثمرين في الوصول اليه.',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    fontFamily: 'font1',
-                    color: grey,
-                  ),
-                  textDirection: TextDirection.rtl,
-                ),
+                UserInformation.type == 'inv'
+                    ? Text(
+                        'اختر اهتماماتك بعناية، ستظهر لك المواضيع التي اخترتها في مقدّمة المشاريع لتسهّل عليك عملية البحث.',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          fontFamily: 'font1',
+                          color: grey,
+                        ),
+                        textDirection: TextDirection.rtl,
+                      )
+                    : Text(
+                        'قم بتحديد المواضيع التي ينتمي لها مشروعك لتساعد المستثمرين في الوصول اليه.',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          fontFamily: 'font1',
+                          color: grey,
+                        ),
+                        textDirection: TextDirection.rtl,
+                      ),
                 SizedBox(
                   height: 25,
                 ),

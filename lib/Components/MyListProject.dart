@@ -103,7 +103,7 @@ class MyListProject extends StatelessWidget {
                             color: black),
                       ),
                       SizedBox(
-                        width: screenSize.width * 0.3,
+                        width: screenSize.width * 0.1,
                       ),
                       investedProject == '1'
                           ? UserInformation.type == 'inv'

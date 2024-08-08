@@ -70,7 +70,7 @@ class VerifyOTPView extends StatelessWidget {
                     blurRadius: 8,
                     offset: 10,
                     width: screenSize.width * 0.9,
-                    hieght: screenSize.height * 0.08,
+                    height: screenSize.height * 0.08,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
@@ -103,7 +103,7 @@ class VerifyOTPView extends StatelessWidget {
                     blurRadius: 8,
                     offset: 10,
                     width: screenSize.width * 0.9,
-                    hieght: screenSize.height * 0.08,
+                    height: screenSize.height * 0.08,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field is required';

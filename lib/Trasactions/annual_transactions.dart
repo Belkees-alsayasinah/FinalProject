@@ -63,7 +63,6 @@ class AnnualTransactions extends StatelessWidget {
                             return Align(
                               alignment: Alignment.centerRight,
                               child: Row(
-
                                 children: [
                                   TextButton(
                                     onPressed: () {
@@ -85,20 +84,20 @@ class AnnualTransactions extends StatelessWidget {
                                     },
                                     child: Text(
                                       controller.models[index].transaction.name,
-                                      style:
-                                          TextStyle(fontSize: 25, color: black),
+                                      style: TextStyle(
+                                          fontSize: screenSize.width * 0.05,
+                                          color: black),
                                       textAlign: TextAlign.right,
                                     ),
                                     style: TextButton.styleFrom(
                                       alignment: Alignment.centerRight,
                                     ),
                                   ),
-
                                   Icon(Icons.arrow_right),
                                   Text(
                                     controller.models[index].transaction.price,
                                     style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: screenSize.width * 0.04,
                                     ),
                                     textAlign: TextAlign.right,
                                   ),

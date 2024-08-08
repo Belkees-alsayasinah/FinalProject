@@ -4,12 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../service/info.dart';
-
 class EditProfileController extends GetxController {
+  var args = Get.arguments;
   late String firstName;
-  late RxString lastName;
-  late RxString email;
+  late String lastName;
+  late String email;
   late String phone;
   late String address;
   late String id;
@@ -24,14 +23,15 @@ class EditProfileController extends GetxController {
 
   @override
   void onInit() async {
+    args = Get.arguments;
+    firstName = args['firstName'];
+    lastName = args['lastName'];
+    email = args['email'];
+    phone = args['phone'];
+    address = args['address'];
+    id = args['id'];
     isload = true.obs;
     models = <RegisterModel>[].obs;
-    firstName = '';
-    lastName = 'first'.obs;
-    email = 'first'.obs;
-    phone = '';
-    address = '';
-    id = '';
     service = EditProfileService();
     addStudentState = false;
     formstate = GlobalKey<FormState>();
@@ -45,12 +45,13 @@ class EditProfileController extends GetxController {
       formdata.save();
       RegisterModel student = RegisterModel(
           firstName: firstName,
-          lastName: lastName.value,
-          email: email.value,
+          lastName: lastName,
+          email: email,
           phone: phone,
           location: address);
       addStudentState = await service.updateProfile(id, student);
       if (addStudentState) {
+        Get.back();
         var mapmsg = service.message;
         print('map: $mapmsg');
       }

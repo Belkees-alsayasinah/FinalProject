@@ -1,7 +1,6 @@
-import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/material.dart';
 
-class MyTextField extends StatelessWidget {
+class MyTextField extends StatefulWidget {
   final TextEditingController? control;
   final String label;
   final String hint;
@@ -13,11 +12,11 @@ class MyTextField extends StatelessWidget {
   final Function()? suffixPressed;
   final TextInputType keyboardType;
   final bool obscureText;
-  final int max;
+  final int? max;
   final double blurRadius;
   final double offset;
   final double width;
-  final double hieght; // تعديل: تغيير 'hieght' إلى 'height'
+  final double height;
 
   const MyTextField({
     Key? key,
@@ -35,52 +34,71 @@ class MyTextField extends StatelessWidget {
     required this.blurRadius,
     required this.offset,
     required this.width,
-    required this.hieght, // تعديل: تغيير 'hieght' إلى 'height'
-    this.max = 1,
+    required this.height,
+    this.max,
   }) : super(key: key);
 
   @override
+  _MyTextFieldState createState() => _MyTextFieldState();
+}
+
+class _MyTextFieldState extends State<MyTextField> {
+  bool _obscureText = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.obscureText;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Container(
-      width: width, // ضبط العرض
-      height: hieght.toDouble(), // ضبط الارتفاع
-      padding: EdgeInsets.all(8.0),
+      width: widget.width,
+      height: screenSize.height * 0.08,
+      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: fieldColor,
+        color: Colors.grey[200],
         boxShadow: [
           BoxShadow(
             color: Color.fromARGB(143, 205, 204, 208),
-            blurRadius: blurRadius,
-            offset: Offset(10, offset),
+            blurRadius: widget.blurRadius,
+            offset: Offset(10, widget.offset),
             spreadRadius: -3,
           ),
         ],
       ),
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: width - 16, // تعديل العرض
-          maxHeight: hieght - 16, // تعديل الارتفاع
-        ),
-        child: TextField(
-          textDirection: TextDirection.rtl,
-          controller: control,
-          onChanged: onsave,
-          obscureText: obscureText,
-          textInputAction: textInputAction,
-          keyboardType: keyboardType,
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            labelText: label,
-            hintText: hint,
-            hintStyle: TextStyle(
-              color: Colors.grey[400],
-            ),
-            suffix: icon != null ? Icon(icon) : null,
-            suffixIcon: suffixPressed != null ? IconButton(onPressed: suffixPressed!, icon: Icon(Icons.clear)) : null,
+      child: TextField(
+        textDirection: TextDirection.rtl,
+        controller: widget.control,
+        onChanged: widget.onsave,
+        obscureText: _obscureText,
+        textInputAction: widget.textInputAction,
+        keyboardType: widget.keyboardType,
+        maxLines: widget.max ?? 1,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          labelText: widget.label,
+          hintText: widget.hint,
+          hintStyle: TextStyle(
+            color: Colors.grey[400],
           ),
-          textAlign: TextAlign.right,
+          suffix: widget.icon != null ? Icon(widget.icon) : null,
+          suffixIcon: widget.obscureText ? IconButton(
+            icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+            onPressed: () {
+              setState(() {
+                _obscureText = !_obscureText;
+              });
+            },
+          ) : null,
+          contentPadding:
+          EdgeInsets.symmetric(vertical: 10.0), // Adjusted content padding
         ),
+        textAlign: TextAlign.right,
       ),
     );
   }

@@ -26,21 +26,22 @@ class ProfilePageController extends GetxController {
   }
 
   getdata() async {
-    d = await service.getProfileData(UserInformation.user_token);
-    models.assignAll(service.model);
-    isLoad.value = false;
-    update();
-    models.refresh();
+    d = await service
+        .fetchProfileData(UserInformation.user_token)
+        .listen((event) {
+      models.value = event;
+      isLoad.value = false;
+    });
     if (models.isEmpty) {
     } else if (models[0].investedProjects == []) {}
   }
 
-  //delete
-  ondelete(int id) async {
-    state = await service.deleteData(id);
-    if (state) {
-    } else {
-      print('noop');
-    }
-  }
+  // //delete
+  // ondelete(int id) async {
+  //   state = await service.deleteData(id);
+  //   if (state) {
+  //   } else {
+  //     print('noop');
+  //   }
+  // }
 }
