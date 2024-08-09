@@ -299,7 +299,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                       TextButton(
                           onPressed: () {
-                            // Get.to(LoginPage());
+                            Get.to(LoginPage());
                           },
                           child: Text(
                             'تسجيل الدخول',

@@ -33,7 +33,7 @@ class LoginPageController extends GetxController {
   }
 
   void onClicksignin() async {
-    isLoading.value = true;
+   // isLoading.value = true;
     var formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();
@@ -44,20 +44,22 @@ class LoginPageController extends GetxController {
         Get.offAll(BasicPage());
         print("type user : ${UserInformation.type}");
       } else {
+        isLoading.value = false;
         Get.snackbar(
           "عذراً",
           "البريد الإلكتروني أو كلمة المرور غير صحيحة",
           icon: Icon(
             Icons.report_gmailerrorred,
             size: 40,
-            // color: Colors.white,
           ),
           duration: Duration(seconds: 5),
           snackPosition: SnackPosition.TOP,
         );
       }
+    } else {
+      // Reset isLoading if form validation fails
+      isLoading.value = false;
     }
-    isLoading.value = false;
   }
 
   Future<void> loginclick() async {
@@ -65,6 +67,7 @@ class LoginPageController extends GetxController {
     loginState = await service.login(user);
     var mapmsg = service.message;
     if (mapmsg is Map) {
+      // Handle map message if needed
     } else if (mapmsg is String) {
       isLoading.value = false;
       message = mapmsg;

@@ -1,12 +1,12 @@
 import 'package:bloom_project/Components/TextField.dart';
 import 'package:bloom_project/RegisterPage/register_page.dart';
-import 'package:bloom_project/Style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-
 import '../Components/MyButton.dart';
 import 'login_page_controller.dart';
+import 'login_page_string.dart';
+import 'login_page_style.dart';
 
 class LoginPage extends StatelessWidget {
   final LoginPageController loginController = Get.put(LoginPageController());
@@ -14,39 +14,31 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
+    final LoginPageStyles styles = LoginPageStyles(screenSize);
+
     return Scaffold(
       body: Padding(
-        padding:
-            const EdgeInsets.only(top: 70, bottom: 30, left: 30, right: 30),
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
         child: Center(
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Form(
               key: loginController.formstate,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    'تسجيل الدخول',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 34,
-                      fontFamily: 'font1',
-                      color: textColor,
-                    ),
+                    LoginPageStrings.loginTitle,
+                    style: styles.titleStyle,
                   ),
-                  SizedBox(height: 100),
+                  SizedBox(height: screenSize.height * 0.1),
                   Text(
-                    ':البريد الإلكتروني',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: 'font1',
-                    ),
+                    LoginPageStrings.emailLabel,
+                    style: styles.labelStyle,
                   ),
                   MyTextField(
                     label: '',
-                    hint: "أدخل البريد الإلكتروني",
+                    hint: LoginPageStrings.emailHint,
                     textInputAction: TextInputAction.next,
                     onsave: (value) {
                       loginController.email = value!;
@@ -54,101 +46,87 @@ class LoginPage extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     blurRadius: 8,
                     offset: 10,
-                    width: screenSize.width * 0.9,
-                    height: screenSize.height * 0.08,
+                    width: styles.textFieldWidth,
+                    height: styles.textFieldHeight,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'This field is required';
+                        return LoginPageStrings.emailValidationError;
                       }
                       if (!value.contains('@') || !value.contains('.')) {
                         return 'Incorrect format';
                       }
                       return null;
                     },
-                    max: 1, // Changed maxLines to 1
+                    max: 1,
                   ),
-                  SizedBox(height: 25),
+                  SizedBox(height: screenSize.height * 0.03),
                   Text(
-                    ':كلمة المرور',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: 'font1',
-                    ),
+                    LoginPageStrings.passwordLabel,
+                    style: styles.labelStyle,
                   ),
                   MyTextField(
                     label: '',
-                    hint: "ادخل كلمة المرور",
+                    hint: LoginPageStrings.passwordHint,
                     textInputAction: TextInputAction.done,
                     onsave: (value) {
-                      // save value
+                      loginController.password = value!;
                     },
                     keyboardType: TextInputType.visiblePassword,
-                    obscureText: true, // تمكين إخفاء كلمة المرور
+                    obscureText: true,
                     blurRadius: 8,
                     offset: 10,
-                    width: screenSize.width * 0.9,
-                    height: screenSize.height * 0.08,
+                    width: styles.textFieldWidth,
+                    height: styles.textFieldHeight,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'This field is required';
+                        return LoginPageStrings.passwordValidationError;
                       }
                       return null;
                     },
                   ),
-
-                  SizedBox(height: 50),
+                  SizedBox(height: screenSize.height * 0.05),
                   Obx(() {
                     return loginController.isLoading.value
                         ? Center(
                             child:
                                 LoadingAnimationWidget.horizontalRotatingDots(
-                              color: textColor,
-                              size: 50.0,
+                              color: styles.textColor,
+                              size: styles.loadingSize,
                             ),
                           )
                         : MyButton(
-                            fontSize: 34,
+                            fontSize: styles.buttonTextStyle.fontSize!,
                             onsave: () {
                               if (loginController.formstate.currentState!
                                   .validate()) {
                                 loginController.onClicksignin();
                               }
                             },
-                            width: 348,
-                            height: 62,
-                            text: 'تسجيل الدخول',
-                            color: buttonColor,
+                            width: styles.buttonWidth,
+                            height: styles.buttonHeight,
+                            text: LoginPageStrings.loginButtonText,
+                            color: styles.buttonColor,
                             radius: 15,
                             textColor: Colors.white,
                           );
                   }),
-                  SizedBox(height: 25),
+                  SizedBox(height: screenSize.height * 0.03),
                   Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       textDirection: TextDirection.rtl,
                       children: [
                         Text(
-                          'ليس لديك حساب؟',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            fontFamily: 'font1',
-                          ),
+                          LoginPageStrings.noAccountText,
+                          style: styles.labelStyle,
                         ),
                         TextButton(
                           onPressed: () {
                             Get.to(RegisterPage());
                           },
                           child: Text(
-                            'إنشاء حساب',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              fontFamily: 'font1',
-                              color: textColor,
-                            ),
+                            LoginPageStrings.registerText,
+                            style: styles.linkTextStyle,
                           ),
                         ),
                       ],
