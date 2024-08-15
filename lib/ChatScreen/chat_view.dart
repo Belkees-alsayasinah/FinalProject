@@ -1,5 +1,6 @@
 import 'package:bloom_project/ChatScreen/GetMessages/messages_controller.dart';
 import 'package:bloom_project/Components/TextField.dart';
+import 'package:bloom_project/Config/server_config.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:bloom_project/service/info.dart';
 import 'package:flutter/material.dart';
@@ -10,102 +11,30 @@ import 'package:http/http.dart' as http; // لإرسال طلبات HTTP
 import 'GetMessages/messages_model.dart';
 import 'SendMessges/chat_controller.dart';
 
-class ChatScreen extends StatefulWidget {
+class ChatView extends StatefulWidget {
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  _ChatViewState createState() => _ChatViewState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatViewState extends State<ChatView> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _controller = TextEditingController();
   ChatController controller = Get.put(ChatController());
   GetMessagesController messagesController = Get.put(GetMessagesController());
 
-  late PusherChannelsFlutter pusher;
+  late PusherChannelsFlutter _pusher;
+  String _log = 'output:\n';
   late PusherChannel channel;
 
   @override
   void initState() {
     super.initState();
-
-    // Initialize Pusher
-    pusher = PusherChannelsFlutter.getInstance();
-
-    // Set up the channel authorizer
-    pusher.init(
-      apiKey: '70daea949684097ebed4',
-      cluster: 'eu',
-      onConnectionStateChange: (state, _) {
-        print("Connection state: $state");
-      },
-      onError: (error, code, _) {
-        print("Connection error: $error, code: $code");
-      },
-      onAuthorizer: (channelName, socketId, options) async {
-        final response = await http.post(
-          Uri.parse('https://example.com/pusher/auth'),
-          body: {
-            'channel_name': channelName,
-            'socket_id': socketId,
-          },
-        );
-
-        if (response.statusCode == 200) {
-          print('تمت المصادقة');
-          return jsonDecode(response.body);
-        } else {
-          throw Exception('Failed to authorize Pusher channel');
-        }
-      },
-    );
-
-    _connectToPusher();
+    _initializePusher();
   }
 
-  //
-  // void _connectToPusher() async {
-  //   // Subscribe to a channel
-  //   channel = await pusher.subscribe(channelName: 'chatLaravel');
-  //   print("Subscribed to channel: ${channel.me}");
-  //
-  //   // Listen to events on the channel
-  //   channel.onEvent?.call((event) {
-  //     print("Event received: ${event.eventName}");
-  //     if (event.eventName == 'message_sent') {
-  //       final messageData = event.data;
-  //       setState(() {
-  //         final message = MessagesModel.fromJson(messageData);
-  //         messagesController.models.add(message);
-  //       });
-  //     }
-  //   });
-  // }
-  void _connectToPusher() async {
-    try {
-      // Subscribe to a channel
-      channel = await pusher.subscribe(
-          channelName: 'private-chat.${UserInformation.profileType}');
-
-      if (channel != null) {
-        print(channel);
-        print("Subscribed to channel: ${channel.channelName}");
-
-        // Listen to events on the channel
-        channel.onEvent?.call((event) {
-          print("Event received: ${event.eventName}");
-          final messageData = event.data;
-          setState(() {
-            final message = MessagesModel.fromJson(messageData);
-            messagesController.models.add(message);
-            print("Received message: ${message.content}");
-          });
-        });
-      } else {
-        print("Failed to subscribe to channel. Channel is null.");
-      }
-    } catch (e, stackTrace) {
-      print("Error connecting to Pusher: $e");
-      print("Stack trace: $stackTrace");
-    }
+  void _initializePusher() {
+    _pusher = PusherChannelsFlutter.getInstance();
+    _connectToPusher();
   }
 
   void _sendMessage() async {
@@ -205,5 +134,96 @@ class _ChatScreenState extends State<ChatScreen> {
         ],
       ),
     );
+  }
+
+  void _connectToPusher() async {
+    try {
+      await _pusher.init(
+        apiKey: '70daea949684097ebed4',
+        cluster: 'eu',
+        onConnectionStateChange: _onConnectionStateChange,
+        //onError: _onError,
+        // onSubscriptionSucceeded: _onSubscriptionSucceeded,
+        onEvent: _onEvent,
+        // onSubscriptionError: _onSubscriptionError,
+        onDecryptionFailure: _onDecryptionFailure,
+        onMemberAdded: _onMemberAdded,
+        onMemberRemoved: _onMemberRemoved,
+        onAuthorizer: (channelName, socketId, options) async {
+          print("channelName: $channelName     SocketID: $socketId");
+
+          final response = await http.post(
+            Uri.parse(
+                ServerConfig.domainNameServer + ServerConfig().onAuthorizer),
+            headers: {
+              'Authorization': 'Bearer ${UserInformation.user_token}',
+              'Accept': 'application/json',
+            },
+            body: {
+              'channel_name': channelName,
+              'socket_id': socketId,
+            },
+          );
+          print(response.statusCode);
+          if (response.statusCode == 200) {
+            print('تمت المصادقة');
+            return jsonDecode(response.body);
+          } else {
+            print('error');
+            print(response.body);
+
+            throw Exception('Failed to authorize Pusher channel');
+          }
+        },
+      );
+
+      await _pusher.subscribe(
+          channelName: 'private-chat.user.${UserInformation.profileType}');
+      await _pusher.connect();
+    } catch (e) {
+      _log1("ERROR: $e");
+    }
+  }
+
+  void _onEvent(PusherEvent event) async {
+    _log1("Received event: ${event.eventName} with data: ${event.data}");
+    await messagesController.getdata();
+  }
+
+  void _log1(String text) {
+    print("LOG: $text");
+    setState(() {
+      _log += text + "\n";
+    });
+  }
+
+  // Other methods...
+
+  void _onConnectionStateChange(String state, String message) {
+    _log1("Connection state changed to $state with message: $message");
+  }
+
+  void _onError(String message, String errorCode) {
+    _log1("Error: $message with code: $errorCode");
+  }
+
+  void _onSubscriptionSucceeded(String channelName, String status) {
+    _log1("Subscribed to $channelName with status: $status");
+  }
+
+  void _onSubscriptionError(String message, String channelName) {
+    _log1("Subscription error: $message on $channelName");
+  }
+
+  void _onDecryptionFailure(String message, String channelName) {
+    _log1("Decryption failure: $message on $channelName");
+  }
+
+  void _onMemberAdded(String channelName, PusherMember member) {
+    _log1("Member added: $member on $channelName");
+  }
+
+  void _onMemberRemoved(String channelName, PusherMember member) {
+    _log1("Member removed: $member on $channelName");
   }
 }

@@ -32,56 +32,58 @@ class _PusherChatState extends State<PusherChat> {
         padding: const EdgeInsets.all(20.0),
         child: Form(
           key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _apiKeyController,
-                decoration: InputDecoration(labelText: 'API Key'),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter API key';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _clusterController,
-                decoration: InputDecoration(labelText: 'Cluster'),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter cluster';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _channelNameController,
-                decoration: InputDecoration(labelText: 'Channel Name'),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter channel name';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _eventNameController,
-                decoration: InputDecoration(labelText: 'Event Name'),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter event name';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _connectToPusher,
-                child: Text('Connect to Pusher'),
-              ),
-              SizedBox(height: 20),
-              Text(_log),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: _apiKeyController,
+                  decoration: InputDecoration(labelText: 'API Key'),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter API key';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  controller: _clusterController,
+                  decoration: InputDecoration(labelText: 'Cluster'),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter cluster';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  controller: _channelNameController,
+                  decoration: InputDecoration(labelText: 'Channel Name'),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter channel name';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  controller: _eventNameController,
+                  decoration: InputDecoration(labelText: 'Event Name'),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter event name';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _connectToPusher,
+                  child: Text('Connect to Pusher'),
+                ),
+                SizedBox(height: 20),
+                Text(_log),
+              ],
+            ),
           ),
         ),
       ),
@@ -107,7 +109,7 @@ class _PusherChatState extends State<PusherChat> {
         onMemberRemoved: _onMemberRemoved,
       );
 
-      await _pusher.subscribe(channelName: _channelNameController.text);
+      await _pusher.subscribe(channelName: _channelNameController.text.trim());
       await _pusher.connect();
     } catch (e) {
       _log1("ERROR: $e");

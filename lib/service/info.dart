@@ -1,5 +1,6 @@
 class UserInformation {
   static String user_token = '';
+  static String user_id = '';
   static String app_theme = "light";
   static String app_lang = "en";
   static String usertype = '';

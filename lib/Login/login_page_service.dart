@@ -32,16 +32,22 @@ class LoginPageService {
         "device_token": deviceToken ?? '', // Pass device token in the body
       },
     );
-
     print("Body: ${response.body}");
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       var r = jsonDecode(response.body);
       token = r['token'];
+      // طباعة التوكين بالكامل هنا
+     // print("Full token: %$token %" );
+       print("Token (Part 1): ${token.substring(0, token.length ~/ 2)}");
+       print("Token (Part 2): ${token.substring(token.length ~/ 2)}");
+
       UserInformation.profileType = r['id'];
+      //UserInformation.user_id = r['id'];
       print(r['id']);
       UserInformation.user_token = token;
       UserInformation.usertype = r['user_type'];
+   //   print("ttttttt: % ${UserInformation.user_token} %");
       StoreInfo info = StoreInfo();
       await info.save("token", UserInformation.user_token);
       await info.save("usertype", UserInformation.usertype);

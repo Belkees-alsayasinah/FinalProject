@@ -320,6 +320,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  lecho:
+    dependency: "direct main"
+    description:
+      name: lecho
+      sha256: "849a0eccc3a29ef4964ff2d7121ec596db232eb980ebcc11da61ee9c7e804dfd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   loading_animation_widget:
     dependency: "direct main"
     description:

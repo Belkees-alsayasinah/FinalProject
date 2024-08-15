@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 const Color white = Colors.white;
 const Color black = Colors.black;
 const Color red = Colors.red;
-const Color grey = Colors.grey;
+const Color gg = Colors.grey;
+
 const double appPadding = 30.0;
 Color buttonColor = Color(0xFF659B5E);
-Color buttonColorOpa = Color(0xFF92A78E);
+Color buttonColorOpa = Color(0xFFC7E3C0);
+//Color buttonColorOpa = Color(0xFF92A78E);
+Color grey = Color(0xFFB4B4B4);
 const Color textColor = Color(0xFF556F44);
 Color fieldColor = Color(0xFFE8E8E8);
 Color cardColor = Color(0xFFF3F3F3);

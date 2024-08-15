@@ -7,6 +7,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import '../DetailsPage/details_page_view.dart';
+import '../try.dart';
 
 class SearchPageView extends StatefulWidget {
   final TextEditingController priceController = TextEditingController();
@@ -136,17 +137,16 @@ class _SearchPageViewState extends State<SearchPageView> {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              Get.to(DetailsPageView(
+                              Get.to(PlannerScreen(
                                 id: controller.models[index].id,
+                                userID: controller.models[index].userId.toString(),  // Ensure this is a String
                                 title: controller.models[index].name,
-                                description:
-                                    controller.models[index].description,
+                                description: controller.models[index].description,
                                 address: controller.models[index].location,
                                 cost: controller.models[index].amount,
-                                investment_status: controller
-                                    .models[index].investmentStatus
-                                    .toString(),
+                                investment_status: controller.models[index].investmentStatus.toString(), // Ensure this is a String
                               ));
+
                             },
                             child: Stack(
                               children: [

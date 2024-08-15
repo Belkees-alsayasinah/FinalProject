@@ -24,8 +24,8 @@ class HomePageService {
         'Accept': 'application/json',
       },
     );
-    print("Home");
-    print(response.statusCode);
+    //print("Home");
+    //print(response.statusCode);
     if (response.statusCode == 200) {
       var r = await json.decode((response.body));
       Map<String, dynamic> s = r;

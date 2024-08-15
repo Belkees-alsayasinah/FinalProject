@@ -1,3 +1,4 @@
+import 'package:bloom_project/ChatScreen/chat_view.dart';
 import 'package:bloom_project/FirstPage/type_of_user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -67,6 +68,7 @@ class SettingsDrawer extends StatelessWidget {
                 ],
               ),
               onTap: () {
+                Get.to(ChatView());
                 // اتخذ إجراء عند النقر على عنصر القائمة 2
               },
             ),

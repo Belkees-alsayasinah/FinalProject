@@ -40,18 +40,24 @@ class PlannerScreen extends StatelessWidget {
               Container(
                 height: MediaQuery.of(context).size.height * 0.3,
                 decoration: BoxDecoration(
-                  color: buttonColor,
+                  color: Color(0xFFC7E3C0),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(40),
                     bottomRight: Radius.circular(40),
                   ),
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/logo.jpg'),
-                    // ضع هنا مسار الصورة الخاصة بك
-                    fit: BoxFit.cover,
+                ),
+                child: Center(
+                  child: Container(
+                    width: 100, // هنا يمكنك ضبط عرض الصورة
+                    height: 100, // هنا يمكنك ضبط ارتفاع الصورة
+                    child: Image.asset(
+                      'assets/images/details.png',
+                      fit: BoxFit.contain, // لجعل الصورة تناسب الحاوية المحددة
+                    ),
                   ),
                 ),
               ),
+
               SizedBox(height: 16),
               // قسم التواريخ
               Container(
@@ -147,9 +153,9 @@ class PlannerScreen extends StatelessWidget {
                     ),
                     ActivityCard(
                       title: 'المبلغ المطلوب',
-                      subtitle: cost,
+                      subtitle: cost.toString(),
                       time: '12:00 PM',
-                      color: Colors.grey,
+                      color: grey,
                     ),
                     ActivityCard(
                       title: 'تفاصيل المشروع',
