@@ -1,3 +1,4 @@
+import 'package:bloom_project/ChatScreen/UnSeenMessage/un_seen_Message_controller.dart';
 import 'package:bloom_project/ChatScreen/chat_view.dart';
 import 'package:bloom_project/FirstPage/type_of_user.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +8,10 @@ import '../Style/constant.dart';
 import '../service/info.dart';
 import '../service/store.dart';
 import 'package:http/http.dart' as http;
-import 'package:get/get.dart';
 
 class SettingsDrawer extends StatelessWidget {
+  UnSeenMessageController controller = Get.put(UnSeenMessageController());
+
   @override
   Widget build(BuildContext context) {
     const titleStyle = TextStyle(
@@ -55,15 +57,29 @@ class SettingsDrawer extends StatelessWidget {
                 textDirection: TextDirection.rtl,
                 children: [
                   Icon(
-                    Icons.language,
+                    Icons.chat,
                     color: black,
                   ),
                   SizedBox(
                     width: 10,
                   ),
                   Text(
-                    'تغيير اللغة',
+                    'دردشة',
                     style: titleStyle,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  GetBuilder<UnSeenMessageController>(
+                    builder: (controller) {
+                      return Text(controller.models[0].unseenMessagesCount == 0
+                          ? '0'
+                          : controller.models[0].unseenMessagesCount
+                              .toString(),
+                      style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),
+
+                      );
+                    },
                   ),
                 ],
               ),

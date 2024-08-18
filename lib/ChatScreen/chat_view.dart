@@ -1,4 +1,5 @@
 import 'package:bloom_project/ChatScreen/GetMessages/messages_controller.dart';
+import 'package:bloom_project/ChatScreen/UnSeenMessage/un_seen_Message_controller.dart';
 import 'package:bloom_project/Components/TextField.dart';
 import 'package:bloom_project/Config/server_config.dart';
 import 'package:bloom_project/Style/constant.dart';
@@ -21,6 +22,7 @@ class _ChatViewState extends State<ChatView> {
   final TextEditingController _controller = TextEditingController();
   ChatController controller = Get.put(ChatController());
   GetMessagesController messagesController = Get.put(GetMessagesController());
+  UnSeenMessageController messageController = Get.find();
 
   late PusherChannelsFlutter _pusher;
   String _log = 'output:\n';
@@ -38,34 +40,54 @@ class _ChatViewState extends State<ChatView> {
   }
 
   void _sendMessage() async {
-    controller.onClickSendMessage();
-    await messagesController.getdata();
-    if (_controller.text.isNotEmpty) {
-      setState(() {
-        _controller.clear();
+    try {
+      controller.onClickSendMessage();
+      await messagesController.getdata();
+      if (_controller.text.isNotEmpty) {
+        setState(() {
+          _controller.clear();
+        });
         _getMessage();
-      });
+      }
+    } catch (e) {
+      print("Error sending message: $e");
     }
   }
 
-  void _getMessage() {
+  void _getMessage() async {
     if (_controller.text.isNotEmpty) {
-      setState(() async {
-        await messagesController.getdata();
-      });
+      await messagesController.getdata();
+      setState(() {});
     }
   }
+
+  // void _getMessage() {
+  //   if (_controller.text.isNotEmpty) {
+  //     setState(() async {
+  //       await messagesController.getdata();
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        leading: Text(''),
         centerTitle: true,
         title: Text(
           'الدردشة',
           style: TextStyle(color: textColor, fontFamily: 'font1', fontSize: 34),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                messageController.getdata();
+                Get.back();
+              },
+              icon: Icon(Icons.arrow_forward_ios, color: textColor, size: 30))
+        ],
       ),
       body: Column(
         children: [
@@ -170,7 +192,7 @@ class _ChatViewState extends State<ChatView> {
             return jsonDecode(response.body);
           } else {
             print('error');
-            print(response.body);
+           // print(response.body);
 
             throw Exception('Failed to authorize Pusher channel');
           }

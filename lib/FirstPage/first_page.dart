@@ -30,7 +30,7 @@ class FirstPage extends StatelessWidget {
                 child: Hero(
                   tag: 'dash',
                   child: Image.asset(
-                    'assets/images/logo.jpg',
+                    'assets/images/g.jpg',
                   ),
                 )
               ),

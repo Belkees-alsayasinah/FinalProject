@@ -32,7 +32,7 @@ class ChatController extends GetxController {
       await addComplaint();
       if (addState) {
         print(addState);
-        Get.back();
+        //Get.back();
       }
     }
   }

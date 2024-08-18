@@ -38,6 +38,10 @@ class ServerConfig {
   String investorUpdateProfile = 'api/investor/investors/update/';
   String userUpdateProfile = 'api/user/users/update/';
   String sendMessageUser = 'api/user/sendMessageUser';
+  String sendMessageInv = 'api/sendMessageInvestor';
   String getMessagesUser = 'api/user/indexUser';
+  String getMessageInv = 'api/investor/indexInvestor';
   String onAuthorizer = 'api/broadcasting/auth';
+  String MessageCountUser = 'api/user/admins-with-unseen-messages';
+  String MessageCountInv = 'api/investor/admins-with-unseen-messages';
 }

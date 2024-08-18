@@ -83,7 +83,7 @@ class MyDetailsPage extends StatelessWidget {
             top: 0,
             right: 0,
             child: Padding(
-                padding: EdgeInsets.only(top: 10, left: 6, bottom: 6, right: 6),
+                padding: EdgeInsets.only(top: 20, left: 6, bottom: 6, right: 6),
                 child: Row(
                   children: [
                     IconButton(

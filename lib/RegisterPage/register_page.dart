@@ -275,7 +275,7 @@ class RegisterPage extends StatelessWidget {
                       }
                     },
                     width: screenSize.width * 1,
-                    height: screenSize.height * 0.1,
+                    height: screenSize.height * 0.08,
                     text: 'إنشاء الحساب',
                     color: buttonColor,
                     radius: 15,

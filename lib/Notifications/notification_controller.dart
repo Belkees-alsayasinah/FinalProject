@@ -28,12 +28,15 @@ class NotificationController extends GetxController {
   getdata() async {
     isLoad.value = true;
     try {
-      d = await service
-          .fetchNotification(UserInformation.user_token)
-          .listen((event) {
-        models.value = event;
-        isLoad.value = false;
-      });
+      d = await service.getNotification(UserInformation.user_token);
+      models.assignAll(service.model);
+      models.refresh();
+      // d = await service
+      //     .fetchNotification(UserInformation.user_token)
+      //     .listen((event) {
+      //   models.value = event;
+      //   isLoad.value = false;
+      // });
     } finally {
       isLoad.value = false;
     }

@@ -22,8 +22,8 @@ class NotificationService {
         'Accept': 'application/json',
       },
     );
-    //print("notification");
-    //print(response.statusCode);
+    print("notification");
+    print(response.statusCode);
     if (response.statusCode == 200) {
       var r = await json.decode((response.body));
       Map<String, dynamic> s = r;

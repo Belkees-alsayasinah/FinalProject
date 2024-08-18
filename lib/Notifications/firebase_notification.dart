@@ -34,6 +34,7 @@ class FirebaseNotification {
           snackPosition: SnackPosition.TOP,
         );
         final NotificationController controller = Get.find();
+        controller.getdata();
       }
     });
   }

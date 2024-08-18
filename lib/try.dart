@@ -1,13 +1,20 @@
 import 'package:bloom_project/Components/MyButton.dart';
 import 'package:bloom_project/Style/constant.dart';
+import 'package:bloom_project/service/info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'Components/MylabelText.dart';
+import 'DetailsPage/details_page_controller.dart';
 import 'Evaluation/evaluation_controller.dart';
 
 class PlannerScreen extends StatelessWidget {
+  DetailsPageController controller = Get.put(DetailsPageController());
+
   final int id;
   String? userID;
   final String title;
@@ -163,23 +170,29 @@ class PlannerScreen extends StatelessWidget {
                       time: '3:00 PM',
                       color: buttonColorOpa,
                     ),
-                    ActivityCard(
-                      title: 'طلب تواصل',
-                      subtitle:
-                          'إذا كنت ترغب في الاستثمار في هذا المشروع يمكنك التقدّم بطلب استثمار وتقديم بعض المستندات: ',
-                      time: '6:00 PM',
-                      color: grey,
-                      actionButton: MyButton(
-                        color: buttonColor,
-                        fontSize: 20,
-                        height: 40,
-                        text: 'تواصل',
-                        onsave: () {},
-                        radius: 15,
-                        textColor: Colors.white,
-                        width: 100,
-                      ),
-                    ),
+                    UserInformation.type == 'inv'
+                        ? ActivityCard(
+                            title: 'طلب تواصل',
+                            subtitle:
+                                'إذا كنت ترغب في الاستثمار في هذا المشروع يمكنك التقدّم بطلب استثمار وتقديم بعض المستندات: ',
+                            time: '6:00 PM',
+                            color: grey,
+                            actionButton: MyButton(
+                              color: buttonColor,
+                              fontSize: 20,
+                              height: 40,
+                              text: 'تواصل',
+                              onsave: () {
+                                controller.buttonText.value == "تواصل"
+                                    ? _showCreateFolderDialog(context, id)
+                                    : _showCreateFolderDialog(context, id);
+                              },
+                              radius: 15,
+                              textColor: Colors.white,
+                              width: 100,
+                            ),
+                          )
+                        : SizedBox(),
                   ],
                 ),
               ),
@@ -196,7 +209,6 @@ class PlannerScreen extends StatelessWidget {
                 size: 30,
               ),
               onPressed: () {
-                // التعامل مع الضغط على الزر
                 Navigator.of(context).pop();
               },
             ),
@@ -206,57 +218,6 @@ class PlannerScreen extends StatelessWidget {
     );
   }
 }
-
-// class DateCard extends StatelessWidget {
-//   final String day;
-//   final String date;
-//   final bool isSelected;
-//
-//   const DateCard({
-//     required this.day,
-//     required this.date,
-//     this.isSelected = false,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       margin: EdgeInsets.symmetric(horizontal: 8),
-//       width: 60,
-//       decoration: BoxDecoration(
-//         color: isSelected ? Colors.orange : Colors.white,
-//         borderRadius: BorderRadius.circular(10),
-//         boxShadow: [
-//           BoxShadow(
-//             color: Colors.black12,
-//             blurRadius: 6,
-//             offset: Offset(0, 2),
-//           ),
-//         ],
-//       ),
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           Text(
-//             day,
-//             style: TextStyle(
-//               fontSize: 16,
-//               color: isSelected ? Colors.white : Colors.black,
-//             ),
-//           ),
-//           SizedBox(height: 4),
-//           Text(
-//             date,
-//             style: TextStyle(
-//               fontSize: 16,
-//               color: isSelected ? Colors.white : Colors.black,
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
 
 class ActivityCard extends StatelessWidget {
   final String title;
@@ -339,4 +300,151 @@ class ActivityCard extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> _showCreateFolderDialog(BuildContext context, int id) async {
+  DetailsPageController controller = Get.put(DetailsPageController());
+
+  final Size screenSize = MediaQuery.of(context).size;
+  return Get.defaultDialog(
+    title: '',
+    content: Container(
+      width: screenSize.width * 0.7,
+      height: screenSize.height * 0.4,
+      child: Column(
+        children: [
+          Text(
+            'نحتاج إلى بعض الوثائق من أجل تأكيد عملية التواصل مع صاحب العمل:',
+            style: TextStyle(
+              fontFamily: 'font1',
+              fontSize: 20,
+              color: black,
+            ),
+            textDirection: TextDirection.rtl,
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            textDirection: TextDirection.rtl,
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    MyLabelText(text: 'صورة شخصية:'),
+                    MyButton(
+                        onsave: () {
+                          controller.pickPhotos('personal_photo');
+                        },
+                        width: Get.width * 0.25,
+                        height: 62,
+                        text: 'تحديد',
+                        color: Colors.white,
+                        textColor: black,
+                        radius: 15,
+                        fontSize: 20)
+                  ],
+                ),
+              ),
+              //SizedBox(width: 40,),
+              Expanded(child: Obx(() {
+                return controller.personalPhoto.value == null
+                    ? CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        radius: 30,
+                        child: Icon(Icons.image),
+                      )
+                    : CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        radius: 30,
+                        backgroundImage: controller.personalPhoto.value != null
+                            ? FileImage(controller.personalPhoto.value!)
+                                as ImageProvider<Object>?
+                            : AssetImage('assets/images/s1.jpg')
+                                as ImageProvider<Object>?,
+                      );
+              })),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            textDirection: TextDirection.rtl,
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    MyLabelText(text: 'صورة الهوية:'),
+                    MyButton(
+                        onsave: () {
+                          controller.pickPhotos('idPhoto');
+                        },
+                        width: Get.width * 0.25,
+                        height: 62,
+                        text: 'تحديد',
+                        color: Colors.white,
+                        textColor: black,
+                        radius: 15,
+                        fontSize: 20)
+                  ],
+                ),
+              ),
+              //SizedBox(width: 40,),
+              Expanded(
+                child: Obx(() {
+                  return controller.idPhoto.value == null
+                      ? CircleAvatar(
+                          backgroundColor: Colors.grey,
+                          radius: 30,
+                          child: Icon(Icons.image),
+                        )
+                      : CircleAvatar(
+                          backgroundColor: Colors.grey,
+                          radius: 30,
+                          backgroundImage: controller.idPhoto.value != null
+                              ? FileImage(controller.idPhoto.value!)
+                                  as ImageProvider<Object>?
+                              : AssetImage('assets/images/s1.jpg')
+                                  as ImageProvider<Object>?,
+                        );
+                }),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+    actions: <Widget>[
+      TextButton(
+        onPressed: () {
+          Get.back();
+        },
+        child: Text(
+          'إلغاء',
+          style: TextStyle(
+              fontFamily: 'font1',
+              fontWeight: FontWeight.bold,
+              color: textColor,
+              fontSize: 30),
+        ),
+      ),
+      TextButton(
+        onPressed: () {
+          controller.uploadPhotos(id).then((value) => Navigator.pop(context));
+        },
+        child: Text(
+          'تأكيد الطلب',
+          style: TextStyle(
+            fontFamily: 'font1',
+            fontWeight: FontWeight.bold,
+            color: textColor,
+            fontSize: 30,
+          ),
+        ),
+      ),
+    ],
+  );
 }

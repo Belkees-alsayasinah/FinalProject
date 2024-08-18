@@ -75,7 +75,7 @@ class DetailsPageController extends GetxController {
 
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200 || response.statusCode == 201) {
-      buttonText.value = 'قيد المعالجة';
+     // buttonText.value = 'قيد المعالجة';
 
 
       Get.back();

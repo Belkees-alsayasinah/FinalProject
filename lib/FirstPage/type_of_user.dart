@@ -27,7 +27,7 @@ class TypeOfUser extends StatelessWidget {
                   child: Hero(
                     tag: 'imageHero',
                     child: Image.asset(
-                      'assets/images/logo.jpg',
+                      'assets/images/g.jpg',
                     ),
                   )),
             ),

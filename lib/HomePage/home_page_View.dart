@@ -1,17 +1,16 @@
 import 'dart:math';
-
-import 'package:bloom_project/DetailsPage/details_page_view.dart';
 import 'package:bloom_project/HomePage/home_page_controller.dart';
 import 'package:bloom_project/SearchPage/search_page_view.dart';
 import 'package:bloom_project/SectorPage/sector_page_view.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:bloom_project/settings_drawer/settings_drawer.dart';
+import 'package:bloom_project/try.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-
 import '../service/info.dart';
+
 
 class HomePageView extends StatelessWidget {
   HomePageController controller = Get.put(HomePageController());
@@ -126,7 +125,7 @@ class HomePageView extends StatelessWidget {
                                     } else {
                                       return InkWell(
                                         onTap: () {
-                                          Get.to(DetailsPageView(
+                                          Get.to(PlannerScreen(
                                             id: controller.models0[index].id,
                                             title:
                                                 controller.models0[index].name,
@@ -146,9 +145,10 @@ class HomePageView extends StatelessWidget {
                                             Container(
                                               ///todo
                                                 width: screenSize.width * 0.5,
-                                                height: screenSize.width * 0.43,
+                                                height: screenSize.height * 0.20,
                                                 decoration: BoxDecoration(
-                                                  color: Colors.grey[100],
+                                                  color: buttonColorOpa,
+                                                  //Colors.grey[100],
                                                   borderRadius:
                                                       BorderRadius.all(
                                                     Radius.circular(15),
@@ -195,7 +195,7 @@ class HomePageView extends StatelessWidget {
                                                             .amount
                                                             .toString(),
                                                         style: TextStyle(
-                                                          color: grey,
+                                                          //color: grey,
                                                           fontSize: 18,
                                                           fontFamily: 'font1',
                                                         ),
@@ -210,7 +210,7 @@ class HomePageView extends StatelessWidget {
                                                           Text(
                                                             "العنون: ${controller.models0[index].location}",
                                                             style: TextStyle(
-                                                              color: grey,
+                                                             // color: grey,
                                                               fontSize: 18,
                                                               fontFamily:
                                                                   'font1',

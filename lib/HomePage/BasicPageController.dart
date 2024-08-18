@@ -23,7 +23,6 @@ class BasicPageController extends GetxController {
     HomePageView(),
     NotificationsPage(),
     ArticlesView(),
-    ChatScreen(),
   ];
   List<BottomNavigationBarItem> bottomItem = [
     BottomNavigationBarItem(label: "Profile", icon: Icon(Icons.person)),
@@ -32,7 +31,6 @@ class BasicPageController extends GetxController {
     BottomNavigationBarItem(
         label: "Notification", icon: Icon(Icons.notifications)),
     BottomNavigationBarItem(label: "Article", icon: Icon(Icons.article)),
-    BottomNavigationBarItem(label: "Chat", icon: Icon(Icons.chat)),
   ];
 
   void changeBottomNavBar(int index) {
