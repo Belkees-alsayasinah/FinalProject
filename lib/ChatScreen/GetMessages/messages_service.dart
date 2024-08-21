@@ -28,6 +28,10 @@ class GetMessagesService {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
       },
+      body: {
+        "limit": '100',
+
+      },
     );
     print(response.statusCode);
     if (response.statusCode == 200) {

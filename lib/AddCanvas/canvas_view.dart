@@ -855,7 +855,7 @@ class AddCanvasView extends StatelessWidget {
                       controller.onClickAddCanvas(id);
                     },
                     width: screenSize.width * 0.9,
-                    height: screenSize.height * 0.1,
+                    height: screenSize.height * 0.08,
                     text: 'إرسال النموذج',
                     color: buttonColor,
                     radius: 15,

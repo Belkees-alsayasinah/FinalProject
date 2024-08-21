@@ -28,10 +28,30 @@ class _ChatViewState extends State<ChatView> {
   String _log = 'output:\n';
   late PusherChannel channel;
 
+  final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
     _initializePusher();
+
+    // Scroll to the bottom when messages are loaded
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollToBottom();
+    });
+
+    // Scroll to the bottom when the list of messages changes
+    ever(messagesController.models, (_) {
+      _scrollToBottom();
+    });
+  }
+
+  void _scrollToBottom() {
+    if (_scrollController.hasClients) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+      });
+    }
   }
 
   void _initializePusher() {
@@ -48,6 +68,7 @@ class _ChatViewState extends State<ChatView> {
           _controller.clear();
         });
         _getMessage();
+        _scrollToBottom();
       }
     } catch (e) {
       print("Error sending message: $e");
@@ -58,20 +79,15 @@ class _ChatViewState extends State<ChatView> {
     if (_controller.text.isNotEmpty) {
       await messagesController.getdata();
       setState(() {});
+      _scrollToBottom();
     }
   }
 
-  // void _getMessage() {
-  //   if (_controller.text.isNotEmpty) {
-  //     setState(() async {
-  //       await messagesController.getdata();
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
+    final Size screenSize = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       appBar: AppBar(
         leading: Text(''),
@@ -93,9 +109,10 @@ class _ChatViewState extends State<ChatView> {
         children: [
           Expanded(
             child: Obx(() {
-              var reversedMessages =
-                  messagesController.models.reversed.toList();
+              var reversedMessages = messagesController.models.reversed
+                  .toList();
               return ListView.builder(
+                controller: _scrollController, // Assign ScrollController here
                 itemCount: reversedMessages.length,
                 itemBuilder: (context, index) {
                   MessagesModel message = reversedMessages[index];
@@ -104,12 +121,11 @@ class _ChatViewState extends State<ChatView> {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Align(
-                      alignment: isAdmin
-                          ? Alignment.centerLeft
-                          : Alignment.centerRight,
+                      alignment: isAdmin ? Alignment.centerLeft : Alignment
+                          .centerRight,
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 15),
                         decoration: BoxDecoration(
                           color: isAdmin ? Colors.grey[300] : buttonColorOpa,
                           borderRadius: BorderRadius.circular(20),
@@ -158,6 +174,7 @@ class _ChatViewState extends State<ChatView> {
     );
   }
 
+
   void _connectToPusher() async {
     try {
       await _pusher.init(
@@ -192,7 +209,7 @@ class _ChatViewState extends State<ChatView> {
             return jsonDecode(response.body);
           } else {
             print('error');
-           // print(response.body);
+            // print(response.body);
 
             throw Exception('Failed to authorize Pusher channel');
           }

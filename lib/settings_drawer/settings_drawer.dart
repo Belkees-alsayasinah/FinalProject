@@ -31,19 +31,20 @@ class SettingsDrawer extends StatelessWidget {
                 ),
               ),
             ),
-            ListTile(
+            UserInformation.type == 'inv' ? SizedBox() :ListTile(
               title: Row(
                 textDirection: TextDirection.rtl,
                 children: [
+
                   Icon(
-                    Icons.brightness_4_outlined,
+                    Icons.list,
                     color: black,
                   ),
                   SizedBox(
                     width: 10,
                   ),
                   Text(
-                    'الوضع الليلي',
+                    'طلبات الاجتماع',
                     style: titleStyle,
                   ),
                 ],
@@ -52,6 +53,7 @@ class SettingsDrawer extends StatelessWidget {
                 // اتخذ إجراء عند النقر على عنصر القائمة 1
               },
             ),
+
             ListTile(
               title: Row(
                 textDirection: TextDirection.rtl,

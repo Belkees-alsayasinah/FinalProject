@@ -44,4 +44,6 @@ class ServerConfig {
   String onAuthorizer = 'api/broadcasting/auth';
   String MessageCountUser = 'api/user/admins-with-unseen-messages';
   String MessageCountInv = 'api/investor/admins-with-unseen-messages';
+  String meetRequestsInv = 'api/investor/Appointment';
+  String sendRequestMeet = 'api/investor/Meeting/';
 }

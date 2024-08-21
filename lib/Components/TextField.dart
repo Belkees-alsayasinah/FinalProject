@@ -57,7 +57,7 @@ class _MyTextFieldState extends State<MyTextField> {
 
     return Container(
       width: widget.width,
-      height: screenSize.height * 0.08,
+      height: screenSize.height * 0.09,
       padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),

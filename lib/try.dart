@@ -1,4 +1,5 @@
 import 'package:bloom_project/Components/MyButton.dart';
+import 'package:bloom_project/MeetingInv/meet_requests.dart';
 import 'package:bloom_project/Style/constant.dart';
 import 'package:bloom_project/service/info.dart';
 import 'package:flutter/cupertino.dart';
@@ -92,57 +93,57 @@ class PlannerScreen extends StatelessWidget {
                             fontFamily: 'font1',
                             color: grey),
                       ),
-                      Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: GetBuilder<AddEvaluationController>(
-                          init: AddEvaluationController(id: '1'),
-                          builder: (controller0) {
-                            return Obx(() {
-                              if (controller0.isLoad.value) {
-                                return LoadingAnimationWidget.discreteCircle(
-                                  color: textColor,
-                                  size: 10,
-                                );
-                              } else {
-                                return Column(
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: screenSize.width * 0.03,
-                                          backgroundColor: Colors.grey[400],
-                                          child: IconButton(
-                                            icon: Icon(
-                                              Icons.favorite,
-                                              color: Colors.red,
-                                              size: screenSize.width * 0.03,
-                                            ),
-                                            onPressed: () {
-                                              controller0.addEvaluation('1');
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Obx(() {
-                                      return Text(
-                                        controller0.models.isNotEmpty
-                                            ? controller0
-                                                .models[0].totalEvaluationCount
-                                                .toString()
-                                            : '0',
-                                        style: TextStyle(
-                                            fontSize: screenSize.width * 0.026),
-                                      );
-                                    })
-                                  ],
-                                );
-                              }
-                            });
-                          },
-                        ),
-                      )
+                      //Spacer(),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 5),
+                      //   child: GetBuilder<AddEvaluationController>(
+                      //     init: AddEvaluationController(id: '1'),
+                      //     builder: (controller0) {
+                      //       return Obx(() {
+                      //         if (controller0.isLoad.value) {
+                      //           return LoadingAnimationWidget.discreteCircle(
+                      //             color: textColor,
+                      //             size: 10,
+                      //           );
+                      //         } else {
+                      //           return Column(
+                      //             children: [
+                      //               Stack(
+                      //                 children: [
+                      //                   CircleAvatar(
+                      //                     radius: screenSize.width * 0.03,
+                      //                     backgroundColor: Colors.grey[400],
+                      //                     child: IconButton(
+                      //                       icon: Icon(
+                      //                         Icons.favorite,
+                      //                         color: Colors.red,
+                      //                         size: screenSize.width * 0.03,
+                      //                       ),
+                      //                       onPressed: () {
+                      //                         controller0.addEvaluation('1');
+                      //                       },
+                      //                     ),
+                      //                   ),
+                      //                 ],
+                      //               ),
+                      //               Obx(() {
+                      //                 return Text(
+                      //                   controller0.models.isNotEmpty
+                      //                       ? controller0
+                      //                           .models[0].totalEvaluationCount
+                      //                           .toString()
+                      //                       : '0',
+                      //                   style: TextStyle(
+                      //                       fontSize: screenSize.width * 0.026),
+                      //                 );
+                      //               })
+                      //             ],
+                      //           );
+                      //         }
+                      //       });
+                      //     },
+                      //   ),
+                      // )
                     ],
                   ),
                 ),
@@ -193,12 +194,32 @@ class PlannerScreen extends StatelessWidget {
                             ),
                           )
                         : SizedBox(),
+                    UserInformation.type == 'inv'
+                        ? ActivityCard(
+                            title: 'طلب اجتماع اونلاين',
+                            subtitle:
+                                'إذا كنت ترغب في الاستثمار في هذا المشروع يمكنك التقدّم بطلب للاجتماع في مكالمة فيديو من أجل الاتفاق والاستفسار عن تفاصيل المشروع وحجز موعد: ',
+                            time: '6:00 PM',
+                            color: grey,
+                            actionButton: MyButton(
+                              color: buttonColor,
+                              fontSize: 20,
+                              height: 40,
+                              text: 'حجز موعد',
+                              onsave: () {
+                                Get.to(MeetingRequestsView(title: title,projectID: id));
+                              },
+                              radius: 15,
+                              textColor: Colors.white,
+                              width: 200,
+                            ),
+                          )
+                        : SizedBox(),
                   ],
                 ),
               ),
             ],
           ),
-          // زر الرجوع في أعلى يمين الصفحة
           Positioned(
             top: 40,
             right: 16,
